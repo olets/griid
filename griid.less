@@ -1,0 +1,230 @@
+// Just for visibility
+.cell, [class^='cell-'], [class*='cell-'] {       
+  background: blue;
+  color: #fff;
+  outline: 1px solid #fff;
+}
+
+// Requires 
+@fz: 20; // the pixel value of the wrapper's (in this example, <body>'s) text
+.fz(@font-size: @fz) {font-size: @font-size * 1em / @fz}
+html, body {font-size: 1px * @fz; line-height: 2;}
+@mobile-break-width: 765px; // window width at which columns collapse
+
+/* LESS styles for a grid system
+   called Griid
+   with support for centered unfilled rows
+
+   by Henry Bley-Vroman,
+   2016,
+   MIT License.
+   
+   Stands alone, or use with the rows-of-columns.html Twig snippet
+   
+   Uses inline-block, so does not work below IE9
+
+*/
+
+// Configuration 
+@griid-cell_spacing: 0; // 0 is recommended; percentage values will not be respected by type A columns (see below)
+@griid-row_spacing: 0; // 0 is recommended; percentage values will not be respected by type A columns (see below)
+@griid-min_fractional_width: 6; // read the value x as 1/x
+@griid-max_equal_columns: 6;
+
+/* 
+ * README
+ * 
+ * Usage:
+ * 
+ * 1. Three types of rows are supported
+ * 
+ *     A. Automatic equal-width cells,
+ *        filling one entire row.
+ * 
+ *        <div class="griid">
+ *            <div class="cell">1-</div>
+ *            <div class="cell">2-</div>
+ *            <div class="cell">3-</div>
+ *        </div>
+ *        
+ *        |     1-     |     2-     |     3-     |
+ * 
+ *     
+ *     B. Automatic equal-width cells,
+ *        with a specified number of columns per row.
+ * 
+ *        <div class="griid-COUNT">
+ *             <div class="cell">...</div>
+ *             <div class="cell">...</div>
+ *             ...
+ *        </div>
+ * 
+ *        where COUNT is an integer between 2 and @griid-max_equal_columns (inclusive).
+ *        All cell will be the same width, 1/COUNT the width of the row.
+ * 
+ *        For example:
+ * 
+ *        <div class="griid-2">
+ *             <div class="cell">1</div>
+ *             <div class="cell">2</div>
+ *             <div class="cell">3</div>
+ *        </div>
+ * 
+ *        |        1        |        2        |
+ *                 |        3        |
+ * 
+ * 
+  *     C. Cell fractional width specified on a per-column basis,
+ *        with under-full rows aligned centered.
+ * 
+ *        <div class="griid">
+ *             <div class="cell-X-N">...</div>
+ *             ...
+ *        </div>
+ * 
+ *        where X is an integer less than N,
+ *        and N is an integer between 2 and @griid-min_fractional_width (inclusive).
+ *        Cell will be X/N the width of the row. Cells' widths are
+ *        independent of each other.
+ * 
+ *        !Important: Because the styles don't know what cell widths you've used,
+ *        you must add `.row-end` to the last cell of each row
+ * 
+ *        <div class="griid">
+ *             <div class="cell-1-4">1</div>
+ *             <div class="cell-1-2">2</div>
+ *             <div class="cell-1-4 row-end">3</div>
+ *             <div class="cell-1-3">2</div>
+ *        </div>
+ *        |    1    |        2        |    3    |
+ *                    |      4      |
+ * 
+ *        Full-width cells are cell-N-N or `cell-full`, and do not require `row-end`
+ * 
+ * 
+ * 2. For A and B, columns are separated by 
+ * 
+ * 
+ * 3. In all cases,
+ *     - Cells are separated by the griid-cell_spacing value,
+ *     - Cells are vertically centered.
+ *         - Add `.top` or `.bottom` to a column to customize its vertical alignment
+ *         - Add `.top` or `.bottom` to a row or row group to customize the default for its child columns
+ *         - Override upstream up customizations by adding `.top`, `.middle`, or `.bottom` to a row or column
+ * 
+ * 
+ * Acknowledgements:
+ * This started as a modification of Joel Sutherland's "grid-items" grid system
+ * 
+ */
+
+@columnsfz: 1rem * @fz;
+@mobile: ~'all and (max-width: @{mobile-break-width})';
+.griid, [class^='griid-'], [class*='griid-'] {     // GRID 
+    
+    @IE_friendly_hundred_percent: 99.99999%; // there's always one IE problem
+    
+    display: table;
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    font-size: 0;
+    
+    &.griid {
+        border-spacing: @griid-cell_spacing;
+    }
+    .cell, [class^='cell-'], [class*='cell-']  { // CELLS 
+        .fz(@columnsfz);
+        position: relative;
+        margin-bottom: @griid-row_spacing;
+        
+        display: table-cell;                            // will be overridden for non-auto cells 
+        width: 1%;
+        
+        &, &.middle, .middle& {                        // cell vertical alignment 
+            vertical-align: middle
+        }
+        .group-of-rows.top &, &.top, .top& {
+            vertical-align: top
+        }
+        .group-of-rows.bottom &, &.bottom, .bottom& {
+            vertical-align: bottom
+        }
+
+        img {                                         // not strictly part of the columns system, but vital 
+            max-width: 100%;
+            height: auto
+        }
+        
+        @media @mobile {
+            display: block;
+            width: 100% !important;
+            padding-right: 0;
+        }
+    }
+    &[class^='griid-'] .cell, &[class*='griid-'] .cell,
+    [class^='cell-'], [class*='cell-'] {
+        margin-right: @griid-cell_spacing;
+        display: inline-block;
+        &:last-child {
+            margin-right: 0;
+        }
+        @media @mobile {
+            margin-right: 0
+        }
+    }
+                                                                                    // CELL WIDTH MIXINS 
+    
+    .cell-width(@x) {
+        @gutters: (@x - 1) * @griid-cell_spacing;
+        width: calc(~'(@{IE_friendly_hundred_percent} - @{gutters}) / @{x}');
+    }
+    
+    .cell-x(@x) {                                                                // for fractional-width cells 
+        .cell-width(@x);
+        &.row-end {
+            margin-right: 0
+        }
+    }
+    .cell-x(@x) when (@griid-cell_spacing = 0) {
+        width: calc(~'@{IE_friendly_hundred_percent} / @{x}')
+    }
+    .cell-x-widths(@n, @i: 1) when (@i =< @n) {
+        .cell-1-@{i} {.cell-x(@i)}
+        .cell-2-@{i} {.cell-x(@i/2)}
+        .cell-3-@{i} {.cell-x(@i/3)}
+        .cell-4-@{i} {.cell-x(@i/4)}
+        .cell-5-@{i} {.cell-x(@i/5)}
+        .cell-x-widths(@n, (@i + 1))
+    }
+    
+    .griid-x(@x) {                                                              // for cells in evenly divided rows 
+        .cell-width(@x);
+        @lastInRow: ~'@{x}n';
+        &:nth-of-type(@{lastInRow}) {
+            margin-right: 0;
+        }
+    }
+    .griid-x(@x) when (@griid-cell_spacing = 0) {
+        width: calc(~'@{IE_friendly_hundred_percent} / @{x}')
+    }
+    .grid-x-cell-widths(@n, @i: 2) when (@i =< @n) {
+        .griid-@{i}& {.griid-x(@i)}
+        .grid-x-cell-widths(@n, (@i + 1))
+    }
+    
+                                                                                 // CELL WIDTHS! 
+    .cell-full { width: @IE_friendly_hundred_percent; margin-right: auto; }
+    .cell-x-widths(@griid-min_fractional_width);             /* Cells with fractional widths declared on the cell;
+                                                                the largest division supported is automatically 1/2;
+                                                                this variable is set in the initial configuration
+                                                              */
+    
+    .cell {.grid-x-cell-widths(@griid-max_equal_columns);}          /* Cells in a grid where cell count is declared on the grid;
+                                                                       a minimum of two cells is automatically supported;
+                                                                       this variable is set in the initial configuration
+                                                                       */
+    
+}
