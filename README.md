@@ -60,10 +60,10 @@ Usage:
 		|	 1	 |		  2		  |	 3	 |
    		            |      4     |
 
-	Full-width cells are cell-N-N or `cell-full`, and do not require `row-end`
+	Full-width cells are cell-N-N or `.cell-full`, and do not require `.row-end`
 
 
-2. For A and B, columns are separated by 
+2. For multi-row grids (B and C), columns are separated by `@griid-cell_spacing`
 
 
 3. In all cases,
