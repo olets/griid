@@ -1,5 +1,6 @@
 # griid
-Griid is an easy-to-use grid system which supports three grid types: single full-width single-row grids  with cells of equal width; multi-row grids with a specified number of equal-width columns; and multi-row grids with fraction-of-the-grid-width cell widths specified per-cell. In the latter two cases, if the last row of the grid isn't filled its cells will be center aligned
+
+griid is an easy-to-use grid system which supports three grid types: single full-width single-row grids  with cells of equal width; multi-row grids with a specified number of equal-width columns; and multi-row grids with fraction-of-the-grid-width cell widths specified per-cell. In the latter two cases, if the last row of the grid isn't filled its cells will be center aligned
 
 Usage:
 
@@ -8,12 +9,12 @@ Usage:
   A.	Automatic equal-width cells, filling one entire row.
 
 		<div class="griid">
-			<div class="cell">1-</div>
-			<div class="cell">2-</div>
-			<div class="cell">3-</div>
+			<div class="cell">1</div>
+			<div class="cell">2</div>
+			<div class="cell">3</div>
 		</div>
 	
-		|	  1-	  |	  2-	  |	  3-	  |
+		|     1     |     2     |     3     |
 
 
 	B. Automatic equal-width cells, with a specified number of columns per row.
@@ -63,14 +64,10 @@ Usage:
 	Full-width cells are cell-N-N or `cell-full`, and do not require `row-end`
 
 
-2. For A and B, columns are separated by 
+2. For multi-row grids (B and C), columns are separated by `@griid-cell_spacing` and rows are separated by `@griid-row_spacing`
 
 
-3. In all cases,
-	
-	Cells are separated by the griid-cell_spacing value,
-	
-	Cells are vertically centered.
+3. In all cases, cells are vertically centered.
 	- Add `.top` or `.bottom` to a column to customize its vertical alignment
 	- Add `.top` or `.bottom` to a row or row group to customize the default for its child columns
 	- Override upstream up customizations by adding `.top`, `.middle`, or `.bottom` to a row or column
@@ -78,4 +75,4 @@ Usage:
 
 
 ###Acknowledgements:
-This started as a modification of Joel Sutherland's "grid-items" grid system
+This started as a modification of a project by Joel Sutherland's "grid-items" grid system
