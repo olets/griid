@@ -6,6 +6,7 @@
     <title>Griid by olets</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/customizations.css">
     <link rel="stylesheet" href="stylesheets/griid.min.css">
     <link rel="stylesheet" href="stylesheets/github-light.css">
     <meta name="viewport" content="width=device-width">
@@ -42,14 +43,18 @@
 
 <p>A.    Automatic equal-width cells, filling one entire row.</p>
 
-<pre><code>  &lt;div class="griid"&gt;
-      &lt;div class="cell"&gt;1&lt;/div&gt;
-      &lt;div class="cell"&gt;2&lt;/div&gt;
-      &lt;div class="cell"&gt;3&lt;/div&gt;
-  &lt;/div&gt;
-
-  |     1     |     2     |     3     |
+<pre><code>&lt;div class="griid"&gt;
+  &lt;div class="cell"&gt;1&lt;/div&gt;
+  &lt;div class="cell"&gt;2&lt;/div&gt;
+  &lt;div class="cell"&gt;3&lt;/div&gt;
+  &lt;div class="cell"&gt;4&lt;/div&gt;
+  &lt;div class="cell"&gt;5&lt;/div&gt;
+  &lt;div class="cell"&gt;6&lt;/div&gt;
+  &lt;div class="cell"&gt;7&lt;/div&gt;
+&lt;/div&gt;
 </code></pre>
+
+
 <div class="griid">
   <div class="cell">
     1
@@ -73,7 +78,7 @@
     7
   </div>
 </div>
-
+<hr>
 <p>B. Automatic equal-width cells, with a specified number of columns per row.</p>
 
 <pre><code>  &lt;div class="griid-COUNT"&gt;
@@ -87,14 +92,19 @@
 
 <p>For example:</p>
 
-<pre><code>  &lt;div class="griid-2"&gt;
-      &lt;div class="cell"&gt;1&lt;/div&gt;
-      &lt;div class="cell"&gt;2&lt;/div&gt;
-      &lt;div class="cell"&gt;3&lt;/div&gt;
-  &lt;/div&gt;
-
-  |         1       |       2       |
-          |         3       |
+<pre><code>
+&lt;div class="griid-3"&gt;
+  &lt;div class="cell"&gt;1&lt;/div&gt;
+  &lt;div class="cell"&gt;2&lt;/div&gt;
+  &lt;div class="cell"&gt;3&lt;/div&gt;
+  &lt;div class="cell"&gt;4&lt;/div&gt;
+  &lt;div class="cell"&gt;5&lt;/div&gt;
+  &lt;div class="cell"&gt;6&lt;/div&gt;
+  &lt;div class="cell"&gt;7&lt;/div&gt;
+  &lt;div class="cell"&gt;8&lt;/div&gt;
+  &lt;div class="cell"&gt;9&lt;/div&gt;
+  &lt;div class="cell"&gt;10&lt;/div&gt;
+&lt;/div&gt;
 </code></pre>
 
 <div class="griid-3">
@@ -129,7 +139,7 @@
     10
   </div>
 </div>
-
+<hr>
 <p>C. Cell fractional width specified on a per-column basis, with under-full rows aligned centered.</p>
 
 <pre><code>  &lt;div class="griid"&gt;
@@ -144,14 +154,19 @@
 
 <p>!Important: Because the styles don't know what cell widths you've used, you must add <code>.row-end</code> to the last cell of each row</p>
 
-<pre><code>  &lt;div class="griid"&gt;
-      &lt;div class="cell-1-4"&gt;1&lt;/div&gt;
-      &lt;div class="cell-1-2"&gt;2&lt;/div&gt;
-      &lt;div class="cell-1-4 row-end"&gt;3&lt;/div&gt;
-      &lt;div class="cell-1-3"&gt;2&lt;/div&gt;
-  &lt;/div&gt;
-  |    1   |        2       |  3   |
-              |      4     |
+<pre><code>&lt;div class="griid"&gt;
+  &lt;div class="cell-1-6"&gt;1&lt;/div&gt;
+  &lt;div class="cell-1-3"&gt;2&lt;/div&gt;
+  &lt;div class="cell-1-6"&gt;3&lt;/div&gt;
+  &lt;div class="cell-1-3 row-end"&gt;4&lt;/div&gt;
+  &lt;div class="cell-1-1"&gt;5&lt;/div&gt;
+  &lt;div class="cell-1-2"&gt;6&lt;/div&gt;
+  &lt;div class="cell-1-4"&gt;7&lt;/div&gt;
+  &lt;div class="cell-1-4 row-end"&gt;8&lt;/div&gt;
+  &lt;div class="cell-2-5"&gt;9&lt;/div&gt;
+  &lt;div class="cell-3-5 row-end"&gt;10&lt;/div&gt;
+  &lt;div class="cell-2-5"&gt;11&lt;/div&gt;
+&lt;/div&gt;
 </code></pre>
 
 <div class="griid">
