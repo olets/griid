@@ -17,8 +17,8 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Griid</h1>
-        <p>Griid is an easy-to-use grid system which supports three grid types: single full-width single-row grids  with cells of equal width; multi-row grids with a specified number of equal-width columns; and multi-row grids with fraction-of-the-grid-width cell widths specified per-cell</p>
+        <h1>griid</h1>
+        <p>griid is an easy-to-use grid system which supports three grid types: single full-width single-row grids  with cells of equal width; multi-row grids with a specified number of equal-width columns; and multi-row grids with fraction-of-the-grid-width cell widths specified per-cell. In the latter two cases, if the last row of the grid isn't filled its cells will be center aligned.</p>
 
         <p class="view"><a href="https://github.com/olets/griid">View the Project on GitHub <small>olets/griid</small></a></p>
 
@@ -30,12 +30,8 @@
         </ul>
       </header>
       <section>
-        <h1>
-<a id="griid" class="anchor" href="#griid" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>griid</h1>
-
-<p>Griid is an easy-to-use grid system which supports three grid types: single full-width single-row grids  with cells of equal width; multi-row grids with a specified number of equal-width columns; and multi-row grids with fraction-of-the-grid-width cell widths specified per-cell. In the latter two cases, if the last row of the grid isn't filled its cells will be center aligned</p>
-
-<p>Usage:</p>
+        <h2>
+<a id="griid" class="anchor" href="#griid" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>griid usage</h2>
 
 <ol>
 <li>
@@ -107,6 +103,7 @@
 &lt;/div&gt;
 </code></pre>
 
+
 <div class="griid-3">
   <div class="cell">
     1
@@ -139,6 +136,8 @@
     10
   </div>
 </div>
+
+<p><small>(Note the in this demo cells have an 1px <code>outline</code>, which is why the orphan cell appears misaligned)</small></p>
 <hr>
 <p>C. Cell fractional width specified on a per-column basis, with under-full rows aligned centered.</p>
 
@@ -183,10 +182,13 @@
   <div class="cell-2-5">11</div>
 </div>
 
+
+<p><small>(Note the in this demo cells have an 1px <code>outline</code>, which is why the orphan cell appears misaligned)</small></p>
+
 <p>Full-width cells are cell-N-N or <code>cell-full</code>, and do not require <code>row-end</code></p>
 </li>
 <li><p>For multi-row grids (B and C), columns are separated by <code>@griid-cell_spacing</code> and rows are separated by <code>@griid-row_spacing</code></p></li>
-<li><li><p>In all cases, cells are vertically centered.</p>
+<li><p>In all cases, cells are vertically centered.</p>
 <!--
 <ul>
 <li>Add <code>.top</code> or <code>.bottom</code> to a column to customize its vertical alignment</li>
@@ -194,7 +196,6 @@
 <li>Override upstream up customizations by adding <code>.top</code>, <code>.middle</code>, or <code>.bottom</code> to a row or column</li>
 </ul>
 --></li>
-</li>
 </ol>
 
 <h3>

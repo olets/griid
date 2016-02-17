@@ -3,3 +3,19 @@ hr {
 	background: #ccc;
 	margin: 40px 0
 }
+:not(pre)>code {
+	color: inherit;
+	background: #f8f8f8;
+	border: 1px solid #e5e5e5;
+	padding: 2px 4px;
+	border-radius: 2px;
+	white-space: nowrap;
+}
+small {
+	margin-top: 1em;
+	line-height: 1.2;
+	display: block;
+}
+small code {
+	font-size: inherit;
+}
