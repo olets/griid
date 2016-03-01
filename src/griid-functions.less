@@ -113,9 +113,9 @@ griid--drop(@dropBy: 1(, @minColCount: @griid--min-cols(, @maxColCount: @griid--
         > [class*='cell'] {vertical-align: @args}
     }
 }
-.griid--top {.griid--vertical-align(top)}
-.griid--middle {.griid--vertical-align(middle)}
-.griid--bottom {.griid--vertical-align(bottom)}
+.griid--top() {.griid--vertical-align(top)}
+.griid--middle() {.griid--vertical-align(middle)}
+.griid--bottom() {.griid--vertical-align(bottom)}
 
 /* orphan alignment
    takes left/center/right
@@ -124,9 +124,9 @@ griid--drop(@dropBy: 1(, @minColCount: @griid--min-cols(, @maxColCount: @griid--
 .griid--orphan-align(@alignment:@griid--orphan-h-align) {
     [class*='griid'], &[class*='griid'] {text-align:@alignment}
 }
-.griid--left {.griid--orphan-align(left)}
-.griid--center {.griid--orphan-align(center)}
-.griid--right {.griid--orphan-align(right)}
+.griid--left() {.griid--orphan-align(left)}
+.griid--center() {.griid--orphan-align(center)}
+.griid--right() {.griid--orphan-align(right)}
 
 
 
@@ -138,7 +138,7 @@ griid--drop(@dropBy: 1(, @minColCount: @griid--min-cols(, @maxColCount: @griid--
  */
 
 /* turn a multi-row grid into a single-row grid with equal-width, equal-height columns */
-.griid--row {
+.griid--row() {
     [class*='griid'], &[class*='griid'] {
         > [class*='cell'] {
             display: table-cell;
