@@ -29,13 +29,13 @@
  * config
  * 
  */
+@griid--font-size: 16px;
 @griid--gutter: 0;                                     // gte 0, any unit
 @griid--row-spacing: 0;                                // gte 0, any unit
-@griid--min-cols: 2;                                   // set per-site to minimize css weight
-@griid--max-cols: 6;                                   // set per-site to minimize css weight
 @griid--orphan-h-align: left;                          // default orphan alignment (left, center, or right)
 @griid--item-v-align: top;                             // default grid-item vertical alignment (top, middle, or bottom)
-@griid--font-size: 16px;
+@griid--min-cols: 2;                                   // set per-site to minimize css weight
+@griid--max-cols: 6;                                   // set per-site to minimize css weight
 
 /**********************************************************************************************************************************
  **********************************************************************************************************************************
@@ -43,44 +43,87 @@
  * documentation
  * 
 *//*
+    
+griid markup:
 
-Always supports single-row grids with equal-width, equal-height columns
-(`.griid > .cell*n`)
+multi-row grids with equal-width cells look like
+`.griid-x > .cell*n` (there will be x cells per row)
 
-REQUIRES initialization
-
-1. Run
-.griid--initialize-equal-cells(
-                               @fontSize: @griid--font-size,
-                                (@maxColCount: @griid--max-cols,
-                                 (@minColCount:@griid--min-cols))
-                              )
-to support multi-row grids with equal-width cells
-(`.griid-x > .cell*n` will give you x cells per row)
-
-2. Run
-.griid--initialize-unequal-cells(
-                                 @fontSize: @griid--font-size, 
-                                  (@denominatorOfNarrowestCells: @griid--max-cols,
-                                   (@numeratorOfNarrowestCells: @griid--min-cols))
-                                )
-to support multi-row grids with unequal cells
+multi-row grids with unequal-width cells look like
 `.griid` for the grid, `.cell-n-d` for a cell n/d of the row width. Add `.row-end` to the last cell in each row
 
-3. Run
-.griid--initialize(
-                   @fontSize: @griid--font-size,
-                    (@maxColCount: @griid--max-cols,
-                     (@minColCount: @griid--min-cols,
-                      (@smallestDenominator: @griid--max-cols,
-                       (@largestDenominator: @griid--min-cols))))
-                  )
-to support multi-row grids with equal-width and unequal-width cells.
-For equal-width cells, `.griid-x > .cell*n` will give you x cells per row
-For unequal-width cells, use `.griid` for the grid, `.cell-n-d` for a cell n/d of the row width. Add `.row-end` to the last cell in each row
+single-row grids with equal-width, equal-height cells look like
+`.griid > .cell`
 
 
-The initialization functions can be re-run at any point to re-initialize with new settings or two wipe over customizations
+griid LESS:
+
+griid **requires** initialization
+
+A. Typical usage:
+    1. Definitely: run `.griid--install` to have full griid support, using the @griid-- values.
+    2. Likely: run adjustment functions in media queries to treat one grid as another in certain contexts (see griid-functions.less)
+    3. Possibly: run `.griid--initialize` to revert any changes made by adjustment functions,
+           or if you only need to reset a particular type of grid, you can save a little weight
+           run `.griid--initialize-equal-cells`, `.griid--initialize-unequal-cells`, or `.griid--initialize-row`
+
+
+B. Customizing your setup:
+    The default installation from `.griid--install` will fit most needs, but you can also build a custom griid setup:
+
+    1. `.griid--base` is always the first thing. It gives you support for multi-row grids, and is required by everything else
+    2. `griid--inline-alignment` adds support for using alignment classes in your markup
+            `.top`, `.middle`, `.bottom` give you inline overrides for cell content vertical alignment
+            `.left`, `.center`, `.right` give you inline overrides for (when applied to a grid) orphan alignment and (when applied to a cell) content alignment
+    3. `.griid--single-row` adds support for single-row grids with equal-width, equal-height cells
+    4. `.griid--base`, with or without `.griid--inline-alignment` and `.griid--single-row`, still needs initialization.
+            `.griid--initialize` gets you ready to go with single-row and multi-row columns
+            Or run any of `.griid--initialize-equal-cells`, `.griid--initialize-unequal-cells`, or `.griid--initialize-row`
+
+    Note: `.griid--base` is simply shorthand for `.griid--base; .griid--inline-alignment; .griid--initialize`
+
+C. Overriding default variables
+
+    The initialization functions can be re-run at any point to re-initialize with new settings or two wipe over customizations.
+
+    1.
+    .griid--initialize(
+                       @fontSize: @griid--font-size,
+                        (@maxColCount: @griid--max-cols,
+                         (@minColCount: @griid--min-cols,
+                          (@smallestDenominator: @griid--max-cols,
+                           (@largestDenominator: @griid--min-cols))))
+                      )
+
+
+    2.
+    .griid--initialize-equal-cells(
+                                   @fontSize: @griid--font-size,
+                                    (@maxColCount: @griid--max-cols,
+                                     (@minColCount:@griid--min-cols))
+                                  )
+
+
+    3.
+    .griid--initialize-unequal-cells(
+                                     @fontSize: @griid--font-size, 
+                                      (@denominatorOfNarrowestCells: @griid--max-cols,
+                                       (@numeratorOfNarrowestCells: @griid--min-cols))
+                                    )
+
+
+    4. If you really want to, you can even do a custom `.griid--build`
+      .griid--build(
+                    @fontSize,
+                     (@gutter,
+                      (@rowSpacing,
+                       (@orphanAlignment,
+                        (@contentAlignment,
+                         (@maxColCount,
+                          (@minColCount,
+                           (@smallestDenominator,
+                            (@largestDenominator))))))))
+                   )
 
 
 */
@@ -103,59 +146,59 @@ The initialization functions can be re-run at any point to re-initialize with ne
     border-spacing: @griid--gutter;
 }*/
 
-[class*='griid'] {
-    display: table;
-    table-layout: fixed;
-    width: 100%;
-//    overflow: hidden;
-    font-size: 0;
-    text-align: @griid--orphan-h-align;
-    > [class*='cell'] {
-        position: relative;
-        display: inline-block;                             // inline-blocks allow vertical and horizontal alignment
-        margin-bottom: @griid--row-spacing;
-        vertical-align: @griid--item-v-align;
-        font-size: @griid--font-size;
-        text-align: left;
-//        overflow: hidden;
-        &.row-end { margin-right: 0 }
-        &:last-child { margin-right: 0 !important}
+.griid--base(@fontSize: @griid--font-size, @orphanAlignment: @griid--orphan-h-align, @contentAlignment: @griid--item-v-align,@rowSpacing: @griid--row-spacing) {
+  [class*='griid'] {
+      display: table;
+      table-layout: fixed;
+      width: 100%;
+  //    overflow: hidden;
+      font-size: 0;
+      text-align: @orphanAlignment;
+      > [class*='cell'] {
+          position: relative;
+          display: inline-block;                             // inline-blocks allow vertical and horizontal alignment
+          margin-bottom: @rowSpacing;
+          vertical-align: @contentAlignment;
+          font-size: @fontSize;
+          text-align: left;
+  //        overflow: hidden;
+          &.row-end { margin-right: 0 }
+          &:last-child { margin-right: 0 !important}
 
-        img {max-width: 100%}          // for good measure
-    }
-    .cell-1-1, .cell-full { width: @ie_friendly_100_percent }
+          img {max-width: 100%}          // for good measure
+      }
+      .cell-1-1, .cell-full { width: @ie_friendly_100_percent }
+  }
 }
 
-
-/**********************************************************************************************************************************
- **********************************************************************************************************************************
- **********************************************************************************************************************************
+/****************************************************************
  * layout for single-row grid of equal-width, equal-height cells
  * 
  */
-.griid > .cell {
-    display: table-cell;
-    width: 1%
+.griid--single-row(@fontSize: @griid--font-size) {
+    .griid > .cell {
+        display: table-cell;
+        width: 1%
+    }
 }
 
-
-/**********************************************************************************************************************************
- **********************************************************************************************************************************
- **********************************************************************************************************************************
+/****************************************************************
  * optional support for inline class-defined alignment
  * 
  */
-[class*='griid'] {
-    > [class*='cell'] {
-        .top&, &.top { vertical-align: top }                      // make grid-item top-aligned
-        .middle&, &.middle {vertical-align: middle}                  // make grid-item middle-aligned
-        .bottom&, &.bottom {vertical-align: bottom}                  // make grid-item bottom-aligned
-    }
-    &, > [class*='cell'] {
-        &.left {text-align: left}
-        &.center {text-align: center}
-        &.right {text-align: right}
-    }
+.griid--inline-alignment {
+  [class*='griid'] {
+      > [class*='cell'] {
+          .top&, &.top { vertical-align: top }                      // make grid-item top-aligned
+          .middle&, &.middle {vertical-align: middle}                  // make grid-item middle-aligned
+          .bottom&, &.bottom {vertical-align: bottom}                  // make grid-item bottom-aligned
+      }
+      &, > [class*='cell'] {
+          &.left {text-align: left}
+          &.center {text-align: center}
+          &.right {text-align: right}
+      }
+  }
 }
 
 
@@ -241,13 +284,28 @@ The initialization functions can be re-run at any point to re-initialize with ne
     .griid--initialize-unequal-helper(@smallestDenominator, @largestDenominator)
 }
 
+
+/* initial single-row grids */
+.griid--initialize-row(@fontSize: @griid--font-size) {
+    .griid--single-row(@fontSize);
+}
+
+
 /* initialize equal- and unequal-width cells */
 .griid--initialize(@fontSize: @griid--font-size, @maxColCount: @griid--max-cols, @minColCount: @griid--min-cols, @smallestDenominator: @griid--max-cols, @largestDenominator: @griid--min-cols)  when not (@fontSize = @griid--font-size) {
+    .griid--initialize-row(@fontSize);
     [class*='griid'] > [class*='cell'] { font-size: @fontSize }
     .griid--initialize-equal-helper(@maxColCount, @minColCount);
     .griid--initialize-unequal-helper(@smallestDenominator, @largestDenominator)
 }
 .griid--initialize(@fontSize: @griid--font-size, @maxColCount: @griid--max-cols, @minColCount: @griid--min-cols, @smallestDenominator: @griid--max-cols, @largestDenominator: @griid--min-cols)  when (@fontSize = @griid--font-size) {
+    .griid--initialize-row(@fontSize);
     .griid--initialize-equal-helper(@maxColCount, @minColCount);
     .griid--initialize-unequal-helper(@smallestDenominator, @largestDenominator)
+}
+
+.griid--install(@fontSize: @griid--font-size, @gutter: @griid--gutter, @rowSpacing: @griid--row-spacing, @orphanAlignment: @griid--orphan-h-align, @contentAlignment: @griid--item-v-align, @maxColCount: @griid--max-cols, @minColCount: @griid--min-cols, @smallestDenominator: @griid--max-cols, @largestDenominator: @griid--min-cols) {
+    .griid--base(@fontSize, @orphanAlignment, @contentAlignment, @rowSpacing);
+    .griid--inline-alignment;
+    .griid--initialize(@griid--font-size, @maxColCount, @minColCount, @smallestDenominator, @largestDenominator)
 }
