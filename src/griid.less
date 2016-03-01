@@ -1,17 +1,14 @@
-// Just for visibility
-.cell, [class^='cell-'], [class*='cell-'] {       
-  background: blue;
-  color: #fff;
-  outline: 1px solid #fff;
-}
+/**********************************************************************************************************************************
+ **********************************************************************************************************************************
+ **********************************************************************************************************************************
+    griid
 
-// Requires 
-@fz: 20; // the pixel value of the wrapper's (in this example, <body>'s) text
-.fz(@font-size: @fz) {font-size: @font-size * 1em / @fz}
-html, body {font-size: 1px * @fz; line-height: 2;}
-@mobile-break-width: 765px; // window width at which columns collapse
+    The greedy grid that tries to do it all with LESS
+   
+    by Henry Bley-Vroman
+    MIT license
+    olets.github.io/griid/
 
-/* Griid
 
   an easy-to-use grid system which supports three grid types:
   - single full-width single-row grids with cells of equal width;
@@ -22,123 +19,235 @@ html, body {font-size: 1px * @fz; line-height: 2;}
    by Henry Bley-Vroman,
    2016, MIT License.
    
-   Uses inline-block, so does not work on IE below
+   Uses inline-block, so does not work on IE below 9
 
 */
 
-// Configuration 
-@griid-cell_spacing: 0; // 0 is recommended; percentage values will not be respected by type A columns (see below)
-@griid-row_spacing: 0; // 0 is recommended; percentage values will not be respected by type A columns (see below)
-@griid-min_fractional_width: 6; // read the value x as 1/x
-@griid-max_equal_columns: 6;
+/**********************************************************************************************************************************
+ **********************************************************************************************************************************
+ **********************************************************************************************************************************
+ * config
+ * 
+ */
+@griid--gutter: 0;                                     // gte 0, any unit
+@griid--row-spacing: 0;                                // gte 0, any unit
+@griid--min-cols: 2;                                   // set per-site to minimize css weight
+@griid--max-cols: 6;                                   // set per-site to minimize css weight
+@griid--orphan-h-align: left;                          // default orphan alignment (left, center, or right)
+@griid--item-v-align: top;                             // default grid-item vertical alignment (top, middle, or bottom)
+@griid--font-size: 16px;
 
-@columnsfz: 1rem * @fz;
-@mobile: ~'all and (max-width: @{mobile-break-width})';
-.griid, [class^='griid-'], [class*='griid-'] {     // GRID 
-    
-    @IE_friendly_hundred_percent: 99.99999%; // there's always one IE problem
-    
+/**********************************************************************************************************************************
+ **********************************************************************************************************************************
+ **********************************************************************************************************************************
+ * documentation
+ * 
+*//*
+
+Always supports single-row grids with equal-width, equal-height columns
+(`.griid > .cell*n`)
+
+REQUIRES initialization
+
+1. Run
+.griid--initialize-equal-cells(
+                               @fontSize: @griid--font-size,
+                                (@maxColCount: @griid--max-cols,
+                                 (@minColCount:@griid--min-cols))
+                              )
+to support multi-row grids with equal-width cells
+(`.griid-x > .cell*n` will give you x cells per row)
+
+2. Run
+.griid--initialize-unequal-cells(
+                                 @fontSize: @griid--font-size, 
+                                  (@denominatorOfNarrowestCells: @griid--max-cols,
+                                   (@numeratorOfNarrowestCells: @griid--min-cols))
+                                )
+to support multi-row grids with unequal cells
+`.griid` for the grid, `.cell-n-d` for a cell n/d of the row width. Add `.row-end` to the last cell in each row
+
+3. Run
+.griid--initialize(
+                   @fontSize: @griid--font-size,
+                    (@maxColCount: @griid--max-cols,
+                     (@minColCount: @griid--min-cols,
+                      (@smallestDenominator: @griid--max-cols,
+                       (@largestDenominator: @griid--min-cols))))
+                  )
+to support multi-row grids with equal-width and unequal-width cells.
+For equal-width cells, `.griid-x > .cell*n` will give you x cells per row
+For unequal-width cells, use `.griid` for the grid, `.cell-n-d` for a cell n/d of the row width. Add `.row-end` to the last cell in each row
+
+
+The initialization functions can be re-run at any point to re-initialize with new settings or two wipe over customizations
+
+
+*/
+
+
+
+
+
+
+/**********************************************************************************************************************************
+ **********************************************************************************************************************************
+ **********************************************************************************************************************************
+ * general grid and cell layout
+ * 
+ */
+
+@ie_friendly_100_percent: 99.99999%;                   // there's always one IE problem
+/*.griid {
+    border-collapse: separate;
+    border-spacing: @griid--gutter;
+}*/
+
+[class*='griid'] {
     display: table;
     table-layout: fixed;
-    border-collapse: collapse;
     width: 100%;
-    text-align: center;
-    position: relative;
+//    overflow: hidden;
     font-size: 0;
-    
-    &.griid {
-        border-spacing: @griid-cell_spacing;
-    }
-    .cell, [class^='cell-'], [class*='cell-']  { // CELLS 
-        .fz(@columnsfz);
+    text-align: @griid--orphan-h-align;
+    > [class*='cell'] {
         position: relative;
-        margin-bottom: @griid-row_spacing;
-        
-        display: table-cell;                            // will be overridden for non-auto cells 
-        width: 1%;
-        
-        &, &.middle, .middle& {                        // cell vertical alignment 
-            vertical-align: middle
-        }
-        .group-of-rows.top &, &.top, .top& {
-            vertical-align: top
-        }
-        .group-of-rows.bottom &, &.bottom, .bottom& {
-            vertical-align: bottom
-        }
+        display: inline-block;                             // inline-blocks allow vertical and horizontal alignment
+        margin-bottom: @griid--row-spacing;
+        vertical-align: @griid--item-v-align;
+        font-size: @griid--font-size;
+        text-align: left;
+//        overflow: hidden;
+        &.row-end { margin-right: 0 }
+        &:last-child { margin-right: 0 !important}
 
-        img {                                         // not strictly part of the columns system, but vital 
-            max-width: 100%;
-            height: auto
-        }
-        
-        @media @mobile {
-            display: block;
-            width: 100% !important;
-            padding-right: 0;
-        }
+        img {max-width: 100%}          // for good measure
     }
-    &[class^='griid-'] .cell, &[class*='griid-'] .cell,
-    [class^='cell-'], [class*='cell-'] {
-        margin-right: @griid-cell_spacing;
-        display: inline-block;
-        &:last-child {
-            margin-right: 0;
-        }
-        @media @mobile {
-            margin-right: 0
-        }
+    .cell-1-1, .cell-full { width: @ie_friendly_100_percent }
+}
+
+
+/**********************************************************************************************************************************
+ **********************************************************************************************************************************
+ **********************************************************************************************************************************
+ * layout for single-row grid of equal-width, equal-height cells
+ * 
+ */
+.griid > .cell {
+    display: table-cell;
+    width: 1%
+}
+
+
+/**********************************************************************************************************************************
+ **********************************************************************************************************************************
+ **********************************************************************************************************************************
+ * optional support for inline class-defined alignment
+ * 
+ */
+[class*='griid'] {
+    > [class*='cell'] {
+        .top&, &.top { vertical-align: top }                      // make grid-item top-aligned
+        .middle&, &.middle {vertical-align: middle}                  // make grid-item middle-aligned
+        .bottom&, &.bottom {vertical-align: bottom}                  // make grid-item bottom-aligned
     }
-                                                                                    // CELL WIDTH MIXINS 
-    
-    .cell-width(@x) {
-        @gutters: (@x - 1) * @griid-cell_spacing;
-        width: calc(~'(@{IE_friendly_hundred_percent} - @{gutters}) / @{x}');
+    &, > [class*='cell'] {
+        &.left {text-align: left}
+        &.center {text-align: center}
+        &.right {text-align: right}
     }
-    
-    .cell-x(@x) {                                                                // for fractional-width cells 
-        .cell-width(@x);
-        &.row-end {
-            margin-right: 0
-        }
-    }
-    .cell-x(@x) when (@griid-cell_spacing = 0) {
-        width: calc(~'@{IE_friendly_hundred_percent} / @{x}')
-    }
-    .cell-x-widths(@n, @i: 1) when (@i =< @n) {
-        .cell-1-@{i} {.cell-x(@i)}
-        .cell-2-@{i} {.cell-x(@i/2)}
-        .cell-3-@{i} {.cell-x(@i/3)}
-        .cell-4-@{i} {.cell-x(@i/4)}
-        .cell-5-@{i} {.cell-x(@i/5)}
-        .cell-x-widths(@n, (@i + 1))
-    }
-    
-    .griid-x(@x) {                                                              // for cells in evenly divided rows 
-        .cell-width(@x);
-        @lastInRow: ~'@{x}n';
-        &:nth-of-type(@{lastInRow}) {
-            margin-right: 0;
-        }
-    }
-    .griid-x(@x) when (@griid-cell_spacing = 0) {
-        width: calc(~'@{IE_friendly_hundred_percent} / @{x}')
-    }
-    .grid-x-cell-widths(@n, @i: 2) when (@i =< @n) {
-        .griid-@{i}& {.griid-x(@i)}
-        .grid-x-cell-widths(@n, (@i + 1))
-    }
-    
-                                                                                 // CELL WIDTHS! 
-    .cell-full { width: @IE_friendly_hundred_percent; margin-right: auto; }
-    .cell-x-widths(@griid-min_fractional_width);             /* Cells with fractional widths declared on the cell;
-                                                                the largest division supported is automatically 1/2;
-                                                                this variable is set in the initial configuration
-                                                              */
-    
-    .cell {.grid-x-cell-widths(@griid-max_equal_columns);}          /* Cells in a grid where cell count is declared on the grid;
-                                                                       a minimum of two cells is automatically supported;
-                                                                       this variable is set in the initial configuration
-                                                                       */
-    
+}
+
+
+/**********************************************************************************************************************************
+ **********************************************************************************************************************************
+ **********************************************************************************************************************************
+ * width calculations for multi-row grids
+ * 
+ */
+
+/* width calculator for unequal and equal-width cells */
+.griid--cell-width(@x) when not (@griid--gutter = 0) {
+    @griid--gutters: (@x - 1) * @griid--gutter;
+    width: calc(~'(@{ie_friendly_100_percent} - @{griid--gutters}) / @{x}');
+}
+.griid--cell-width(@x) when (@griid--gutter = 0) {    // account for calc limitation: can't subtract zero
+    @griid--gutters: (@x - 1) * @griid--gutter;
+    width: calc(~'@{ie_friendly_100_percent} / @{x}');
+}
+
+
+/* unequal-width cells */
+/* 2: each fraction */
+.griid--unequal-cell(@x) {
+    margin-right: @griid--gutter;
+    .griid--cell-width(@x)
+}
+/* 1: the loop */
+.griid--fraction(@denominator, @i:1) when (@i < @denominator) {
+    .cell-@{i}-@{denominator} { .griid--unequal-cell(@denominator/@i) };
+    .griid--fraction(@denominator, (@i + 1))
+}
+
+
+/* equal-width cells */
+/* 2: each column count */
+.griid--equal-cell(@cols) when (@cols > 1) {
+    &:nth-child(n) { margin-right: @griid--gutter }
+    &:nth-child(@fooN) { margin-right: 0 }
+    @fooN: ~"@{cols}n";
+    .griid--cell-width(@cols)
+}
+/* 1: loop */
+.griid--equal-cell(@cols) when not (@cols > 1) { width: @ie_friendly_100_percent }
+
+
+
+/**********************************************************************************************************************************
+ **********************************************************************************************************************************
+ **********************************************************************************************************************************
+ * initialization mixin functions
+ * 
+ */
+
+/* initialize equal-width cells  */
+.griid--initialize-equal-helper(@maxColCount, @i) when (@i =< @maxColCount) {
+    .griid-@{i} > .cell { .griid--equal-cell(@i) }
+    .griid--initialize-equal-helper(@maxColCount, (@i + 1))
+}
+/* with a specified custom font size  */
+.griid--initialize-equal-cells(@fontSize: @griid--font-size, @maxColCount: @griid--max-cols, @minColCount:@griid--min-cols) when not (@fontSize = @griid--font-size) {
+    [class*='griid'] > [class*='cell'] { font-size: @fontSize }
+    .griid--initialize-equal-helper(@maxColCount, @minColCount)
+}
+/* with the default font size  */
+.griid--initialize-equal-cells(@fontSize: @griid--font-size, @maxColCount: @griid--max-cols, @minColCount:@griid--min-cols) when (@fontSize = @griid--font-size) {
+    .griid--initialize-equal-helper(@maxColCount, @minColCount)
+}
+
+
+/* initialize unequal-width cells */
+.griid--initialize-unequal-helper(@smallestDenominator, @i) when (@i =< @smallestDenominator) {
+    .griid--fraction(@i);
+    .griid--initialize-unequal-helper(@smallestDenominator, (@i + 1))
+}
+/* with a specified custom font size  */
+.griid--initialize-unequal-cells(@fontSize: @griid--font-size, @smallestDenominator: @griid--max-cols, @largestDenominator: @griid--min-cols) when not (@fontSize = @griid--font-size) {
+    [class*='griid'] > [class*='cell'] { font-size: @fontSize }
+    .griid--initialize-unequal-helper(@smallestDenominator, @largestDenominator)
+}
+/* with the default font size  */
+.griid--initialize-unequal-cells(@fontSize: @griid--font-size, @smallestDenominator: @griid--max-cols, @largestDenominator: @griid--min-cols) when (@fontSize = @griid--font-size) {
+    .griid--initialize-unequal-helper(@smallestDenominator, @largestDenominator)
+}
+
+/* initialize equal- and unequal-width cells */
+.griid--initialize(@fontSize: @griid--font-size, @maxColCount: @griid--max-cols, @minColCount: @griid--min-cols, @smallestDenominator: @griid--max-cols, @largestDenominator: @griid--min-cols)  when not (@fontSize = @griid--font-size) {
+    [class*='griid'] > [class*='cell'] { font-size: @fontSize }
+    .griid--initialize-equal-helper(@maxColCount, @minColCount);
+    .griid--initialize-unequal-helper(@smallestDenominator, @largestDenominator)
+}
+.griid--initialize(@fontSize: @griid--font-size, @maxColCount: @griid--max-cols, @minColCount: @griid--min-cols, @smallestDenominator: @griid--max-cols, @largestDenominator: @griid--min-cols)  when (@fontSize = @griid--font-size) {
+    .griid--initialize-equal-helper(@maxColCount, @minColCount);
+    .griid--initialize-unequal-helper(@smallestDenominator, @largestDenominator)
 }

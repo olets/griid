@@ -1,0 +1,227 @@
+/**********************************************************************************************************************************
+ **********************************************************************************************************************************
+ **********************************************************************************************************************************
+    griid
+
+    The greedy grid that tries to do it all with LESS
+   
+    by Henry Bley-Vroman
+    MIT license
+    olets.github.io/griid/
+
+
+  an easy-to-use grid system which supports three grid types:
+  - single full-width single-row grids with cells of equal width;
+  - multi-row grids with a specified number of equal-width columns;-
+  - and multi-row grids with fraction-of-the-grid-width cell widths specified per-cell.
+  In the latter two cases, if the last row of the grid isn't filled its cells will be center aligned
+
+   by Henry Bley-Vroman,
+   2016, MIT License.
+   
+   Uses inline-block, so does not work on IE below 9
+
+*/
+/*
+.griid--vertical-align(@args:@griid--item-v-align)
+.griid--top
+.griid--middle
+.griid--bottom
+    Change the vertical alignment of cell contents
+    Default re-initializes
+
+.griid--orphan-align(@alignment:@griid--orphan-h-align)
+.griid--left
+.griid--center
+.griid--right
+    Change how orphan cells in multi-row grids are aligned
+    Default re-initializes
+
+
+.griid--row
+    Turn a multi-row grid into a single-row grid with equal-height and equal-width cells
+
+
+.griid--resize-row(@treatAs:1)
+    Turn a single-row grid into a multi-row grid with a @treatAs number of cells per row
+    Default turns the cells into blocks
+
+
+.griid--resize-one-unequal((@treatAsNumerator:1, @treatAsDenominator:2,) @targetNumerator, @targetDenominator)
+    Resize one fractional width
+    .griid--resize-one-unequal(@targetNumerator, @targetDenominator) turns the specified width into 1/2
+    .griid--resize-one-unequal(@treatAsNumerator, @treatAsDenominator, @targetNumerator, @targetDenominator)
+         turns @targetNumerator/@targetDenominator into @treatAsNumerator/@treatAsDenominator
+
+.griid--resize-unequal(@treatAsNumerator:1, @treatAsDenominator:2(, @numeratorOfLargest, @denominatorOfLargest))
+    Resize all fractional smaller than or equal to target
+    Default turns all fractional widths into 1/2
+    .griid--resize-unequal(@treatAsNumerator, @treatAsDenominator) turns all fractional widths into @treatAsNumerator/@treatAsDenominator
+    .griid--resize-unequal(@treatAsNumerator, @treatAsDenominator, @numeratorOfLargest, @denominatorOfLargest)
+        turns all fractions equal to or smaller than @numeratorOfLargest/@denominatorOfLargest into @treatAsNumerator/@treatAsDenominator
+
+
+.griid--resize-one-equal((@treatAs:1,) @target)
+    Resize one equal width
+    .griid--resize-one-equal(@target) will turn cells in an ostensibly @target-across multi-column grid into blocks
+
+.griid--resize-equal(@treatAs:1(, @minColCount: @griid--min-cols(, @maxColCount: @griid--max-cols)))
+    Resize all equal widths, optionally starting at a certain number or in a range
+    Default turns cells in all multi-row grids with equal width cells into blocks
+    .griid--resize-equal(@treatAs) turns multi-row grids with equal width cells into @target-across grids
+
+
+.griid--drop-one((@dropBy:1,) @target)
+    Made a specified equal width the next largest fraction (if given one argument) or increase specified number (* count is first of two arguments *)
+    "Drop" because a column is being dropped from the grid.
+    .griid--drop-one(@target) will make @target-across multi-row grids @target-1 across
+
+griid--drop(@dropBy: 1(, @minColCount: @griid--min-cols(, @maxColCount: @griid--max-cols)))
+    Make all equal widths a larger fraction of the whole,
+        optionally by a certain number,
+        by a certain number from a certain width
+        or by a certain number within a certain width range
+    "Drop" because a column is being dropped from the grid.
+    Default makes all equal widths the next larger fraction
+    griid--drop(@dropBy) reduces all multi-row equal-width cell column counts by @dropBy
+    griid--drop(@dropBy, @minColCount) reduces the column count of multi-row equal-width cell grids with at least @minColCount cells per row by @dropBy
+    griid--drop(@dropBy, @minColCount, @maxColCount) reduces by @dropBy the column count of multi-row equal-cell-width grids that have
+        between @minColCount and @maxColCount cells per row (inclusive)
+
+.griid--resize(@treatAs:1)
+    Resize all cells to be a certain width (turns all single-row grids into multi-row grids)
+    Default turns grid into blocks
+
+*/
+
+
+
+
+
+/**********************************************************************************************************************************
+ **********************************************************************************************************************************
+ **********************************************************************************************************************************
+ * alignment functions
+ * 
+ */
+/* vertical alignment of cell contents.
+   takes top/middle/bottom
+   important to override inline alignment classes
+*/
+.griid--vertical-align(@args:@griid--item-v-align) {
+    [class*='griid'], &[class*='griid'] {
+        > [class*='cell'] {vertical-align: @args}
+    }
+}
+.griid--top {.griid--vertical-align(top)}
+.griid--middle {.griid--vertical-align(middle)}
+.griid--bottom {.griid--vertical-align(bottom)}
+
+/* orphan alignment
+   takes left/center/right
+   important to override inline alignment classes
+*/
+.griid--orphan-align(@alignment:@griid--orphan-h-align) {
+    [class*='griid'], &[class*='griid'] {text-align:@alignment}
+}
+.griid--left {.griid--orphan-align(left)}
+.griid--center {.griid--orphan-align(center)}
+.griid--right {.griid--orphan-align(right)}
+
+
+
+/**********************************************************************************************************************************
+ **********************************************************************************************************************************
+ **********************************************************************************************************************************
+ * resize functions
+ * 
+ */
+
+/* turn a multi-row grid into a single-row grid with equal-width, equal-height columns */
+.griid--row {
+    [class*='griid'], &[class*='griid'] {
+        > [class*='cell'] {
+            display: table-cell;
+            width: 1%
+        }
+    }
+}
+
+
+/* resize single-row cells */
+.griid--resize-row(@treatAs:1) {
+    .griid, &.griid {
+        > .cell { .griid--equal-cell(@treatAs); display: inline-block; }
+    }
+}
+
+
+/* resize unequal cells */
+.griid--resize-one-unequal(@treatAsNumerator:1, @treatAsDenominator:2, @targetNumerator:0, @targetDenominator, @ratio:0) when not (@ratio = 0) and (@targetNumerator/@targetDenominator =< @ratio) and (@targetNumerator = 0) {
+    .cell-@{treatAsNumerator}-@{treatAsDenominator} { .griid--unequal-cell(2/1) };
+}
+.griid--resize-one-unequal(@treatAsNumerator:1, @treatAsDenominator:2, @targetNumerator:0, @targetDenominator, @ratio:0) when not (@ratio = 0) and (@targetNumerator/@targetDenominator =< @ratio) and not (@targetNumerator = 0) {
+    .cell-@{targetNumerator}-@{targetDenominator} { .griid--unequal-cell(@treatAsDenominator/@treatAsNumerator) };
+}
+.griid--resize-one-unequal(@treatAsNumerator:1, @treatAsDenominator:2, @targetNumerator:0, @targetDenominator, @ratio:0) when (@ratio = 0) and (@targetNumerator = 0) {
+    .cell-@{treatAsNumerator}-@{treatAsDenominator} { .griid--unequal-cell(2/1) };
+}
+.griid--resize-one-unequal(@treatAsNumerator:1, @treatAsDenominator:2, @targetNumerator:0, @targetDenominator, @ratio:0) when (@ratio = 0) and not (@targetNumerator = 0) {
+    .cell-@{targetNumerator}-@{targetDenominator} { .griid--unequal-cell(@treatAsDenominator/@treatAsNumerator) };
+}
+.griid--resize-unequal-helper(@treatAsNumerator, @treatAsDenominator, @denominator, @i, @ratio) when (@i =< @denominator) {
+    .griid--resize-one-unequal(@treatAsNumerator, @treatAsDenominator, @i, @denominator, @ratio);
+    .griid--resize-unequal-helper(@treatAsNumerator, @treatAsDenominator,@denominator, (@i + 1), @ratio)
+}
+.griid--resize-unequal(@treatAsNumerator:1, @treatAsDenominator:2, @numerator:0, @denominator:1, @i: 1, @smallestDenominator: @griid--max-cols) when (@i =< @smallestDenominator) {
+    .griid--resize-unequal-helper(@treatAsNumerator, @treatAsDenominator, @i, 1, (@numerator/@denominator));
+    .griid--resize-unequal(@treatAsNumerator, @treatAsDenominator, @numerator, @denominator, (@i + 1), @smallestDenominator)
+}
+
+/* resize a given number of equal columns to a different number of equal columns */
+.griid--resize-one-equal(@treatAs, @target:0) when (@target = 0) {
+//    .griid-@{target} { // to only allow mixins to be applied up the tree from a grid
+    .griid-@{treatAs}, &.griid-@{treatAs} { // to allow mixins to be applied to grids or anywhere up the tree from a grid
+        .cell { .griid--equal-cell(1) }
+    }
+}
+.griid--resize-one-equal(@treatAs, @target:0) when not (@target = 0) {
+//    .griid-@{target} { // to only allow mixins to be applied up the tree from a grid
+    .griid-@{target}, &.griid-@{target} { // to allow mixins to be applied to grids or anywhere up the tree from a grid
+        .cell { .griid--equal-cell(@treatAs) }
+    }
+}
+
+/* resize equal-width-column grids with a given minimum column count to a different number of equal columns */
+.griid--resize-equal(@treatAs:1, @i: @griid--min-cols, @maxColCount: @griid--max-cols) when (@i =< @maxColCount) {
+    .griid--resize-one-equal(@treatAs, @i);
+    .griid--resize-equal(@treatAs, (@i + 1), @maxColCount)
+}
+
+/* drop one column from an equal-width-columns grid */
+.griid--drop-one-helper(@dropBy, @target) {
+    .griid-@{target} .cell { .griid--equal-cell(@target - @dropBy)}
+}
+.griid--drop-one(@dropBy, @target:0) when (@target = 0) {    // so that .griid-drop() never drops the column count below 1
+    .griid--drop-one-helper(1, @dropBy)
+}
+.griid--drop-one(@dropBy, @target:0) when not (@target = 0) {
+    .griid--drop-one-helper(@dropBy, @target)
+}
+
+/* drop some number of columns from all equal-width-columns grids, or from all equal-width-columns grids with a given minimum column count */
+.griid--drop(@dropBy: 1, @i: @griid--min-cols, @maxColCount: @griid--max-cols) when (@i =< @maxColCount) and (@dropBy =< @i) {
+    .griid--drop-one-helper(@dropBy, @i);
+    .griid--drop(@dropBy, (@i + 1), @maxColCount)
+}
+.griid--drop(@dropBy: 1, @i: @griid--min-cols, @maxColCount: @griid--max-cols) when (@i =< @maxColCount) and not (@dropBy < @i) {
+    .griid--resize-one-equal(1, @i);
+    .griid--drop(@dropBy, (@i + 1), @maxColCount)
+}
+
+/* resize all */
+.griid--resize(@treatAs:1) {
+    .griid--resize-equal(@treatAs);
+    .griid--resize-unequal(@treatAs,1);
+    .griid--resize-row(@treatAs)
+}
