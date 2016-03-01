@@ -44,7 +44,7 @@
  * 
 *//*
     
-griid markup:
+markup for griid's three grid types:
 
 multi-row grids with equal-width cells look like
 `.griid-x > .cell*n` (there will be x cells per row)
@@ -54,6 +54,29 @@ multi-row grids with unequal-width cells look like
 
 single-row grids with equal-width, equal-height cells look like
 `.griid > .cell`
+
+
+
+bonus: the markup won't be as beautiful, but if
+    you want a grid with equal-height rows where that height is determined from the cell content
+    and you don't want to use a scripted solution (I love https://github.com/liabru/jquery-match-height)
+    and your cells have roughly similar content,
+    and you need to support orphan cells,
+    you may be able to get away with
+
+    `.griid > .row*y > .cell*x`
+
+    This will give you a multi-row grid where all cells are the full height of the row
+    (aka it's styled as an equal-width-cells table).
+    If your cells have similar content, this may be a good-enough approximation of equal-height rows.
+    
+    Notes:
+    
+    If last row is full, this is exactly equivalant to `.griid*y > .cell*x`
+
+    In most cases though you'll probably be better off using `.griid-x > .cell*(x*y)`
+
+    
 
 
 griid LESS:
@@ -176,9 +199,17 @@ C. Overriding default variables
  * 
  */
 .griid--single-row(@fontSize: @griid--font-size) {
-    .griid > .cell {
-        display: table-cell;
-        width: 1%
+    .griid {
+        > .row {
+            display: table-row;
+            > .cell {
+                font-size: @fontSize
+            }
+        }
+        > .cell, > .row > .cell {
+            display: table-cell;
+            width: 1%
+        }
     }
 }
 
