@@ -115,6 +115,7 @@ This will give you a multi-row grid where all cells are the full height of the r
 -    3. Possibly:
 	- run `.griid--initialize` to revert any changes made by adjustment functions,
 	- or if you only need to reset a particular type of grid, you can save a little weight by running `.griid--initialize-equal-cells`, `.griid--initialize-unequal-cells`, or `.griid--initialize-row`
+	- to have specific grids use a different baseline font size, you don't need to do a full new initialization. Just run `.griid--fz(@fontSize)`
 
 
 ###B. Customizing your setup:

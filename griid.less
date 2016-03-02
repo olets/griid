@@ -86,9 +86,11 @@ griid **requires** initialization
 A. Typical usage:
     1. Definitely: run `.griid--install` to have full griid support, using the @griid-- values.
     2. Likely: run adjustment functions in media queries to treat one grid as another in certain contexts (see griid-functions.less)
-    3. Possibly: run `.griid--initialize` to revert any changes made by adjustment functions,
+    3. Possibly:
+        run `.griid--initialize` to revert any changes made by adjustment functions,
            or if you only need to reset a particular type of grid, you can save a little weight
-           run `.griid--initialize-equal-cells`, `.griid--initialize-unequal-cells`, or `.griid--initialize-row`
+           by running `.griid--initialize-equal-cells`, `.griid--initialize-unequal-cells`, or `.griid--initialize-row`
+        run `.griid--fz(@fontSize: @griid--font-size) to have particular grids use a different baseline font size
 
 
 B. Customizing your setup:
@@ -283,6 +285,12 @@ C. Overriding default variables
  * 
  */
 
+/* font size */
+.griid--fz(@fontSize: @griid--font-size) {
+    [class*='griid'] > [class*='cell'] { font-size: @fontSize }
+}
+
+
 /* initialize equal-width cells  */
 .griid--initialize-equal-helper(@maxColCount, @i) when (@i =< @maxColCount) {
     .griid-@{i} > .cell { .griid--equal-cell(@i) }
@@ -290,7 +298,7 @@ C. Overriding default variables
 }
 /* with a specified custom font size  */
 .griid--initialize-equal-cells(@fontSize: @griid--font-size, @maxColCount: @griid--max-cols, @minColCount:@griid--min-cols) when not (@fontSize = @griid--font-size) {
-    [class*='griid'] > [class*='cell'] { font-size: @fontSize }
+    .griid--fz(@fontSize);
     .griid--initialize-equal-helper(@maxColCount, @minColCount)
 }
 /* with the default font size  */
@@ -308,7 +316,7 @@ C. Overriding default variables
 }
 /* with a specified custom font size  */
 .griid--initialize-unequal-cells(@fontSize: @griid--font-size, @smallestDenominator: @griid--max-cols, @largestDenominator: @griid--min-cols) when not (@fontSize = @griid--font-size) {
-    [class*='griid'] > [class*='cell'] { font-size: @fontSize }
+    .griid--fz(@fontSize);
     .griid--initialize-unequal-helper(@smallestDenominator, @largestDenominator)
 }
 /* with the default font size  */
@@ -326,7 +334,7 @@ C. Overriding default variables
 /* initialize equal- and unequal-width cells */
 .griid--initialize(@fontSize: @griid--font-size, @maxColCount: @griid--max-cols, @minColCount: @griid--min-cols, @smallestDenominator: @griid--max-cols, @largestDenominator: @griid--min-cols)  when not (@fontSize = @griid--font-size) {
     .griid--initialize-row(@fontSize);
-    [class*='griid'] > [class*='cell'] { font-size: @fontSize }
+    .griid--fz(@fontSize);
     .griid--initialize-equal-helper(@maxColCount, @minColCount);
     .griid--initialize-unequal-helper(@smallestDenominator, @largestDenominator)
 }
