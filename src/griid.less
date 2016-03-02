@@ -1,7 +1,7 @@
 /**********************************************************************************************************************************
  **********************************************************************************************************************************
  **********************************************************************************************************************************
-    griid v2.1
+    griid v2.1.1
 
     The greedy grid that tries to do it all with LESS
    
@@ -163,34 +163,32 @@ C. Overriding default variables
  * 
  */
 
-@ie_friendly_100_percent: 99.99999%;                   // there's always one IE problem
+@ie_friendly_100_percent: 99.99999%;                       // there's always one IE problem
 /*.griid {
     border-collapse: separate;
     border-spacing: @griid--gutter;
 }*/
 
 .griid--base(@fontSize: @griid--font-size, @orphanAlignment: @griid--orphan-h-align, @contentAlignment: @griid--item-v-align,@rowSpacing: @griid--row-spacing) {
-  [class*='griid'] {
-      display: table;
-      table-layout: fixed;
-      width: 100%;
-  //    overflow: hidden;
-      font-size: 0;
-      text-align: @orphanAlignment;
-      > [class*='cell'] {
-          position: relative;
-          display: inline-block;                             // inline-blocks allow vertical and horizontal alignment
-          margin-bottom: @rowSpacing;
-          vertical-align: @contentAlignment;
-          font-size: @fontSize;
-          text-align: left;
-  //        overflow: hidden;
-          &.row-end { margin-right: 0 }
-          &:last-child { margin-right: 0 !important}
+    [class*='griid'] {
+        display: table;
+        width: 100%;
+        // overflow: hidden;
+        font-size: 0;                                      // keeps the whitespace between cells zero-widthed
+        text-align: @orphanAlignment;                      // alignment of cells in unfilled last rows
+        > [class*='cell'] {
+            display: inline-block;                         // inline-blocks allow vertical and horizontal alignment
+            position: relative;
+            margin-bottom: @rowSpacing;
+            vertical-align: @contentAlignment;
+            font-size: @fontSize;
+            text-align: left;                              // reverts cell content to default (otherwise would inherit @orphanAlignment)
+            // overflow: hidden;
+            &:last-child { margin-right: 0 !important}     // makes sure center- and right-aligned orphans line up with cells in preceding rows
 
-          img {max-width: 100%}          // for good measure
-      }
-  }
+            img {max-width: 100%}                          // for good measure
+        }
+    }
 }
 
 /****************************************************************
@@ -199,14 +197,13 @@ C. Overriding default variables
  */
 .griid--single-row(@fontSize: @griid--font-size) {
     .griid {
+        table-layout: fixed;                               // equal-width cells are the result of a table-layout:fixed table
         > .row {
             display: table-row;
-            > .cell {
-                font-size: @fontSize
-            }
+            > .cell { font-size: @fontSize }
         }
         > .cell, > .row > .cell {
-            display: table-cell;
+            display: table-cell;                           // in combination with 1%-wide table-cells
             width: 1%
         }
     }
@@ -217,18 +214,18 @@ C. Overriding default variables
  * 
  */
 .griid--inline-alignment() {
-  [class*='griid'] {
-      > [class*='cell'] {
-          .top&, &.top { vertical-align: top }                      // make grid-item top-aligned
-          .middle&, &.middle {vertical-align: middle}                  // make grid-item middle-aligned
-          .bottom&, &.bottom {vertical-align: bottom}                  // make grid-item bottom-aligned
-      }
-      &, > [class*='cell'] {
-          &.left {text-align: left}
-          &.center {text-align: center}
-          &.right {text-align: right}
-      }
-  }
+    [class*='griid'] {
+        > [class*='cell'] {                                // vertical alignment classes apply to cells, regardless of whether they're added to a cell's or grid's markup
+            .top&, &.top { vertical-align: top }           // make grid-item top-aligned
+            .middle&, &.middle {vertical-align: middle}    // make grid-item middle-aligned
+            .bottom&, &.bottom {vertical-align: bottom}    // make grid-item bottom-aligned
+        }
+        &, > [class*='cell'] {                             // horizontal alignment classes apply to the grid (ie orphan alignment) or cell
+            &.left {text-align: left}                      // on grids: make orphans align left; on cells: make content align left
+            &.center {text-align: center}                  // on grids: make orphans align center; on cells: make content align center
+            &.right {text-align: right}                    // on grids: make orphans align right; on cells: make content align right
+        }
+    }
 }
 
 
@@ -244,7 +241,7 @@ C. Overriding default variables
     @griid--gutters: (@x - 1) * @griid--gutter;
     width: calc(~'(@{ie_friendly_100_percent} - @{griid--gutters}) / @{x}');
 }
-.griid--cell-width(@x) when (@griid--gutter = 0) {    // account for calc limitation: can't subtract zero
+.griid--cell-width(@x) when (@griid--gutter = 0) {         // account for calc limitation: can't subtract zero
     @griid--gutters: (@x - 1) * @griid--gutter;
     width: calc(~'@{ie_friendly_100_percent} / @{x}');
 }
@@ -301,6 +298,7 @@ C. Overriding default variables
 
 /* initialize unequal-width cells */
 .griid--initialize-unequal-helper(@smallestDenominator, @i) when (@i =< @smallestDenominator) {
+    [class*='griid'] > [class*='cell'].row-end { margin-right: 0 }
     .cell-1-1, .cell-full { width: @ie_friendly_100_percent }
     .griid--fraction(@i);
     .griid--initialize-unequal-helper(@smallestDenominator, (@i + 1))
