@@ -90,7 +90,7 @@ This will give you a multi-row grid where all cells are the full height of the r
     
 Note that if last row is full, this is exactly equivalant to `.griid*y > .cell*x` but with bulkier markup
 
-In most cases though you'll probably be better off using `.griid-x > .cell*(x*y)`
+*Still, you'll almost certainly be better off using `.griid-x > .cell*(x*y)`*
 
     
 ##Configuration
