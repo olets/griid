@@ -1,7 +1,7 @@
 /**********************************************************************************************************************************
  **********************************************************************************************************************************
  **********************************************************************************************************************************
-    griid v2.1.1
+    griid v2.1.2
 
     The greedy grid that tries to do it all with LESS
    
@@ -98,8 +98,9 @@ B. Customizing your setup:
     2. `griid--inline-alignment` adds support for using alignment classes in your markup
             `.top`, `.middle`, `.bottom` give you inline overrides for cell content vertical alignment
             `.left`, `.center`, `.right` give you inline overrides for (when applied to a grid) orphan alignment and (when applied to a cell) content alignment
-    3. `.griid--single-row` adds support for single-row grids with equal-width, equal-height cells
-    4. `.griid--base`, with or without `.griid--inline-alignment` and `.griid--single-row`, still needs initialization.
+    3. `.griid--single-row` adds support for single-row grids with equal-width, equal-height cells. By default these cells do NOT have gutters or row spacing
+    4. `.griid--row-spacing` (NOT included in `.griid--install`) adds gutters and row spacing (both @griid--gutter) to `.griid .cell*x` grids. Beware that this will frame the entire `.griid .cell*x` grids in a @griid-gutter space
+    5. `.griid--base`, with or without `.griid--inline-alignment` and `.griid--single-row`, still needs initialization.
             `.griid--initialize` gets you ready to go with single-row and multi-row columns
             Or run any of `.griid--initialize-equal-cells`, `.griid--initialize-unequal-cells`, or `.griid--initialize-row`
 
@@ -164,10 +165,6 @@ C. Overriding default variables
  */
 
 @ie_friendly_100_percent: 99.99999%;                       // there's always one IE problem
-/*.griid {
-    border-collapse: separate;
-    border-spacing: @griid--gutter;
-}*/
 
 .griid--base(@fontSize: @griid--font-size, @orphanAlignment: @griid--orphan-h-align, @contentAlignment: @griid--item-v-align,@rowSpacing: @griid--row-spacing) {
     [class*='griid'] {
@@ -195,7 +192,7 @@ C. Overriding default variables
  * layout for single-row grid of equal-width, equal-height cells
  * 
  */
-.griid--single-row(@fontSize: @griid--font-size) {
+.griid--single-row(@fontSize: @griid--font-size) {         // .griid--single-row is included in griid--install
     .griid {
         table-layout: fixed;                               // equal-width cells are the result of a table-layout:fixed table
         > .row {
@@ -208,12 +205,18 @@ C. Overriding default variables
         }
     }
 }
+.griid--row-spacing() {                                    // .griid--row-spacing is NOT included in griid-install
+    .griid {                                               // remember that border-spacing applies to the outside edges of the table, 
+        border-collapse: separate;                         // so if this is used `.griid .cell`s will not line up with `.griid-x .cells` or `.griid .cell-n-d`s
+        border-spacing: @griid--gutter;
+    }
+}
 
 /****************************************************************
  * optional support for inline class-defined alignment
  * 
  */
-.griid--inline-alignment() {
+.griid--inline-alignment() {                               // .griid--inline-alignment is included in griid--install
     [class*='griid'] {
         > [class*='cell'] {                                // vertical alignment classes apply to cells, regardless of whether they're added to a cell's or grid's markup
             .top&, &.top { vertical-align: top }           // make grid-item top-aligned
