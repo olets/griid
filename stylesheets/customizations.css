@@ -19,3 +19,55 @@ small {
 small code {
 	font-size: inherit;
 }
+
+/*
+[class*='cell'] {
+	background: #39c;
+	color: #fff;
+	text-align: center;
+	outline: 1px solid #fff;
+}
+*/
+.bound {
+	width: 80%;
+	max-width: 1440px;
+	margin: 0 auto;
+}
+
+html, body {
+	background: #f9f9f9;
+	font-family: sans-serif;
+	font-size: 16px;
+}
+
+[class*='griid'] > [class*='cell'] {
+	background: #f9f9f9;
+	border-radius: 10px;
+
+}
+
+[class*='griid'] > [class*='cell'] [class*='griid'] > [class*='cell'] {
+
+	background: #39c;
+	color: #fff;
+	text-align: center;
+	outline: 1px solid #fff;
+	border-radius: 0;
+}
+
+section, header {
+	background: #fff;
+	padding: 10px;
+	border-radius: 10px;
+	padding-top: 1px;
+}
+header {
+	width: 80%;
+}
+
+hr {
+	height: 1px;
+	box-shadow: none;
+	border: 0;
+	background: #ccc;
+}
