@@ -34,6 +34,7 @@ So:
 	</div>
 
 will be
+
 |- - -1- - -|- - -2- - -|- - -3- - -|
 
 |- - 4- -|- - 5- -|- - 6- -|- - 7- -|
@@ -47,7 +48,9 @@ and
 		<div class="cell">4</div>
 		<div class="cell">5</div>
 	</div>
+	
 will be 
+
 |- - 1- -|- - 2- -|- - 3- -|- - 4- -|
 
 |- - 5- -|
@@ -61,7 +64,9 @@ and
 		<div class="cell-1-2">4</div>
 		<div class="cell1-6 row end">5</div>
 	</div>
+
 will be
+
 |- - 1- -|- - - - - - 2 - - - - - - |
 
 |- - 3 - - |- - - - 4 - - - -| - 5 -|
