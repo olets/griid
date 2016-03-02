@@ -1,13 +1,11 @@
 #griid
-##The greedy grid that tries to do it all with LESS
+###The greedy grid that tries to do it all with LESS
 
 griid is a grid system with automatic rows. You can use the processed griid.css file on its own, but to take advantage its full usefulness you'll need LESS.
 
 Supports IE > 8
 
 griid supports three grid types: single full-width single-row grids  with cells of equal width; multi-row grids with a specified number of equal-width columns; and multi-row grids with fraction-of-the-grid-width cell widths specified per-cell. In the latter two cases, you can control the horizontal alignment of orphan cells (cells in non-full last rows)
-
-Demos at [http://olets.github.io/griid/](http://olets.github.io/griid/)
 
 ---
 
