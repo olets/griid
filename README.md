@@ -209,9 +209,9 @@ griid has support for all sorts of adjustments. These are especially useful for 
     Change how orphan cells in multi-row grids are aligned
     Default re-initializes
 
-###Grid adjustment
+###B.Grid adjustment
 
-####B. Adjusting `.griid .cell` grids
+####1. Adjusting `.griid .cell` grids
 3. `.griid--row`
     Turn a multi-row grid into a single-row grid with equal-height and equal-width cells
 
@@ -221,7 +221,7 @@ griid has support for all sorts of adjustments. These are especially useful for 
     Default turns the cells into blocks
 
 
-####C. Adjusting `.griid .cell-n-d` grids
+####2. Adjusting `.griid .cell-n-d` grids
 5. `.griid--resize-one-unequal((@treatAsNumerator:1, @treatAsDenominator:2,) @targetNumerator, @targetDenominator)`
 Resize one fractional width   
   - `.griid--resize-one-unequal(@targetNumerator, @targetDenominator)` turns `.cell-@targetNumerator-@targetDenominator` cells into `.cell-1-2`    
@@ -235,9 +235,9 @@ Resize one fractional width
   -    `.griid--resize-unequal(@treatAsNumerator, @treatAsDenominator, @numeratorOfLargest, @denominatorOfLargest)` turns all fractions equal to or smaller than **@numeratorOfLargest/@denominatorOfLargest** into `cell-@treatAsNumerator-@treatAsDenominator`
 
 
-####D. Adjusting `.griid-x .cell` grids
+####3. Adjusting `.griid-x .cell` grids
 
-#####Resizing from one column count to another
+#####i. Resizing from one column count to another
 7. `.griid--resize-one-equal((@treatAs:1,) @target)`
     Resize one equal width
     `.griid--resize-one-equal(@target)` will turn cells in an `.griid-@target` into blocks
@@ -247,7 +247,7 @@ Resize one fractional width
     Default turns cells in all `.griid-x` grids into blocks
     `.griid--resize-equal(@treatAs)` turns all `.griid-x` grids into `.griid-@target` grids
 
-#####Dropping the column count by one or more
+#####ii. Dropping the column count by one or more
 
 9. `.griid--drop-one((@dropBy:1,) @target)`
     Drops one or more columns from "one" specified grid type.
@@ -269,3 +269,34 @@ Resize one fractional width
     Turns *all* grids (`.griid .cell`, `.griid-x .cell`, and `.griid .cell-n-d`) into `.griid-@treatAs`
     
     Default turns all cells into blocks
+
+###C. Example: A progressively resposive grid
+
+Here's a simple example of how you might use griid's `resize` function to build a progressively responsive grid. (Note that the calculations aren't *perfect* if @griid--gutter is a percentage value, but who's counting?)
+
+	.progressive-grid() {
+	    @grid-items--max-width: [your site width];
+	    
+	    @max5: 5 * @grid-items--max-width / 6;
+	    @max4: 2 * @grid-items--max-width / 3;
+	    @max3: @grid-items--max-width / 2;
+	    @max2: @grid-items--max-width / 3;
+	    @max1: @grid-items--max-width / 6;
+	    
+	    @media(max-width: @max5) {
+	        .grid-items--resize(5,5)
+	    }
+	    @media(max-width: @max4) {
+	        .grid-items--resize(4,4)
+	    }
+	    @media(max-width: @max3) {
+	        .grid-items--resize(3,3)
+	    }
+	    @media(max-width: @max2) {
+	        .grid-items--resize(2)
+	    }
+	    @media(max-width: @max1) {
+	        .grid-items--resize(1)
+	    }
+	}
+	.progressive-grid;
