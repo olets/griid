@@ -190,7 +190,6 @@ C. Overriding default variables
 
           img {max-width: 100%}          // for good measure
       }
-      .cell-1-1, .cell-full { width: @ie_friendly_100_percent }
   }
 }
 
@@ -302,6 +301,7 @@ C. Overriding default variables
 
 /* initialize unequal-width cells */
 .griid--initialize-unequal-helper(@smallestDenominator, @i) when (@i =< @smallestDenominator) {
+    .cell-1-1, .cell-full { width: @ie_friendly_100_percent }
     .griid--fraction(@i);
     .griid--initialize-unequal-helper(@smallestDenominator, (@i + 1))
 }
