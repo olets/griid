@@ -99,7 +99,7 @@ B. Customizing your setup:
             `.top`, `.middle`, `.bottom` give you inline overrides for cell content vertical alignment
             `.left`, `.center`, `.right` give you inline overrides for (when applied to a grid) orphan alignment and (when applied to a cell) content alignment
     3. `.griid--single-row` adds support for single-row grids with equal-width, equal-height cells. By default these cells do NOT have gutters or row spacing
-    4. `.griid--row-spacing` (NOT included in `.griid--install`) adds gutters and row spacing (both @griid--gutter) to `.griid .cell*x` grids. Beware that this will frame the entire `.griid .cell*x` grids in a @griid-gutter space
+    4. `.griid--space-single-row` (NOT included in `.griid--install`) adds gutters and row spacing (both @griid--gutter) to `.griid .cell*x` grids. Beware that this will frame the entire `.griid .cell*x` grids in a @griid-gutter space
     5. `.griid--base`, with or without `.griid--inline-alignment` and `.griid--single-row`, still needs initialization.
             `.griid--initialize` gets you ready to go with single-row and multi-row columns
             Or run any of `.griid--initialize-equal-cells`, `.griid--initialize-unequal-cells`, or `.griid--initialize-row`
@@ -205,7 +205,7 @@ C. Overriding default variables
         }
     }
 }
-.griid--row-spacing() {                                    // .griid--row-spacing is NOT included in griid-install
+.griid--space-single-row() {                                    // .griid--space-single-row is NOT included in griid-install
     .griid {                                               // remember that border-spacing applies to the outside edges of the table, 
         border-collapse: separate;                         // so if this is used `.griid .cell`s will not line up with `.griid-x .cells` or `.griid .cell-n-d`s
         border-spacing: @griid--gutter;
