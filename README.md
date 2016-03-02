@@ -76,21 +76,11 @@ will be
 
 --
 
-Bonus: the markup won't be as beautiful, but if
--	 you want a grid with equal-height rows where that height is determined from the cell content
--	 and you don't want to use a scripted solution (I love [jquery-match-height](https://github.com/liabru/jquery-match-height))
--    and your cells have roughly similar content,
--    and you need to support orphan cells
-
-you *may* be able to get away with
+Bonus: griid can also support
 
     `.griid > .row*y > .cell*x`
 
-This will give you a multi-row grid where all cells are the full height of the row (aka it's styled as an equal-width-cells table). If your cells have similar content, this may be a good-enough approximation of equal-height rows.
-    
-Note that if last row is full, this is exactly equivalant to `.griid*y > .cell*x` but with bulkier markup
-
-*Still, you'll almost certainly be better off using `.griid-x > .cell*(x*y)`*
+This will give you a multi-row grid where all cells are the full height of the row (aka it's styled as an equal-width-cells table). Note that if last row is full, this is exactly equivalant to `.griid*y > .cell*x` but with bulkier markup, and if the last row isn't full it's functionally equivalent to `.griid-x > .cell*(x*y)`... but will bulkier markup. Support for this is not included by default.
 
     
 ##Configuration
@@ -136,7 +126,7 @@ The default installation from `.griid--install` will fit most needs, but you can
        `.top`, `.middle`, `.bottom` give you inline overrides for cell content vertical alignment
        `.left`, `.center`, `.right` give you inline overrides for (when applied to a grid) orphan alignment and (when applied to a cell) content alignment
 3. `.griid--single-row` adds support for single-row grids with equal-width, equal-height cells. By default these cells do NOT have gutters or row spacing
-4. `.griid--row-spacing` (NOT included in `.griid--install`) adds gutters and row spacing (both @griid--gutter) to `.griid .cell*x` grids. Beware that this will frame the entire `.griid .cell*x` grids in a @griid-gutter space
+4. `.griid--space-single-row` (NOT included in `.griid--install`) adds gutters and row spacing (both @griid--gutter) to `.griid .cell*x` grids. Beware that this will frame the entire `.griid .cell*x` grids in a @griid-gutter space
 5. `.griid--base`, with or without `.griid--inline-alignment` and`.griid--single-row`, still needs initialization.
   -            `.griid--initialize` gets you ready to go with single-row and multi-row columns
   -          Or run any of `.griid--initialize-equal-cells`, `.griid--initialize-unequal-cells`, or `.griid--initialize-row`
