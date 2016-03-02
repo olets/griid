@@ -1,14 +1,3 @@
-#griid
-##The greedy grid that tries to do it all with LESS
-
-griid is a grid system with automatic rows. You can use the processed griid.css file on its own, but to take advantage its full usefulness you'll need LESS.
-
-Supports IE > 8
-
-griid supports three grid types: single full-width single-row grids  with cells of equal width; multi-row grids with a specified number of equal-width columns; and multi-row grids with fraction-of-the-grid-width cell widths specified per-cell. In the latter two cases, you can control the horizontal alignment of orphan cells (cells in non-full last rows)
-
-Demos at [http://olets.github.io/griid/](http://olets.github.io/griid/)
-
 ##markup for griid's three grid types:
 
 Single-row grids with equal-width, equal-height cells look like `.griid > .cell`
@@ -179,3 +168,83 @@ The initialization functions can be re-run at any point to re-initialize with ne
 	                      (@smallestDenominator,
 	                       (@largestDenominator))))))))
 	              )
+	              
+##griid LESS functions and mixins
+
+griid has support for all sorts of adjustments. These are especially useful for media queries - turn your 1/3 - 2/3 grid into 1/2 - 1/2 quickly and cleanly. Progressively resize a grid first from 6 columns (the factory default max columns for griid) to 5, then 4, 3, 2, 1.
+
+###A. Alignment
+1. `.griid--vertical-align(@args:@griid--item-v-align)`
+`.griid--top` (mixin)
+`.griid--middle` (mixin)
+`.griid--bottom` (mixin)
+    Change the vertical alignment of cell contents
+    Default re-initializes
+
+2. `.griid--orphan-align(@alignment:@griid--orphan-h-align)`
+`.griid--left` (mixin)
+`.griid--center` (mixin)
+`.griid--right` (mixin)
+    Change how orphan cells in multi-row grids are aligned
+    Default re-initializes
+
+###Grid adjustment
+
+####B. Adjusting `.griid .cell` grids
+3. `.griid--row`
+    Turn a multi-row grid into a single-row grid with equal-height and equal-width cells
+
+
+4. `.griid--resize-row(@treatAs:1)`
+    Turn a single-row grid into a multi-row grid with a **@treatAs** number of cells per row
+    Default turns the cells into blocks
+
+
+####C. Adjusting `.griid .cell-n-d` grids
+5. `.griid--resize-one-unequal((@treatAsNumerator:1, @treatAsDenominator:2,) @targetNumerator, @targetDenominator)`
+Resize one fractional width   
+  - `.griid--resize-one-unequal(@targetNumerator, @targetDenominator)` turns `.cell-@targetNumerator-@targetDenominator` cells into `.cell-1-2`    
+  - `.griid--resize-one-unequal(@treatAsNumerator, @treatAsDenominator, @targetNumerator, @targetDenominator)` turns `.cell-@targetNumerator-@targetDenominator` into `.cell-@treatAsNumerator-@treatAsDenominator`
+
+
+6. `.griid--resize-unequal(@treatAsNumerator:1, @treatAsDenominator:2(, @numeratorOfLargest, @denominatorOfLargest))`
+  -    Resize all fractional smaller than or equal to target
+  -    Default turns all fractional widths into `.cell-1-2`
+  -    `.griid--resize-unequal(@treatAsNumerator, @treatAsDenominator)` turns all fractional widths into `cell-@treatAsNumerator-@treatAsDenominator`
+  -    `.griid--resize-unequal(@treatAsNumerator, @treatAsDenominator, @numeratorOfLargest, @denominatorOfLargest)` turns all fractions equal to or smaller than **@numeratorOfLargest/@denominatorOfLargest** into `cell-@treatAsNumerator-@treatAsDenominator`
+
+
+####D. Adjusting `.griid-x .cell` grids
+
+#####Resizing from one column count to another
+7. `.griid--resize-one-equal((@treatAs:1,) @target)`
+    Resize one equal width
+    `.griid--resize-one-equal(@target)` will turn cells in an `.griid-@target` into blocks
+
+8. `.griid--resize-equal(@treatAs:1(, @minColCount: @griid--min-cols(, @maxColCount: @griid--max-cols)))`
+    Resize all equal widths, optionally starting at a certain number or in a range
+    Default turns cells in all `.griid-x` grids into blocks
+    `.griid--resize-equal(@treatAs)` turns all `.griid-x` grids into `.griid-@target` grids
+
+#####Dropping the column count by one or more
+
+9. `.griid--drop-one((@dropBy:1,) @target)`
+    Drops one or more columns from "one" specified grid type.
+  -    `.griid--drop-one(@target)` will turn `.griid-@target` into `.griid-(@target-1)`
+  -    `.griid--drop-one(@dropBy, @target)` will turn `.griid-@target` into `.griid-(@target-@dropBy)`
+
+10. `griid--drop(@dropBy: 1(, @minColCount: @griid--min-cols(, @maxColCount: @griid--max-cols)))`
+    Make all equal widths a larger fraction of the whole,
+    -    optionally by a certain number,
+    -    by a certain number from a certain width
+    -    or by a certain number within a certain width range
+
+    Default makes all equal widths the next larger fraction  
+  - `griid--drop(@dropBy)` drops **@dropBy** columns from all `.griid-x` grids
+  - `griid--drop(@dropBy, @minColCount)` drops  **@dropBy** columns `.griid-x` grids that have at least **@minColCount** columns
+  - `griid--drop(@dropBy, @minColCount, @maxColCount)` drops **@dropBy** columns from grids between `.griid-@minColCount` and `.griid-@maxColCount` (inclusive)
+
+11. `.griid--resize(@treatAs:1)`
+    Turns *all* grids (`.griid .cell`, `.griid-x .cell`, and `.griid .cell-n-d`) into `.griid-@treatAs`
+    
+    Default turns all cells into blocks
