@@ -263,7 +263,7 @@ Resize one fractional width
 
 ###C. Example: A progressively resposive grid
 
-Here's a simple example of how you might use griid's `resize` function to build a progressively responsive grid. (Note that the calculations aren't *perfect* if @griid--gutter is a percentage value, but who's counting?)
+Here's a simple example of how you might use griid's `resize` function to build a progressively responsive grid. (Note that the calculations aren't *perfect* if @griid--gutter is non-zero, but who's looking that closely?)
 
 	.progressive-grid() {
 	    @grid-items--max-width: [your site width];
