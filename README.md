@@ -35,6 +35,7 @@ So:
 
 will be
 |- - -1- - -|- - -2- - -|- - -3- - -|
+
 |- - 4- -|- - 5- -|- - 6- -|- - 7- -|
 
 and
@@ -48,6 +49,7 @@ and
 	</div>
 will be 
 |- - 1- -|- - 2- -|- - 3- -|- - 4- -|
+
 |- - 5- -|
 
 and 
@@ -61,6 +63,7 @@ and
 	</div>
 will be
 |- - 1- -|- - - - - - 2 - - - - - - |
+
 |- - 3 - - |- - - - 4 - - - -| - 5 -|
 		
 
@@ -97,7 +100,7 @@ In most cases though you'll probably be better off using `.griid-x > .cell*(x*y)
 
 - The base font size inside cells is `@griid--font-size`
 
-- You can optionally include support (with `.griid--inline-alignment`) for alignment classes to use in your markup. As we will see, there are functions for doing this in **griid-functions.less** but just in case you really want to have it in your markup:
+- You can optionally include support (with `.griid--inline-alignment`) for alignment classes to use in your markup. As we will see, there are functions for doing this in **griid-functions.less** (see below) but just in case you really want to have it in your markup:
 	- Add `.left`, `.center`, `.right` to a multi-row grid to override orphan alignment
 	- Add `.left`, `.center`, `.right` to a cell to override the cell alignment
 	- Add `.top`, `.middle`, or `.bottom` to a grid to control the default for its child cells
