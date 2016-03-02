@@ -7,6 +7,8 @@ Supports IE > 8
 
 griid supports three grid types: single full-width single-row grids  with cells of equal width; multi-row grids with a specified number of equal-width columns; and multi-row grids with fraction-of-the-grid-width cell widths specified per-cell. In the latter two cases, you can control the horizontal alignment of orphan cells (cells in non-full last rows)
 
+Until built, the griid LESS adds absolutely nothing to your compiled CSS -- include it in your default setup, and don't worry about adding bloat if you don't use it. In addition, all of griid's features are compartmentalized -- by customizing your build, you can make sure that only the styles you need actually make it into your stylesheet.
+
 ---
 
 ##markup for griid's three grid types:
