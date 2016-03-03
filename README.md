@@ -93,6 +93,9 @@ At the top of griid.less are griid's default variables:
 - The base font size inside cells is `@griid--font-size`
 
 
+## getting griid
+Download and include **griid.less** and **griid-functions.less**. Or add griid to your bower dependencies with `bower install griid --save` or `bower install griid --save-dev`.
+
 ## using griid
 ###*griid* ***requires*** *initialization*
 
