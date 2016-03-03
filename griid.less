@@ -287,7 +287,10 @@ C. Overriding default variables
 
 /* font size */
 .griid--fz(@fontSize: @griid--font-size) {
-    [class*='griid'] > [class*='cell'] { font-size: @fontSize }
+    [class*='griid'] > [class*='cell'],                    // can be applied upstream of a grid
+    &[class*='griid'] > [class*='cell'] {                  // or directly on a griid
+        font-size: @fontSize
+    }
 }
 
 
