@@ -1,6 +1,6 @@
 {
   "name": "griid",
-  "description": "The greedy grid that tried to do it all with LESS",
+  "description": "The greedy grid that tries to do it all with LESS",
   "main": [
     "griid.less",
     "griid-functions.less"
