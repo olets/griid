@@ -204,7 +204,7 @@ griid has support for all sorts of adjustments. These are especially useful for 
 	`.griid--center` (shorthand mixin from `.griid--orphan-align(center)`)
 	`.griid--right` (shorthand mixin from `.griid--orphan-align(right)`)
 
-###B.Grid transformations
+###B. Grid transformations
 
 Note: all transformation functions check markup, not styles. When you target `.griid-x` grids with a certain column count, griid targets *ostensible* column counts, disregarding any transformations you may have done. For example: If you use  `.griid--drop-one(5);` to turn a five-column grid into four-column grid (see below) and later want to turn it into a three-column grid, you'll need to do either `.griid--drop(2,5)` ("drop by 2 the column count of 5-column grids") or `.griid--resize-one(3,5)` ("resize to 3 columns all 5-column grids"). Don't be tricked into thinking you can do `.griid--drop-one(4)` - as far as `.griid--drop-one()` is concerned, this is still a `.griid-5`. Similarly, `.griid--drop; .griid-drop` is no different than `.griid--drop`. In practice this isn't a problem - there are enough options that you'll be able to easily do what you want.
 
@@ -266,7 +266,7 @@ Resize one fractional-width cell type
     Turn a `.griid-x .cell` or `.griid .cell-n-d` grid into a `.griid .cell` grid
     
 ###5. Adjusting all grids (`.griid .cell`, `.griid-x .cell`, and `.griid .cell-n-d`)
-11. `.griid--resize(@treatAs:1)`
+1. `.griid--resize(@treatAs:1)`
     Turns *all* grids into `.griid-@treatAs` (and all `.cell-n-d` into `.cell`)
     
     Default turns all cells into blocks
@@ -304,3 +304,10 @@ Here's a simple example of how you might use griid's `resize` function to build 
 	    }
 	}
 	.progressive-grid;
+
+##Acknowledgements
+griid grew out of ideas in [@JoelSutherland's](https://github.com/JoelSutherland) **grid-items** LESS grid
+
+
+
+######Henry Bley-Vroman, 2016
