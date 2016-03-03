@@ -276,34 +276,36 @@ Resize one fractional-width cell type
 
 ###A transformation example: A progressively resposive grid
 
-Here's a simple example of how you might use griid's `resize` function to build a progressively responsive grid. (Note that the calculations aren't *perfect* if @griid--gutter is non-zero, but who's looking that closely?)
+Here's a simple example of how you might use griid's `resize` function to build a progressively responsive grid, targeting just a particular grid. (Note that the calculations aren't *perfect* if @griid--gutter is non-zero, but who's looking that closely?)
 
 	.progressive-grid() {
 	    @grid-items--max-width: [your site width];
 	    
-	    @max5: 5 * @grid-items--max-width / 6;
-	    @max4: 2 * @grid-items--max-width / 3;
-	    @max3: @grid-items--max-width / 2;
-	    @max2: @grid-items--max-width / 3;
-	    @max1: @grid-items--max-width / 6;
+	    @max5: 5 * @griid--max-width / 6;
+	    @max4: 2 * @griid--max-width / 3;
+	    @max3: @griid--max-width / 2;
+	    @max2: @griid--max-width / 3;
+	    @max1: @griid--max-width / 6;
 	    
 	    @media(max-width: @max5) {
-	        .grid-items--resize(5,5)
+	        .griid--resize(5,5)
 	    }
 	    @media(max-width: @max4) {
-	        .grid-items--resize(4,4)
+	        .griid--resize(4,4)
 	    }
 	    @media(max-width: @max3) {
-	        .grid-items--resize(3,3)
+	        .griid--resize(3,3)
 	    }
 	    @media(max-width: @max2) {
-	        .grid-items--resize(2)
+	        .griid--resize(2)
 	    }
 	    @media(max-width: @max1) {
-	        .grid-items--resize
+	        .griid--resize
 	    }
 	}
-	.progressive-grid;
+	#footer-grid {
+		.progressive-grid
+	}
 
 ##Acknowledgements
 griid grew out of ideas in [@JoelSutherland's](https://github.com/JoelSutherland) **grid-items** LESS grid
