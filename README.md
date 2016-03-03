@@ -300,7 +300,7 @@ Here's a simple example of how you might use griid's `resize` function to build 
 	        .grid-items--resize(2)
 	    }
 	    @media(max-width: @max1) {
-	        .grid-items--resize(1)
+	        .grid-items--resize
 	    }
 	}
 	.progressive-grid;
