@@ -1,0 +1,27 @@
+{
+  "name": "griid",
+  "description": "The greedy grid that tried to do it all with LESS",
+  "main": [
+    "griid.less",
+    "griid-functions.less"
+  ],
+  "moduleType": [],
+  "keywords": [
+    "less",
+    "grid",
+    "row",
+    "column"
+  ],
+  "authors": [
+    "Henry Bley-Vroman (https://github.com/olets/)"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/olets/griid",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
