@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>griid tests</title>
+    <meta name="description" content="tests for griid">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="griid-tests.css">
+    <link rel="stylesheet" href="../css/griid.css">
+</head>
+<body>
+<div class="griid">
+    <div class="cell-1-3">
+        <h1>Test Suite for griid</h1>
+        as of 2.4.1
+        <ul>
+            <li>
+                <a href="#singlerow">.griid > .cell</a>
+            </li>
+            <li>
+                <a href="#equal">.griid-x > .cell</a>
+            </li>
+            <li>
+                <a href="#fractions">.griid > .cell-numerator-denominator</a>
+            </li>
+            <li>
+                <a href="#vertical-alignment">vertical alignment</a>
+            </li>
+            <li>
+                <a href="#horizontal-alignment">horizontal alignment</a>
+            </li>
+            <li>
+                <a href="#resize-row">resize-row</a>
+            </li>
+            <li>
+                <a href="#resize-row-x">resize-row(x)</a>
+            </li>
+            <li class="broken">
+                <a href="#resize-one-unequal-x-y">resize-one-unequal(x,y)</a>
+            </li>
+            <li>
+                <a href="#resize-one-unequal-a-b-c-d">resize-one-unequal(result n, result d, ostensible n, ostensible d)</a>
+            </li>
+            <li>
+                <a href="#resize-unequal">resize-unequal</a>
+            </li>
+            <li>
+                <a href="#resize-unequal-x-y">resize-unequal(1,2)</a>
+            </li>
+            <li class="broken">
+                <a href="#resize-unequal-a-b-c-d">resize-unequal(1,2,3,4)</a>
+            </li>
+            <li>
+                <a href="#resize-one-equal-x">resize-one-equal(x)</a>
+            </li>
+            <li>
+                <a href="#resize-one-equal-x-y">resize-one-equal(x,y)</a>
+            </li>
+            <li>
+                <a href="#resize-equal">resize-equal</a>
+            </li>
+            <li>
+                <a href="#resize-equal-x">resize-equal(x)</a>
+            </li>
+            <li>
+                <a href="#resize-equal-x-y">resize-equal(x,y)</a>
+            </li>
+            <li>
+                <a href="#resize-equal-x-y-z">resize-equal(x,y,z)</a>
+            </li>
+            <li class="broken">
+                <a href="#drop-one-x">drop-one(x)</a>
+            </li>
+            <li class="broken">
+                <a href="#drop-one-x-y">drop-one(x,y)</a>
+            </li>
+            <li class="broken">
+                <a href="#drop">drop</a>
+            </li>
+            <li class="broken">
+                <a href="#drop-x">drop(x)</a>
+            </li>
+            <li class="broken">
+                <a href="#drop-x-y">drop(x,y)</a>
+            </li>
+            <li class="broken">
+                <a href="#drop-x-y-z">drop(x,y,z)</a>
+            </li>
+            <li>
+                <a href="#row">row</a>
+            </li>
+            <li>
+                <a href="#resize">resize</a>
+            </li>
+            <li>
+                <a href="#resize-x">resize-x</a>
+            </li>
+        </ul>
+    </div>
+    <div class="cell-2-3">
+        <div id="tests">
+
+            <h4 id="singlerow">
+                .griid
+            </h4>
+            <section class="griid">
+                <div class="cell">a</div>
+                <div class="cell">b</div>
+                <div class="cell">c</div>
+                <div class="cell">d</div>
+            </section>
+
+            <hr>
+            
+            <section id="equal">
+                <h4>
+                    .grid--2
+                </h4>
+                <div class="griid-2">
+                    <div class="cell">a</div>
+                    <div class="cell">b</div>
+                    <div class="cell">c</div>
+                </div>
+
+                <h4>
+                    .grid--3
+                </h4>
+                <div class="griid-3">
+                    <div class="cell">a</div>
+                    <div class="cell">b</div>
+                    <div class="cell">c</div>
+                    <div class="cell">d</div>
+                </div>
+
+                <h4>
+                    .grid--4
+                </h4>
+                <div class="griid-4">
+                    <div class="cell">a</div>
+                    <div class="cell">b</div>
+                    <div class="cell">c</div>
+                    <div class="cell">d</div>
+                    <div class="cell">e</div>
+                </div>
+                
+                <h4>
+                    .griid-5
+                </h4>
+                <div class="griid-5">
+                    <div class="cell">a</div>
+                    <div class="cell">b</div>
+                    <div class="cell">c</div>
+                    <div class="cell">d</div>
+                    <div class="cell">e</div>
+                    <div class="cell">f</div>
+                </div>
+
+                <h4>
+                    .griid-6
+                </h4>
+                <div class="griid-6">
+                    <div class="cell">a</div>
+                    <div class="cell">b</div>
+                    <div class="cell">c</div>
+                    <div class="cell">d</div>
+                    <div class="cell">e</div>
+                    <div class="cell">f</div>
+                    <div class="cell">g</div>
+                </div>
+            </section>
+
+            <hr>
+            <section class="fractions">
+                <h4>
+                    .griid .cell-numerator-denominator
+                </h4>
+                <div class="griid">
+                    <div class="cell-1-2">1/2</div>
+                    <div class="cell-1-3">1/3</div>
+                    <div class="cell-1-6 row-end">1/6</div>
+
+                    <div class="cell-1-3">1/3</div>
+                    <div class="cell-2-3 row-end">2/3</div>
+
+                    <div class="cell-3-4">3/4</div>
+                    <div class="cell-1-4 row-end">1/4</div>
+
+                    <div class="cell-1-5">1/5</div>
+                    <div class="cell-4-5 row-end">2/5</div>
+
+                    <div class="cell-3-5">3/5</div>
+                    <div class="cell-2-5 row-end">2/5</div>
+
+                    <div class="cell-1-6">1/6</div>
+                    <div class="cell-5-6 row-end">5/6</div>
+                </div>
+            </section>
+            
+            <section id="vertical-alignment">
+                <h4>
+                    .grid--top on grid
+                </h4>
+                <div id="grid-top" class="griid">
+                    <div class="cell">ai<br/>aii<br/>aiii</div>
+                    <div class="cell">b</div>
+                    <div class="cell">c</div>
+                </div>
+                
+                <h4>
+                    .grid--middle on grid
+                </h4>
+                <div class="griid grid-middle">
+                    <div class="cell">ai<br/>aii<br/>aiii</div>
+                    <div class="cell">b</div>
+                    <div class="cell">c</div>
+                </div>
+                
+                <h4>
+                    .grid--bottom on grid
+                </h4>
+                <div class="griid grid-bottom">
+                    <div class="cell">ai<br/>aii<br/>aiii</div>
+                    <div class="cell">b</div>
+                    <div class="cell">c</div>
+                </div>
+                <h4>
+                    .grid--bottom on wrapper
+                </h4>
+                <div class="grid-bottom">
+                    <div class="griid">
+                        <div class="cell">ai<br/>aii<br/>aiii</div>
+                        <div class="cell">b</div>
+                        <div class="cell">c</div>
+                    </div>
+                </div>
+                <h4>
+                    .bottom on cell inline (grid is top)
+                </h4>
+                <div class="griid">
+                    <div class="cell">ai<br/>aii<br/>aiii</div>
+                    <div class="cell">b</div>
+                    <div class="cell bottom">c</div>
+                </div>
+            </section>
+
+            <section id="horizontal-alignment">
+                <h4>
+                    .grid--left on grid
+                </h4>
+                <div class="griid-2 grid-left">
+                    <div class="cell">a</div>
+                    <div class="cell">b</div>
+                    <div class="cell">c</div>
+                </div>
+
+                <h4>
+                    .grid--center on grid
+                </h4>
+                <div class="griid-2 grid-center">
+                    <div class="cell">a</div>
+                    <div class="cell">b</div>
+                    <div class="cell">c</div>
+                </div>
+
+                <h4>
+                    .grid--right on grid
+                </h4>
+                <div class="griid-2 grid-right">
+                    <div class="cell">a</div>
+                    <div class="cell">b</div>
+                    <div class="cell">c</div>
+                </div>
+
+                <h4>
+                    .grid--right on wrapper
+                </h4>
+                <div class="grid-right">
+                    <div class="griid-2">
+                        <div class="cell">a</div>
+                        <div class="cell">b</div>
+                        <div class="cell">c</div>
+                    </div>
+                </div>
+
+                <h4>
+                    .right on cell inline (grid is left)
+                </h4>
+                <div class="griid-2">
+                    <div class="cell">a</div>
+                    <div class="cell right">b (right)</div>
+                    <div class="cell">c</div>
+                </div>
+            </section>
+
+            <section id="resize-row">
+                <h4>
+                    .grid--resize-row
+                </h4>
+                turn `.griid .cell` into the equivalent of `.griid-1` (note: there is no `griid-1`)
+                <h5>on the grid</h5>
+                <div class="griid grid-resize-row">
+                    <div class="cell">cell becomes block</div>
+                    <div class="cell">cell becomes block</div>
+                    <div class="cell">cell becomes block</div>
+                    <div class="cell">cell becomes block</div>
+                </div>
+                <h5>on a wrapper</h5>
+                <div class="grid-resize-row">
+                    <div class="griid">
+                        <div class="cell">cell becomes block</div>
+                        <div class="cell">cell becomes block</div>
+                        <div class="cell">cell becomes block</div>
+                        <div class="cell">cell becomes block</div>
+                    </div>
+                </div>
+            
+            <section id="resize-row-x">
+                <h4>
+                    .grid--resize-row(3)
+                </h4>
+                turn `.griid .cell` into `.griid-3 .cell`
+                <h5>on the grid</h5>
+                <div class="griid grid-resize-row--3--">
+                    <div class="cell">cell in row beccomes cell in griid-3</div>
+                    <div class="cell">cell in row beccomes cell in griid-3</div>
+                    <div class="cell">cell in row beccomes cell in griid-3</div>
+                    <div class="cell">cell in row beccomes cell in griid-3</div>
+                </div>
+                <h5>on a wrapper</h5>
+                <div class="grid-resize-row--3--">
+                    <div class="griid">
+                        <div class="cell">cell in row beccomes cell in griid-3</div>
+                        <div class="cell">cell in row beccomes cell in griid-3</div>
+                        <div class="cell">cell in row beccomes cell in griid-3</div>
+                        <div class="cell">cell in row beccomes cell in griid-3</div>
+                    </div>
+                </div>
+            </section>
+            <section id="resize-one-unequal-x-y">
+                <h4 class="broken">
+                    .grid--resize-one-unequal(1,3)
+                </h4>
+                turn 1/3 into (the default) 1/2
+                <h5 class="broken">on the grid</h5>
+                <div class="griid grid-resize-one-unequal--1---3--">
+                    <div class="cell-1-4">1/4</div>
+                    <div class="cell-1-4">1/4</div>
+                    <div class="cell-1-4 row-end">1/4</div>
+                    <div class="cell-1-3">1/3 (new row)</div>
+                    <div class="cell-1-3">1/3</div>
+                    <div class="cell-1-3 row-end">1/3</div>
+                </div>
+                <h5 class="broken">on a wrapper</h5>
+                <div id="grid-resize-one-unequal--1---3--">
+                    <div class="griid">
+                        <div class="cell-1-4">1/4</div>
+                        <div class="cell-1-4">1/4</div>
+                        <div class="cell-1-4 row-end">1/4</div>
+                        <div class="cell-1-3">1/3 (new row)</div>
+                        <div class="cell-1-3">1/3</div>
+                        <div class="cell-1-3 row-end">1/3</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="resize-one-unequal-a-b-c-d">
+                <h4>
+                    .grid--resize-one-unequal(1, 4, 2, 3)
+                </h4>
+                2/3 becomes 1/4
+                <h5>on the grid</h5>
+                <div class="griid grid-resize-one-unequal--1---4---2---3--">
+                    <div class="cell-2-3">2/3 becomes 1/4</div>
+                    <div class="cell-1-3 row-end">1/3</div>
+                </div>
+                
+                <h5>on a wrapper</h5>
+                <div class="grid-resize-one-unequal--1---4---2---3--">
+                    <div class="griid">
+                        <div class="cell-2-3">2/3 becomes 1/4</div>
+                        <div class="cell-1-3 row-end">1/3</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="resize-unequal">
+                <h4>
+                    .griid.grid-resize-unequal
+                </h4>
+                all fractions become 1/2 (the default)
+                <h5>on the grid</h5>
+                <div class="griid grid-resize-unequal">
+                    <div class="cell-1-4">1/4 becomes 1/2</div>
+                    <div class="cell-3-5">3/5 becomes 1/2</div>
+                </div>
+                <h5>on a wrapper</h5>
+                <div class="grid-resize-unequal">
+                    <div class="griid">
+                        <div class="cell-1-4">1/4 becomes 1/2</div>
+                        <div class="cell-3-5">3/5 becomes 1/2</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="resize-unequal-x-y">
+                <h4>
+                    .grid-resize-unequal(1,3)
+                </h4>
+                all fractions become 1/3
+                <h5>on the grid</h5>
+                <div class="griid grid-resize-unequal--1---3--">
+                    <div class="cell-1-5">1/5 becomes 1/3</div>
+                    <div class="cell-1-4">1/4 becomes 1/3</div>
+                </div>
+                <h5>on a wrapper</h5>
+                <div class="grid-resize-unequal--1---3--">
+                    <div class="griid">
+                        <div class="cell-1-5">1/5 becomes 1/3</div>
+                        <div class="cell-1-4">1/4 becomes 1/3</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="resize-unequal-a-b-c-d">
+                <h4 class="broken">
+                    .grid-resize-unequal(1,2,1,3)
+                </h4>
+                all cells 1/3 or smaller become 1/2
+                <h5 class="broken">on the grid</h5>
+                <div class="griid grid-resize-unequal--1---4---1---3--">
+                    <div class="cell-1-2">1/2</div>
+                    <div class="cell-1-3">1/3</div>
+                    <div class="cell-1-5">1/5</div>
+                </div>
+
+                <h5 class="broken">on a wrapper</h5>
+                <div class="grid-resize-unequal--1---4---1---3--">
+                    <div class="griid">
+                        <div class="cell-1-2">1/2</div>
+                        <div class="cell-1-3">1/3</div>
+                        <div class="cell-1-5">1/5</div>
+                    </div>
+                </div>
+            </section>
+                    
+            <section id="resize-one-equal-x">
+                <h4>
+                    .grid-resize-one-equal(3)
+                </h4>
+                .griid-3 becomes single column (the equivalent of griid-1, but there is no griid-1)
+
+                <h5>on the grid</h5>
+                <div class="griid-2 grid-resize-one-equal--3--">
+                    <div class="cell">a</div>
+                    <div class="cell">b</div>
+                    <div class="cell">c</div>
+                </div>
+                <div class="griid-3 grid-resize-one-equal--3--">
+                    <div class="cell">a</div>
+                    <div class="cell">b</div>
+                    <div class="cell">c</div>
+                    <div class="cell">d</div>
+                </div>
+                <div class="griid-4 grid-resize-one-equal--3--">
+                    <div class="cell">a</div>
+                    <div class="cell">b</div>
+                    <div class="cell">c</div>
+                    <div class="cell">d</div>
+                </div>
+                <h5>on a wrapper</h5>
+                <div class="grid-resize-one-equal--3--">
+                    <div class="griid-2">
+                        <div class="cell">a</div>
+                        <div class="cell">b</div>
+                        <div class="cell">c</div>
+                    </div>
+                    <div class="griid-3">
+                        <div class="cell">a</div>
+                        <div class="cell">b</div>
+                        <div class="cell">c</div>
+                        <div class="cell">d</div>
+                    </div>
+                    <div class="griid-4">
+                        <div class="cell">a</div>
+                        <div class="cell">b</div>
+                        <div class="cell">c</div>
+                        <div class="cell">d</div>
+                    </div>
+                </div>
+            </section>
+                
+            <section id="resize-one-equal-x-y">
+                <h4>
+                    .grid-resize-one-equal(4,3)
+                </h4>
+                griid-3 becomes griid-4
+
+                <h5>on the grid</h5>
+                <div class="griid-2 grid-resize-one-equal--4---3--">
+                    <div class="cell">cell in griid-2</div>
+                    <div class="cell">cell in griid-2</div>
+                    <div class="cell">cell in griid-2</div>
+                </div>
+                <div class="griid-3 grid-resize-one-equal--4---3--">
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                </div>
+                <div class="griid-4 grid-resize-one-equal--4---3--">
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                </div>
+
+                <h5>on a wrapper</h5>
+                <div class="grid-resize-one-equal--4---3--">
+                    <div class="griid-2">
+                        <div class="cell">cell in griid-2</div>
+                        <div class="cell">cell in griid-2</div>
+                        <div class="cell">cell in griid-2</div>
+                    </div>
+                    <div class="griid-3">
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                    </div>
+                    <div class="griid-4">
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="resize-equal">
+                <h4>
+                    .grid-resize-equal
+                </h4>
+                .grid-x cells become blocks
+                <h5>on the grid</h5>
+                <div class="griid-4 grid-resize-equal">
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                </div>
+                <h5>on a wrapper</h5>
+                <div class="grid-resize-equal">
+                    <div class="griid-4">
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="resize-equal-x">
+
+                <h4>
+                    .grid-resize-equal(3)
+                </h4>
+                .grid-x become .griid-3
+                <h5>on the grid</h5>
+                <div class="griid-4 grid-resize-equal--3--">
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                </div>
+                <h5>on a wrapper</h5>
+                <div class="grid-resize-equal--3--">
+                    <div class="griid-4">
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="resize-equal-x-y">
+
+                <h4>
+                    .grid-resize-equal(3,4)
+                </h4>
+                .griid-4 becomes .griid-3
+                <h5>on the grid</h5>
+                <div class="griid-2 grid-resize-equal--3---4--">
+                    <div class="cell">cell in griid-2</div>
+                    <div class="cell">cell in griid-2</div>
+                    <div class="cell">cell in griid-2</div>
+                </div>
+                <div class="griid-3 grid-resize-equal--3---4--">
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                </div>
+                <div class="griid-4 grid-resize-equal--3---4--">
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                </div>
+                <div class="griid-5 grid-resize-equal--3---4--">
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                </div>
+                <h5>on a wrapper</h5>
+                <div class="grid-resize-equal--3---4--">
+                    <div class="griid-2">
+                        <div class="cell">cell in griid-2</div>
+                        <div class="cell">cell in griid-2</div>
+                        <div class="cell">cell in griid-2</div>
+                    </div>
+                    <div class="griid-3">
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                    </div>
+                    <div class="griid-4">
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                    </div>
+                    <div class="griid-5">
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                    </div>
+                </div>
+            </section>
+                    
+            <section id="resize-equal-x-y-z">
+                <h4>
+                    .grid-resize-equal(3,4,5)
+                </h4>
+                .grid-x with between 4 and 5 columns become .griid-3
+
+                <h5>on the grid</h5>
+                <div class="griid-2 grid-resize-equal--3---4---5--">
+                    <div class="cell">cell in griid-2</div>
+                    <div class="cell">cell in griid-2</div>
+                    <div class="cell">cell in griid-2</div>
+                </div>
+                <div class="griid-3 grid-resize-equal--3---4---5--">
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                </div>
+                <div class="griid-4 grid-resize-equal--3---4---5--">
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                </div>
+                <div class="griid-5 grid-resize-equal--3---4---5--">
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                </div>
+                <div class="griid-6 grid-resize-equal--3---4---5--">
+                    <div class="cell">cell in griid-6</div>
+                    <div class="cell">cell in griid-6</div>
+                    <div class="cell">cell in griid-6</div>
+                    <div class="cell">cell in griid-6</div>
+                    <div class="cell">cell in griid-6</div>
+                    <div class="cell">cell in griid-6</div>
+                    <div class="cell">cell in griid-6</div>
+                </div>
+                <h5>on a wrapper</h5>
+                <div class="grid-resize-equal--3---4---5--">
+                    <div class="griid-2">
+                        <div class="cell">cell in griid-2</div>
+                        <div class="cell">cell in griid-2</div>
+                        <div class="cell">cell in griid-2</div>
+                    </div>
+                    <div class="griid-3">
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                    </div>
+                    <div class="griid-4">
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                    </div>
+                    <div class="griid-5">
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                    </div>
+                    <div class="griid-6">
+                        <div class="cell">cell in griid-6</div>
+                        <div class="cell">cell in griid-6</div>
+                        <div class="cell">cell in griid-6</div>
+                        <div class="cell">cell in griid-6</div>
+                        <div class="cell">cell in griid-6</div>
+                        <div class="cell">cell in griid-6</div>
+                        <div class="cell">cell in griid-6</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="drop-one-x">
+
+                <h4 class="broken">
+                    .grid-drop-one(4)
+                </h4>
+                .griid-4 loses a column
+                <h5 class="broken">on the grid</h5>
+                <div class="griid-3 grid-drop-one--4--">
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                </div>
+                <div class="griid-4 grid-drop-one--4--">
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                </div>
+                <div class="griid-5 grid-drop-one--4--">
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                </div>
+                <h5>on a wrapper</h5>
+                <div class="grid-drop-one--4--">
+                    <div class="griid-3">
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                    </div>
+                    <div class="griid-4">
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                    </div>
+                    <div class="griid-5">
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="drop-one-x-y">
+    
+                <h4 class="broken">
+                    .grid-drop-one(2, 4)
+                </h4>
+                .griid-4 loses two columns
+                <h5 class="broken">on the grid</h5>
+                <div class="griid-3 grid-drop-one--2---4--">
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                </div>
+                <div class="griid-4 grid-drop-one--2---4--">
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                </div>
+                <div class="griid-5 grid-drop-one--2---4--">
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                </div>
+                <h5>on a wrapper</h5>
+                <div class="grid-drop-one--2---4--">
+                    <div class="griid-3">
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                    </div>
+                    <div class="griid-4">
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                    </div>
+                    <div class="griid-5">
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="drop">
+
+                <h4 class="broken">
+                    .grid-drop
+                </h4>
+                all .grid-x grids lose one column
+                <h5 class="broken">on the grid</h5>
+                <div class="griid-3 grid-drop">
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                </div>
+                <div class="griid-4 grid-drop">
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                </div>
+                <div class="griid-5 grid-drop">
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                </div>
+                <h5>on a wrapper</h5>
+                <div class="grid-drop">
+                    <div class="griid-3">
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                    </div>
+                    <div class="griid-4">
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                    </div>
+                    <div class="griid-5">
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="drop-x">
+
+                <h4 class="broken">
+                    .grid-drop(2)
+                </h4>
+                all .grid-x grids lose two columns
+
+                <h5 class="broken">on the grid</h5>
+                <div class="griid-3 grid-drop--2--">
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                </div>
+                <div class="griid-4 grid-drop--2--">
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                </div>
+                <div class="griid-5 grid-drop--2--">
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                </div>
+                
+                <h5>on a wrapper</h5>
+                <div class="grid-drop--2--">
+                    <div class="griid-3">
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                    </div>
+                    <div class="griid-4">
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                    </div>
+                    <div class="griid-5">
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="drop-x-y">
+
+                <h4 class="broken">
+                    .grid-drop(2,4)
+                </h4>
+                .grid-x grids with 4 or more columns drop two columns
+
+                <h5 class="broken">on the grid</h5>
+                <div class="griid-3 grid-drop--2---4--">
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                </div>
+                <div class="griid-4 grid-drop--2---4--">
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                </div>
+                <div class="griid-5 grid-drop--2---4--">
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                </div>
+
+                <h5>on a wrapper</h5>
+                <div class="grid-drop--2---4--">
+                    <div class="griid-3">
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                    </div>
+                    <div class="griid-4">
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                    </div>
+                    <div class="griid-5">
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="drop-x-y-z">
+                <h4 class="broken">
+                    .grid-drop(2,4,5)
+                </h4>
+                .grid-x with between 4 and 5 columns lose two columns
+                <h5 class="broken">on the grid</h5>
+                <div class="griid-2 grid-drop--2---4---5--">
+                    <div class="cell">cell in griid-2</div>
+                    <div class="cell">cell in griid-2</div>
+                    <div class="cell">cell in griid-2</div>
+                </div>
+                <div class="griid-3 grid-drop--2---4---5--">
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                </div>
+                <div class="griid-4 grid-drop--2---4---5--">
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                    <div class="cell">cell in griid-4</div>
+                </div>
+                <div class="griid-5 grid-drop--2---4---5--">
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                    <div class="cell">cell in griid-5</div>
+                </div>
+                <div class="griid-6 grid-drop--2---4---5--">
+                    <div class="cell">cell in griid-6</div>
+                    <div class="cell">cell in griid-6</div>
+                    <div class="cell">cell in griid-6</div>
+                    <div class="cell">cell in griid-6</div>
+                    <div class="cell">cell in griid-6</div>
+                    <div class="cell">cell in griid-6</div>
+                    <div class="cell">cell in griid-6</div>
+                </div>
+
+                <h5>on a wrapper</h5>
+                <div class="grid-drop--2---4---5--">
+                    <div class="griid-2">
+                        <div class="cell">cell in griid-2</div>
+                        <div class="cell">cell in griid-2</div>
+                        <div class="cell">cell in griid-2</div>
+                    </div>
+                    <div class="griid-3">
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                    </div>
+                    <div class="griid-4">
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                        <div class="cell">cell in griid-4</div>
+                    </div>
+                    <div class="griid-5">
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                        <div class="cell">cell in griid-5</div>
+                    </div>
+                    <div class="griid-6">
+                        <div class="cell">cell in griid-6</div>
+                        <div class="cell">cell in griid-6</div>
+                        <div class="cell">cell in griid-6</div>
+                        <div class="cell">cell in griid-6</div>
+                        <div class="cell">cell in griid-6</div>
+                        <div class="cell">cell in griid-6</div>
+                        <div class="cell">cell in griid-6</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="row">
+                <h4>
+                    .grid-row
+                </h4>
+                turns `.grid-x .cell` and `.griid .cell-numerator-denominator` grids into `.griid .cell` grids
+                <h5>on the grid</h5>
+                <div class="griid grid-row">
+                    <div class="cell">cell</div>
+                    <div class="cell">cell</div>
+                    <div class="cell">cell</div>
+                    <div class="cell">cell</div>
+                    <div class="cell">cell</div>
+                </div>
+                <div class="griid-3 grid-row">
+                    <div class="cell">griid-3 cell</div>
+                    <div class="cell">griid-3 cell</div>
+                    <div class="cell">griid-3 cell</div>
+                    <div class="cell">griid-3 cell</div>
+                </div>
+                <div class="griid grid-row">
+                    <div class="cell-2-3">2/3</div>
+                    <div class="cell-1-3 row-end">1/2</div>
+                </div>
+                <h5>on a wrapper</h5>
+                <div class="grid-row">
+                    <div class="griid">
+                        <div class="cell">cell</div>
+                        <div class="cell">cell</div>
+                        <div class="cell">cell</div>
+                        <div class="cell">cell</div>
+                        <div class="cell">cell</div>
+                    </div>
+                    <div class="griid-3">
+                        <div class="cell">griid-3 cell</div>
+                        <div class="cell">griid-3 cell</div>
+                        <div class="cell">griid-3 cell</div>
+                        <div class="cell">griid-3 cell</div>
+                    </div>
+                    <div class="griid">
+                        <div class="cell-2-3">2/3</div>
+                        <div class="cell-1-3 row-end">1/2</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="resize">
+                <h4>
+                    .grid-resize
+                </h4>
+
+                <h5>on the grid</h5>
+                <div class="griid grid-resize">
+                    <div class="cell">cell</div>
+                    <div class="cell">cell</div>
+                    <div class="cell">cell</div>
+                    <div class="cell">cell</div>
+                    <div class="cell">cell</div>
+                </div>
+                <div class="griid-3 grid-resize">
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                </div>
+                <div class="griid grid-resize">
+                    <div class="cell-1-4">1/4</div>
+                    <div class="cell-3-4">3/4</div>
+                </div>
+
+                <h5 class="broken">on a wrapper</h5>
+                <div class="grid-resize">
+                    <div class="griidrow">
+                        <div class="cell">cell</div>
+                        <div class="cell">cell</div>
+                        <div class="cell">cell</div>
+                        <div class="cell">cell</div>
+                        <div class="cell">cell</div>
+                    </div>
+                    <div class="griid-3">
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                    </div>
+                    <div class="griid">
+                        <div class="cell-1-4">1/4</div>
+                        <div class="cell-3-4">3/4</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="resize-x">
+
+                <h4 class="broken">
+                    .grid-resize(4)
+                </h4>
+                turns all grids into griid-4
+                <h5>on the grid: .griid .cell</h5>
+                <div class="griid grid-resize--4--">
+                    <div class="cell">cell</div>
+                    <div class="cell">cell</div>
+                    <div class="cell">cell</div>
+                    <div class="cell">cell</div>
+                    <div class="cell">cell</div>
+                </div>
+                <h5>on the grid: .griid-x .cell</h5>
+                <div class="griid-3 grid-resize--4--">
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                    <div class="cell">cell in griid-3</div>
+                </div>
+                <h5 class="broken">on the grid: .griid .cell-n-d</h5>
+                <div class="griid grid-resize--4--">
+                    <div class="cell-1-4">1/4</div>
+                    <div class="cell-3-4">3/4</div>
+                </div>
+
+                <div class="grid-resize--4--">
+                <h5>on a wrapper: .griid .cell</h5>
+                    <div class="griid">
+                        <div class="cell">cell</div>
+                        <div class="cell">cell</div>
+                        <div class="cell">cell</div>
+                        <div class="cell">cell</div>
+                        <div class="cell">cell</div>
+                    </div>
+                    <h5>on a wrapper: .griid-x .cell</h5>
+                    <div class="griid-3">
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                        <div class="cell">cell in griid-3</div>
+                    </div>
+                    <h5 class="broken">on a ize-one-unequal(1,3) : .griid .cell-n-d</h5>
+                    <div class="griid">
+                        <div class="cell-1-4">1/4</div>
+                        <div class="cell-3-4">3/4</div>
+                    </div>
+                </div>
+            </section>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+    <!--
+    <script>
+        (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+        e.src='//www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+        ga('create','UA-XXXXX-X');ga('send','pageview');
+    </script>
+-->
+</body>
+</html>
