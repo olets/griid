@@ -19,7 +19,7 @@
    by Henry Bley-Vroman,
    2016, MIT License.
    
-   Uses inline-block, so does not work on IE below 9
+   Relies on nth-child, so does not work on IE below 9
 
 */
 

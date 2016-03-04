@@ -9,6 +9,8 @@
     MIT license
     olets.github.io/griid/
 
+    (comprehensive documentation on github)
+
 
   an easy-to-use grid system which supports three grid types:
   - single full-width single-row grids with cells of equal width;
@@ -36,126 +38,6 @@
 @griid--item-v-align: top;                             // default grid-item vertical alignment (top, middle, or bottom)
 @griid--min-cols: 2;                                   // set per-site to minimize css weight
 @griid--max-cols: 6;                                   // set per-site to minimize css weight
-
-/**********************************************************************************************************************************
- **********************************************************************************************************************************
- **********************************************************************************************************************************
- * documentation
- * 
-*//*
-    
-markup for griid's three grid types:
-
-multi-row grids with equal-width cells look like
-`.griid-x > .cell*n` (there will be x cells per row)
-
-multi-row grids with unequal-width cells look like
-`.griid` for the grid, `.cell-n-d` for a cell n/d of the row width. Add `.row-end` to the last cell in each row
-
-single-row grids with equal-width, equal-height cells look like
-`.griid > .cell`
-
-
-
-bonus: the markup won't be as beautiful, but if
-    you want a grid with equal-height rows where that height is determined from the cell content
-    and you don't want to use a scripted solution (I love https://github.com/liabru/jquery-match-height)
-    and your cells have roughly similar content,
-    and you need to support orphan cells,
-    you may be able to get away with
-
-    `.griid > .row*y > .cell*x`
-
-    This will give you a multi-row grid where all cells are the full height of the row
-    (aka it's styled as an equal-width-cells table).
-    If your cells have similar content, this may be a good-enough approximation of equal-height rows.
-    
-    Notes:
-    
-    If last row is full, this is exactly equivalant to `.griid*y > .cell*x`
-
-    In most cases though you'll probably be better off using `.griid-x > .cell*(x*y)`
-
-    
-
-
-griid LESS:
-
-griid **requires** initialization
-
-A. Typical usage:
-    1. Definitely: run `.griid--install` to have full griid support, using the @griid-- values.
-    2. Likely: run adjustment functions in media queries to treat one grid as another in certain contexts (see griid-functions.less)
-    3. Possibly:
-        run `.griid--initialize` to revert any changes made by adjustment functions,
-           or if you only need to reset a particular type of grid, you can save a little weight
-           by running `.griid--initialize-equal-cells`, `.griid--initialize-unequal-cells`, or `.griid--initialize-row`
-        run `.griid--fz(@fontSize: @griid--font-size) to have particular grids use a different baseline font size
-
-
-B. Customizing your setup:
-    The default installation from `.griid--install` will fit most needs, but you can also build a custom griid setup:
-
-    1. `.griid--base` is always the first thing. It gives you support for multi-row grids, and is required by everything else
-    2. `griid--inline-alignment` adds support for using alignment classes in your markup
-            `.top`, `.middle`, `.bottom` give you inline overrides for cell content vertical alignment
-            `.left`, `.center`, `.right` give you inline overrides for (when applied to a grid) orphan alignment and (when applied to a cell) content alignment
-    3. `.griid--single-row` adds support for single-row grids with equal-width, equal-height cells. By default these cells do NOT have gutters or row spacing
-    4. `.griid--space-single-row` (NOT included in `.griid--install`) adds gutters and row spacing (both @griid--gutter) to `.griid .cell*x` grids. Beware that this will frame the entire `.griid .cell*x` grids in a @griid-gutter space
-    5. `.griid--base`, with or without `.griid--inline-alignment` and `.griid--single-row`, still needs initialization.
-            `.griid--initialize` gets you ready to go with single-row and multi-row columns
-            Or run any of `.griid--initialize-equal-cells`, `.griid--initialize-unequal-cells`, or `.griid--initialize-row`
-
-    Note: `.griid--base` is simply shorthand for `.griid--base; .griid--inline-alignment; .griid--initialize`
-
-C. Overriding default variables
-
-    The initialization functions can be re-run at any point to re-initialize with new settings or two wipe over customizations.
-
-    1.
-    .griid--initialize(
-                       @fontSize: @griid--font-size,
-                        (@maxColCount: @griid--max-cols,
-                         (@minColCount: @griid--min-cols,
-                          (@smallestDenominator: @griid--max-cols,
-                           (@largestDenominator: @griid--min-cols))))
-                      )
-
-
-    2.
-    .griid--initialize-equal-cells(
-                                   @fontSize: @griid--font-size,
-                                    (@maxColCount: @griid--max-cols,
-                                     (@minColCount:@griid--min-cols))
-                                  )
-
-
-    3.
-    .griid--initialize-unequal-cells(
-                                     @fontSize: @griid--font-size, 
-                                      (@denominatorOfNarrowestCells: @griid--max-cols,
-                                       (@numeratorOfNarrowestCells: @griid--min-cols))
-                                    )
-
-
-    4. If you really want to, you can even do a custom `.griid--build`
-      .griid--build(
-                    @fontSize,
-                     (@gutter,
-                      (@rowSpacing,
-                       (@orphanAlignment,
-                        (@contentAlignment,
-                         (@maxColCount,
-                          (@minColCount,
-                           (@smallestDenominator,
-                            (@largestDenominator))))))))
-                   )
-
-
-*/
-
-
-
 
 
 
