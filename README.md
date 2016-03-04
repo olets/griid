@@ -29,6 +29,7 @@ Until built, the griid LESS adds absolutely nothing to your compiled CSS -- incl
 - [Customizing your griid installation](https://github.com/olets/griid#customizing-your-griid-installation)
 	- [Customizing the installation](https://github.com/olets/griid#a-customizing-the-installation)
 	- [Overriding default variables](https://github.com/olets/griid#b-overriding-default-variables)
+- [Contributing](https://github.com/olets/griid#contributing)
 - [Acknowledgements](https://github.com/olets/griid#acknowledgements)
 
  &nbsp;
@@ -337,7 +338,8 @@ The initialization functions can be re-run at any point to re-initialize with ne
 	                       (@largestDenominator))))))))
 	              )
 	              
-
+##Contributing
+Pull requests, SASS version, etc etc are more than welcome. Please check your version against tests/griid-tests.html, and add any new functions to the test suite.
 
 ##Acknowledgements
 griid grew out of ideas in [@JoelSutherland's](https://github.com/JoelSutherland) **grid-items** LESS grid
