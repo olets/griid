@@ -5,16 +5,16 @@ griid is a grid system with automatic rows. You can use the processed griid.css 
 
 Supports IE > 8
 
-griid supports three grid types: single full-width single-row grids  with cells of equal width; multi-row grids with a specified number of equal-width columns; and multi-row grids with fraction-of-the-grid-width cell widths specified per-cell. In the latter two cases, you can control the horizontal alignment of orphan cells (cells in non-full last rows)
+griid supports [three grid types](https://github.com/olets/griid#markup-for-griids-three-grid-types): full-width single-row grids with cells of equal width and height; multi-row grids with a specified number of equal-width columns; and multi-row grids with fraction-of-the-grid-width cell widths specified per-cell. In the latter two cases, you can control the horizontal alignment of orphan cells (cells in non-full last rows), the space between all cells, and various other [parameters](https://github.com/olets/griid#griid-default-settings)
 
-Until built, the griid LESS adds absolutely nothing to your compiled CSS -- include it in your default setup, and don't worry about adding bloat if you don't use it. In addition, all of griid's features are compartmentalized -- by customizing your build, you can make sure that only the styles you need actually make it into your stylesheet.
+Until [built](https://github.com/olets/griid#a-typical-usage), the griid LESS adds absolutely nothing to your compiled CSS -- include it in your default setup, and don't worry about adding bloat if you don't use it. In addition, all of griid's features are compartmentalized -- by [customizing your build](https://github.com/olets/griid#customizing-your-griid-installation), you can make sure that only the styles you need actually make it into your stylesheet.
 
 ###Table of contents
 - [markup for griid's three grid types](https://github.com/olets/griid#markup-for-griids-three-grid-types)
 - [getting grid](https://github.com/olets/griid#getting-grid)
 - [using griid](https://github.com/olets/griid#using-griid)
   - [default settings](https://github.com/olets/griid#griid-default-settings)
-  - 	[typical usage](https://github.com/olets/griid#a-typical-usage)
+  - [typical usage](https://github.com/olets/griid#a-typical-usage)
 - [griid LESS functions and mixins](https://github.com/olets/griid#griid-less-functions-and-mixins)
   - [alignment](https://github.com/olets/griid#a-alignment)
   - [grid transformations](https://github.com/olets/griid#b-grid-transformations)
@@ -105,10 +105,21 @@ will be
 |- - 3 - - |- - - - 4 - - - -| - 5 -|
 
 
-
+&nbsp;
 
 ## getting griid
-Download and include **griid.less** and **griid-functions.less**. Or add griid to your bower dependencies with `bower install griid --save` or `bower install griid --save-dev`.
+Download and include **griid.less** and **griid-functions.less**.
+
+Or add griid to your bower dependencies with
+	
+	bower install griid --save
+
+Or it from the rawgit CDN (remember to update the URL to the latest version)
+
+	https://cdn.rawgit.com/olets/griid/v2.1.6/griid.less
+	https://cdn.rawgit.com/olets/griid/v2.1.6/griid-functions.less
+
+&nbsp;
 
 ## using griid
 ###*griid* ***requires*** *initialization*
@@ -128,15 +139,19 @@ At the top of griid.less are griid's default variables:
 
 - The base font size inside cells is `@griid--font-size`
 
+&nbsp;
+
 ###Typical usage:
 -    1. Definitely: run `.griid--install` to have full griid support, with the default `@griid--` values.
--    2. Likely: run adjustment functions in media queries to treat one grid as another in certain contexts (using **griid-functions.less**; see below)
+-    2. Likely: run adjustment functions in media queries to treat one grid as another in certain contexts ([see below](https://github.com/olets/griid#b-grid-transformations))
 -    3. Possibly:
 	- run `.griid--initialize` to revert any changes made by adjustment functions,
 	- or if you only need to reset a particular type of grid, you can save a little weight by running `.griid--initialize-equal-cells`, `.griid--initialize-unequal-cells`, or `.griid--initialize-row`
 	- to have specific grids use a different baseline font size, you don't need to do a full new initialization. Just run `.griid--fz(@fontSize)`##griid LESS functions and mixins
 
-griid has support for all sorts of adjustments. These are especially useful for media queries - turn your 1/3 - 2/3 grid into 1/2 - 1/2 quickly and cleanly. Progressively resize a grid first from 6 columns (the factory default max columns for griid) to 5, then 4, 3, 2, 1. Turn a single-row grid into a three-column grid. Pretty much anything you could want to do, you can
+griid has support for all sorts of adjustments. These are especially useful for media queries - turn your 1/3 - 2/3 layout into 1/2 - 1/2 [quickly and cleanly](https://github.com/olets/griid#2-adjusting-griid-cell-n-d-grids). [Progressively resize a grid](https://github.com/olets/griid#a-transformation-example-a-progressively-resposive-grid) first from 6 columns (the factory default max columns for griid) [to 5](https://github.com/olets/griid#3-adjusting-griid-x-cell-grids), then 4, 3, 2, 1. Turn a [single-row grid into](https://github.com/olets/griid#1-adjusting-griid-cell-grids) a three-column grid. Pretty much anything you could want to do, you can
+
+&nbsp;
 
 ###A. Alignment
 1. `.griid--vertical-align(@args:@griid--item-v-align)`
@@ -157,9 +172,11 @@ griid has support for all sorts of adjustments. These are especially useful for 
 	`.griid--center` (shorthand mixin from `.griid--orphan-align(center)`)
 	`.griid--right` (shorthand mixin from `.griid--orphan-align(right)`)
 
+&nbsp;
+
 ###B. Grid transformations
 
-Note: all transformation functions check markup, not styles. When you target `.griid-x` grids with a certain column count, griid targets *ostensible* column counts, disregarding any transformations you may have done. For example: If you use  `.griid--drop-one(5);` to turn a five-column grid into four-column grid (see below) and later want to turn it into a three-column grid, you'll need to do either `.griid--drop(2,5)` ("drop by 2 the column count of 5-column grids") or `.griid--resize-one(3,5)` ("resize to 3 columns all 5-column grids"). Don't be tricked into thinking you can do `.griid--drop-one(4)` - as far as `.griid--drop-one()` is concerned, this is still a `.griid-5`. Similarly, `.griid--drop; .griid-drop` is no different than `.griid--drop`. In practice this isn't a problem - there are enough options that you'll be able to easily do what you want.
+Note: *all transformation functions check markup, not styling*. When you target `.griid-x` grids with a certain column count, griid targets *ostensible* column counts, disregarding any transformations you may have done. For example: If you use  `.griid--drop-one(5);` to turn a five-column grid into four-column grid ([see below](https://github.com/olets/griid#3-adjusting-griid-x-cell-grids)) and later want to turn it into a three-column grid, you'll need to do either `.griid--drop(2,5)` ("drop by 2 the column count of 5-column grids") or `.griid--resize-one(3,5)` ("resize to 3 columns all 5-column grids"). Don't be tricked into thinking you can do `.griid--drop-one(4)` - as far as `.griid--drop-one()` is concerned, this is still a `.griid-5`. Similarly, `.griid--drop; .griid-drop` is no different than `.griid--drop`. In practice this isn't a problem - there are enough options that you'll be able to easily do what you want.
 
 ####1. Adjusting `.griid .cell` grids
 
@@ -225,11 +242,11 @@ Resize one fractional-width cell type
     Default turns all cells into blocks
 
 
---
+&nbsp;
 
 ###A transformation example: A progressively resposive grid
 
-Here's a simple example of how you might use griid's `resize` function to build a progressively responsive grid, targeting just a particular grid. (Note that the calculations aren't *perfect* if @griid--gutter is non-zero, but who's looking that closely?)
+Here's a simple example of how you might use [griid's `resize` function](https://github.com/olets/griid#3-adjusting-griid-x-cell-grids) to build a progressively responsive grid, targeting just a particular grid. (Note that the calculations aren't *perfect* if @griid--gutter is non-zero, but who's looking that closely?)
 
 	.progressive-grid() {
 	    @grid-items--max-width: [your site width];
@@ -260,20 +277,21 @@ Here's a simple example of how you might use griid's `resize` function to build 
 		.progressive-grid
 	}
 
+&nbsp;
 
 ## Customizing your griid installation
 
 ### A. Customizing the installation
-The default installation from `.griid--install` will fit most needs, but you can also build a custom griid setup to support only the features your site uses. This keeps the compiled griid CSS weight to the lowest possible on a per-site basis
+The [default installation](https://github.com/olets/griid#a-typical-usage) from `.griid--install` will fit most needs, but you can also build a custom griid setup to support only the features your site uses. This keeps the compiled griid CSS weight to the lowest possible on a per-site basis
 
-1. `.griid--base` is always the first thing. It gives you support for multi-row grids, and is required by everything else
-2. `.griid--inline-alignment` adds support for using alignment classes in your markup. As we will see, there are functions for doing this in **griid-functions.less** (see below) but just in case you really want to have it in your markup:
+1. `.griid--base` is always required
+2. `.griid--inline-alignment` adds support for using inline alignment classes. It's probably preferable to use [the alignment transformations](https://github.com/olets/griid#a-alignment) but just in case you really want to have it in your markup:
 	- Add `.left`, `.center`, `.right` to a multi-row grid to override orphan alignment
 	- Add `.left`, `.center`, `.right` to a cell to override the cell alignment
 	- Add `.top`, `.middle`, or `.bottom` to a grid to control the default for its child cells
 	- Add `.top`, `.middle`, or `.bottom` to a cell to control its vertical alignment
 3. `.griid--single-row` adds support for single-row grids with equal-width, equal-height cells. By default these cells do NOT have gutters or row spacing
-4. `.griid--space-single-row` (NOT included in `.griid--install`) adds gutters and row spacing (both @griid--gutter) to `.griid .cell*x` grids. Beware that this will frame the entire `.griid .cell*x` grids in a @griid-gutter space
+4. `.griid--space-single-row` (NOT included in [`.griid--install`](https://github.com/olets/griid#a-typical-usage)) adds gutters and row spacing (both @griid--gutter) to `.griid .cell*x` grids. Beware that this will frame the entire `.griid .cell*x` grids in a @griid-gutter space
 5. `.griid--base`, with or without `.griid--inline-alignment` and`.griid--single-row`, still needs initialization.
   -            `.griid--initialize` gets you ready to go with all three grid types
   -          Or run any of `.griid--initialize-equal-cells`, `.griid--initialize-unequal-cells`, or `.griid--initialize-row` if you don't need to support them all
@@ -281,8 +299,8 @@ The default installation from `.griid--install` will fit most needs, but you can
 6. `.griid .cell` grids do *not* have space around the cells by default. If you mix in `.griid--space-single-row`, these single-row grids will have gutters and row spacing *and a frame* of `@griid--gutter`
 7. `griid--single-row-spacing` adds support for `.griid > .row*y > .cell*x`. This may be useful if you
   -	 want a grid with equal-height rows where that height is determined from the cell content
-  -	 don't want to use a scripted solution (I love [jquery-match-height](https://github.com/liabru/jquery-match-height))
-  -    need to support orphan cells
+  -	 don't want to use a scripted solution (I love **[jquery-match-height](https://github.com/liabru/jquery-match-height)**)
+  -  need to support orphan cells
 
 	This will give you a multi-row grid where all cells are the full height of the row (aka it's styled as an equal-width-cells table). If your cells have similar content, this may even be a good-enough approximation of equal-height rows.
     
@@ -291,10 +309,11 @@ The default installation from `.griid--install` will fit most needs, but you can
 
 **Note**:`.griid--install` is simply shorthand for `.griid--base;` + `.griid--inline-alignment;` + `.griid--initialize;`
 
+&nbsp;
 
 ###B. Overriding default variables
 
-The initialization functions can be re-run at any point to re-initialize with new settings or to wipe over customizations.
+The [initialization functions](https://github.com/olets/griid#customizing-your-griid-installation) can be re-run at any point to re-initialize with new settings or to wipe over customizations.
 
 1.
 
@@ -337,9 +356,13 @@ The initialization functions can be re-run at any point to re-initialize with ne
 	                      (@smallestDenominator,
 	                       (@largestDenominator))))))))
 	              )
-	              
+	
+&nbsp;
+
 ##Contributing
-Pull requests, SASS version, etc etc are more than welcome. Please check your version against tests/griid-tests.html, and add any new functions to the test suite.
+Pull requests, a SASS version, etc etc are more than welcome. Please check your version against tests/griid-tests.html, and add any new functions to the test suite.
+
+&nbsp;
 
 ##Acknowledgements
 griid grew out of ideas in [@JoelSutherland's](https://github.com/JoelSutherland) **grid-items** LESS grid
