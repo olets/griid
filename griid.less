@@ -1,7 +1,7 @@
 /**********************************************************************************************************************************
  **********************************************************************************************************************************
  **********************************************************************************************************************************
-    griid v2.1.5
+    griid v2.1.6
 
     The greedy grid that tries to do it all with LESS
    
@@ -21,7 +21,7 @@
    by Henry Bley-Vroman,
    2016, MIT License.
    
-   Uses inline-block, so does not work on IE below 9
+   Relies on nth-child, so does not work on IE below 9
 
 */
 
@@ -151,7 +151,7 @@
 /* 2: each column count */
 .griid--equal-cell(@cols) when (@cols > 1) {
     &:nth-child(n) { margin-right: @griid--gutter }
-    &:nth-child(@fooN) { margin-right: 0 }
+    &:nth-child(@{fooN}) { margin-right: 0 }
     @fooN: ~"@{cols}n";
     .griid--cell-width(@cols)
 }
