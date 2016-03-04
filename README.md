@@ -79,7 +79,16 @@ will be
 
 
 
-## griid default settings
+
+## getting griid
+Download and include **griid.less** and **griid-functions.less**. Or add griid to your bower dependencies with `bower install griid --save` or `bower install griid --save-dev`.
+
+## using griid
+###*griid* ***requires*** *initialization*
+
+
+
+###griid default settings
 
 At the top of griid.less are griid's default variables:
 
@@ -92,14 +101,7 @@ At the top of griid.less are griid's default variables:
 
 - The base font size inside cells is `@griid--font-size`
 
-
-## getting griid
-Download and include **griid.less** and **griid-functions.less**. Or add griid to your bower dependencies with `bower install griid --save` or `bower install griid --save-dev`.
-
-## using griid
-###*griid* ***requires*** *initialization*
-
-###A. Typical usage:
+###Typical usage:
 -    1. Definitely: run `.griid--install` to have full griid support, with the default `@griid--` values.
 -    2. Likely: run adjustment functions in media queries to treat one grid as another in certain contexts (using **griid-functions.less**; see below)
 -    3. Possibly:
@@ -108,82 +110,6 @@ Download and include **griid.less** and **griid-functions.less**. Or add griid t
 	- to have specific grids use a different baseline font size, you don't need to do a full new initialization. Just run `.griid--fz(@fontSize)`
 
 
-###B. Customizing your setup:
-
-The default installation from `.griid--install` will fit most needs, but you can also build a custom griid setup:
-
-1. `.griid--base` is always the first thing. It gives you support for multi-row grids, and is required by everything else
-2. `.griid--inline-alignment` adds support for using alignment classes in your markup. As we will see, there are functions for doing this in **griid-functions.less** (see below) but just in case you really want to have it in your markup:
-	- Add `.left`, `.center`, `.right` to a multi-row grid to override orphan alignment
-	- Add `.left`, `.center`, `.right` to a cell to override the cell alignment
-	- Add `.top`, `.middle`, or `.bottom` to a grid to control the default for its child cells
-	- Add `.top`, `.middle`, or `.bottom` to a cell to control its vertical alignment
-3. `.griid--single-row` adds support for single-row grids with equal-width, equal-height cells. By default these cells do NOT have gutters or row spacing
-4. `.griid--space-single-row` (NOT included in `.griid--install`) adds gutters and row spacing (both @griid--gutter) to `.griid .cell*x` grids. Beware that this will frame the entire `.griid .cell*x` grids in a @griid-gutter space
-5. `.griid--base`, with or without `.griid--inline-alignment` and`.griid--single-row`, still needs initialization.
-  -            `.griid--initialize` gets you ready to go with all three grid types
-  -          Or run any of `.griid--initialize-equal-cells`, `.griid--initialize-unequal-cells`, or `.griid--initialize-row` if you don't need to support them all
-
-6. `.griid .cell` grids do *not* have space around the cells by default. If you mix in `.griid--space-single-row`, these single-row grids will have gutters and row spacing *and a frame* of `@griid--gutter`
-7. `griid--single-row-spacing` adds support for `.griid > .row*y > .cell*x`. This may be useful if you
-  -	 want a grid with equal-height rows where that height is determined from the cell content
-  -	 don't want to use a scripted solution (I love [jquery-match-height](https://github.com/liabru/jquery-match-height))
-  -    need to support orphan cells
-
-	This will give you a multi-row grid where all cells are the full height of the row (aka it's styled as an equal-width-cells table). If your cells have similar content, this may even be a good-enough approximation of equal-height rows.
-    
-	Note that if last row is full this is exactly equivalant to `.griid*y > .cell*x` but with bulkier markup, and that if you don't need cells that are the full height of their row (or can achieve that matched height with a script) this has no advantage over `.griid-x .cell` while having several disadvantages (bulkier markup, and less easily manipulated by the griid functions we'll cover below).
-
-
-**Note**:`.griid--install` is simply shorthand for `.griid--base;` + `.griid--inline-alignment;` + `.griid--initialize;`
-
-
-###C. Overriding default variables
-
-The initialization functions can be re-run at any point to re-initialize with new settings or to wipe over customizations.
-
-1.
-
-	.griid--initialize(
-	                  @fontSize: @griid--font-size,
-	                   (@maxColCount: @griid--max-cols,
-	                    (@minColCount: @griid--min-cols,
-	                     (@smallestDenominator: @griid--max-cols,
-	                      (@largestDenominator: @griid--min-cols))))
-	                 )
-
-2.
-
-	.griid--initialize-equal-cells(
-	                              @fontSize: @griid--font-size,
-	                               (@maxColCount: @griid--max-cols,
-	                                (@minColCount:@griid--min-cols))
-	                             )
-
-3.
-
-	.griid--initialize-unequal-cells(
-	                                @fontSize: @griid--font-size, 
-	                                 (@denominatorOfNarrowestCells: @griid--max-cols,
-	                                  (@numeratorOfNarrowestCells: @griid--min-cols))
-	                               )
-	                               
-
-.4. If you really want to, you can even do a custom `.griid--build`
-
-
-	.griid--build(
-	               @fontSize,
-	                (@gutter,
-	                 (@rowSpacing,
-	                  (@orphanAlignment,
-	                   (@contentAlignment,
-	                    (@maxColCount,
-	                     (@minColCount,
-	                      (@smallestDenominator,
-	                       (@largestDenominator))))))))
-	              )
-	              
 ##griid LESS functions and mixins
 
 griid has support for all sorts of adjustments. These are especially useful for media queries - turn your 1/3 - 2/3 grid into 1/2 - 1/2 quickly and cleanly. Progressively resize a grid first from 6 columns (the factory default max columns for griid) to 5, then 4, 3, 2, 1. Turn a single-row grid into a three-column grid. Pretty much anything you could want to do, you can
@@ -263,7 +189,7 @@ Resize one fractional-width cell type
   - `griid--drop(@dropBy, @minColCount, @maxColCount)` drops **@dropBy** columns from grids with between **@minColCount** and **@maxColCount** columns (inclusive)
 
 
-###4. Ajdusting both `.griid-x .cell` and `.griid .cell-n-d` grids
+###4. Adjusting both `.griid-x .cell` and `.griid .cell-n-d` grids
 
 1. `.griid--row`
     Turn a `.griid-x .cell` or `.griid .cell-n-d` grid into a `.griid .cell` grid
@@ -309,6 +235,86 @@ Here's a simple example of how you might use griid's `resize` function to build 
 	#footer-grid {
 		.progressive-grid
 	}
+
+
+## Customizing your griid installation
+
+### A. Customizing the installation
+The default installation from `.griid--install` will fit most needs, but you can also build a custom griid setup to support only the features your site uses. This keeps the compiled griid CSS weight to the lowest possible on a per-site basis
+
+1. `.griid--base` is always the first thing. It gives you support for multi-row grids, and is required by everything else
+2. `.griid--inline-alignment` adds support for using alignment classes in your markup. As we will see, there are functions for doing this in **griid-functions.less** (see below) but just in case you really want to have it in your markup:
+	- Add `.left`, `.center`, `.right` to a multi-row grid to override orphan alignment
+	- Add `.left`, `.center`, `.right` to a cell to override the cell alignment
+	- Add `.top`, `.middle`, or `.bottom` to a grid to control the default for its child cells
+	- Add `.top`, `.middle`, or `.bottom` to a cell to control its vertical alignment
+3. `.griid--single-row` adds support for single-row grids with equal-width, equal-height cells. By default these cells do NOT have gutters or row spacing
+4. `.griid--space-single-row` (NOT included in `.griid--install`) adds gutters and row spacing (both @griid--gutter) to `.griid .cell*x` grids. Beware that this will frame the entire `.griid .cell*x` grids in a @griid-gutter space
+5. `.griid--base`, with or without `.griid--inline-alignment` and`.griid--single-row`, still needs initialization.
+  -            `.griid--initialize` gets you ready to go with all three grid types
+  -          Or run any of `.griid--initialize-equal-cells`, `.griid--initialize-unequal-cells`, or `.griid--initialize-row` if you don't need to support them all
+
+6. `.griid .cell` grids do *not* have space around the cells by default. If you mix in `.griid--space-single-row`, these single-row grids will have gutters and row spacing *and a frame* of `@griid--gutter`
+7. `griid--single-row-spacing` adds support for `.griid > .row*y > .cell*x`. This may be useful if you
+  -	 want a grid with equal-height rows where that height is determined from the cell content
+  -	 don't want to use a scripted solution (I love [jquery-match-height](https://github.com/liabru/jquery-match-height))
+  -    need to support orphan cells
+
+	This will give you a multi-row grid where all cells are the full height of the row (aka it's styled as an equal-width-cells table). If your cells have similar content, this may even be a good-enough approximation of equal-height rows.
+    
+	Note that if last row is full this is exactly equivalant to `.griid*y > .cell*x` but with bulkier markup, and that if you don't need cells that are the full height of their row (or can achieve that matched height with a script) this has no advantage over `.griid-x .cell` while having several disadvantages (bulkier markup, and less easily manipulated by the griid functions we'll cover below).
+
+
+**Note**:`.griid--install` is simply shorthand for `.griid--base;` + `.griid--inline-alignment;` + `.griid--initialize;`
+
+
+###B. Overriding default variables
+
+The initialization functions can be re-run at any point to re-initialize with new settings or to wipe over customizations.
+
+1.
+
+	.griid--initialize(
+	                  @fontSize: @griid--font-size,
+	                   (@maxColCount: @griid--max-cols,
+	                    (@minColCount: @griid--min-cols,
+	                     (@smallestDenominator: @griid--max-cols,
+	                      (@largestDenominator: @griid--min-cols))))
+	                 )
+
+2.
+
+	.griid--initialize-equal-cells(
+	                              @fontSize: @griid--font-size,
+	                               (@maxColCount: @griid--max-cols,
+	                                (@minColCount:@griid--min-cols))
+	                             )
+
+3.
+
+	.griid--initialize-unequal-cells(
+	                                @fontSize: @griid--font-size, 
+	                                 (@denominatorOfNarrowestCells: @griid--max-cols,
+	                                  (@numeratorOfNarrowestCells: @griid--min-cols))
+	                               )
+	                               
+
+.4. If you really want to, you can even do a custom `.griid--build`
+
+
+	.griid--build(
+	               @fontSize,
+	                (@gutter,
+	                 (@rowSpacing,
+	                  (@orphanAlignment,
+	                   (@contentAlignment,
+	                    (@maxColCount,
+	                     (@minColCount,
+	                      (@smallestDenominator,
+	                       (@largestDenominator))))))))
+	              )
+	              
+
 
 ##Acknowledgements
 griid grew out of ideas in [@JoelSutherland's](https://github.com/JoelSutherland) **grid-items** LESS grid
