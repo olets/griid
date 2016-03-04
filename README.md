@@ -9,7 +9,33 @@ griid supports three grid types: single full-width single-row grids  with cells 
 
 Until built, the griid LESS adds absolutely nothing to your compiled CSS -- include it in your default setup, and don't worry about adding bloat if you don't use it. In addition, all of griid's features are compartmentalized -- by customizing your build, you can make sure that only the styles you need actually make it into your stylesheet.
 
+###Table of contents
+- [markup for griid's three grid types](https://github.com/olets/griid#markup-for-griids-three-grid-types)
+- [getting grid](https://github.com/olets/griid#getting-grid)
+- [using griid](https://github.com/olets/griid#using-griid)
+  - [default settings](https://github.com/olets/griid#griid-default-settings)
+  - 	[typical usage](https://github.com/olets/griid#a-typical-usage)
+- [griid LESS functions and mixins](https://github.com/olets/griid#griid-less-functions-and-mixins)
+  - [alignment](https://github.com/olets/griid#a-alignment)
+  - [grid transformations](https://github.com/olets/griid#b-grid-transformations)
+ 	   - [Adjusting .griid .cell grids](https://github.com/olets/griid#1-adjusting-griid-cell-grids)
+ 	   - [Adjusting .griid .cell-n-d grids](https://github.com/olets/griid#2-adjusting-griid-cell-n-d-grids)
+ 	   - [Adjusting .griid-x .cell grids](https://github.com/olets/griid#3-adjusting-griid-x-cell-grids)
+	 	   - [Resizing to an arbitrary column count](https://github.com/olets/griid#i-resizing-from-one-column-count-to-any-other-arbitrary-column-count)
+	 	   - [Dropping the column count by one or more](https://github.com/olets/griid#ii-dropping-the-column-count-by-one-or-more)
+ 	   - [Adjusting both .griid-x .cell and .griid .cell-n-d grids](https://github.com/olets/griid#4-adjusting-both-griid-x-cell-and-griid-cell-n-d-grids)
+ 	   - [Adjusting all grids (.griid .cell, .griid-x .cell, and .griid .cell-n-d)](https://github.com/olets/griid#5-adjusting-all-grids-griid-cell-griid-x-cell-and-griid-cell-n-d)
+   - [A transformation example: A progressively resposive grid](https://github.com/olets/griid#a-transformation-example-a-progressively-resposive-grid)
+- [Customizing your griid installation](https://github.com/olets/griid#customizing-your-griid-installation)
+	- [Customizing the installation](https://github.com/olets/griid#a-customizing-the-installation)
+	- [Overriding default variables](https://github.com/olets/griid#b-overriding-default-variables)
+- [Acknowledgements](https://github.com/olets/griid#acknowledgements)
+
+ &nbsp;
+ 
 ---
+
+&nbsp;
 
 ##markup for griid's three grid types:
 
@@ -107,10 +133,7 @@ At the top of griid.less are griid's default variables:
 -    3. Possibly:
 	- run `.griid--initialize` to revert any changes made by adjustment functions,
 	- or if you only need to reset a particular type of grid, you can save a little weight by running `.griid--initialize-equal-cells`, `.griid--initialize-unequal-cells`, or `.griid--initialize-row`
-	- to have specific grids use a different baseline font size, you don't need to do a full new initialization. Just run `.griid--fz(@fontSize)`
-
-
-##griid LESS functions and mixins
+	- to have specific grids use a different baseline font size, you don't need to do a full new initialization. Just run `.griid--fz(@fontSize)`##griid LESS functions and mixins
 
 griid has support for all sorts of adjustments. These are especially useful for media queries - turn your 1/3 - 2/3 grid into 1/2 - 1/2 quickly and cleanly. Progressively resize a grid first from 6 columns (the factory default max columns for griid) to 5, then 4, 3, 2, 1. Turn a single-row grid into a three-column grid. Pretty much anything you could want to do, you can
 
@@ -319,6 +342,8 @@ The initialization functions can be re-run at any point to re-initialize with ne
 ##Acknowledgements
 griid grew out of ideas in [@JoelSutherland's](https://github.com/JoelSutherland) **grid-items** LESS grid
 
+&nbsp;
 
+&nbsp;
 
 ######Henry Bley-Vroman, 2016
