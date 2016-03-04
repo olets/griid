@@ -1,7 +1,7 @@
 /**********************************************************************************************************************************
  **********************************************************************************************************************************
  **********************************************************************************************************************************
-    griid v2.1.4
+    griid v2.1.5
 
     The greedy grid that tries to do it all with LESS
    
@@ -312,8 +312,6 @@ C. Overriding default variables
 
 /* initialize unequal-width cells */
 .griid--initialize-unequal-helper(@smallestDenominator, @i) when (@i =< @smallestDenominator) {
-    [class*='griid'] > [class*='cell'].row-end { margin-right: 0 }
-    .cell-1-1, .cell-full { width: @ie_friendly_100_percent }
     .griid--fraction(@i);
     .griid--initialize-unequal-helper(@smallestDenominator, (@i + 1))
 }
@@ -324,6 +322,8 @@ C. Overriding default variables
 }
 /* with the default font size  */
 .griid--initialize-unequal-cells(@fontSize: @griid--font-size, @smallestDenominator: @griid--max-cols, @largestDenominator: @griid--min-cols) when (@fontSize = @griid--font-size) {
+    [class*='griid'] > [class*='cell'].row-end { margin-right: 0 }
+    .cell-1-1, .cell-full { width: @ie_friendly_100_percent }
     .griid--initialize-unequal-helper(@smallestDenominator, @largestDenominator)
 }
 
@@ -339,11 +339,15 @@ C. Overriding default variables
     .griid--initialize-row(@fontSize);
     .griid--fz(@fontSize);
     .griid--initialize-equal-helper(@maxColCount, @minColCount);
+    [class*='griid'] > [class*='cell'].row-end { margin-right: 0 }
+    .cell-1-1, .cell-full { width: @ie_friendly_100_percent }
     .griid--initialize-unequal-helper(@smallestDenominator, @largestDenominator)
 }
 .griid--initialize(@fontSize: @griid--font-size, @maxColCount: @griid--max-cols, @minColCount: @griid--min-cols, @smallestDenominator: @griid--max-cols, @largestDenominator: @griid--min-cols)  when (@fontSize = @griid--font-size) {
     .griid--initialize-row(@fontSize);
     .griid--initialize-equal-helper(@maxColCount, @minColCount);
+    [class*='griid'] > [class*='cell'].row-end { margin-right: 0 }
+    .cell-1-1, .cell-full { width: @ie_friendly_100_percent }
     .griid--initialize-unequal-helper(@smallestDenominator, @largestDenominator)
 }
 

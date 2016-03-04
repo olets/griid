@@ -50,34 +50,35 @@ li.broken {
 
 /* every transformation */
 /*
-#griid-top {.griid--top}
-#griid-middle {.griid--middle}
-#griid-bottom {.griid--bottom}
-#griid-left {.griid--left}
-#griid-center {.griid--center}
-#griid-right {.griid--right}
-#griid-resize-row{.griid--resize-row}
-#griid-resize-row--3--{.griid--resize-row(3)}
-//#griid-resize-one-unequal--1---3-- {.griid--resize-one-unequal(1, 3)}
-#griid-resize-one-unequal--1---4---2---3-- {.griid--resize-one-unequal(1, 4, 2, 3)}
-#griid-resize-unequal {.griid--resize-unequal}
-#griid-resize-unequal--1---3-- {.griid--resize-unequal(1, 3)}
-#griid-resize-unequal--1---2---1---3-- {.griid--resize-unequal(1, 2, 1, 3)}
-#griid-resize-one-equal--3-- {.griid--resize-one-equal(3)}
-#griid-resize-one-equal--4---3-- {.griid--resize-one-equal(4, 3)}
-#griid-resize-equal {.griid--resize-equal}
-#griid-resize-equal--3-- {.griid--resize-equal(3)}
-#griid-resize-equal--3---4-- {.griid--resize-equal(3, 4)}
-#griid-resize-equal--3---4---5-- {.griid--resize-equal(3, 4, 5)}
-#griid-drop-one--4-- {.griid--drop-one(4)}
-#griid-drop-one--2---4-- {.griid--drop-one(2, 4)}
-#griid-drop {.griid--drop}
-#griid-drop--2-- {.griid--drop(2)}
-#griid-drop--2---4-- {.griid--drop(2, 4)}
-#griid-drop--2---4---5-- {.griid--drop(2, 4, 5)}
-#griid-row {.griid--row}
-#griid-resize {.griid--resize}
-#griid-resize--4-- {.griid--resize(4)}
+.griid--install;
+.grid-top {.griid--top}
+.grid-middle {.griid--middle}
+.grid-bottom {.griid--bottom}
+.grid-left {.griid--left}
+.grid-center {.griid--center}
+.grid-right {.griid--right}
+.grid-resize-row{.griid--resize-row}
+.grid-resize-row--3--{.griid--resize-row(3)}
+//.grid-resize-one-unequal--1---3-- {.griid--resize-one-unequal(1, 3)}
+.grid-resize-one-unequal--1---4---2---3-- {.griid--resize-one-unequal(1, 4, 2, 3)}
+.grid-resize-unequal {.griid--resize-unequal}
+.grid-resize-unequal--1---3-- {.griid--resize-unequal(1, 3)}
+.grid-resize-unequal--1---2---1---3-- {.griid--resize-unequal(1, 2, 1, 3)}
+.grid-resize-one-equal--3-- {.griid--resize-one-equal(3)}
+.grid-resize-one-equal--4---3-- {.griid--resize-one-equal(4, 3)}
+.grid-resize-equal {.griid--resize-equal}
+.grid-resize-equal--3-- {.griid--resize-equal(3)}
+.grid-resize-equal--3---4-- {.griid--resize-equal(3, 4)}
+.grid-resize-equal--3---4---5-- {.griid--resize-equal(3, 4, 5)}
+.grid-drop-one--4-- {.griid--drop-one(4)}
+.grid-drop-one--2---4-- {.griid--drop-one(2, 4)}
+.grid-drop {.griid--drop}
+.grid-drop--2-- {.griid--drop(2)}
+.grid-drop--2---4-- {.griid--drop(2, 4)}
+.grid-drop--2---4---5-- {.griid--drop(2, 4, 5)}
+.grid-row {.griid--row}
+.grid-resize {.griid--resize}
+.grid-resize--4-- {.griid--resize(4)}
 */
 
 .grid-top [class*='griid'] > [class*='cell'],
