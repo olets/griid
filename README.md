@@ -10,14 +10,14 @@ griid supports [three grid types](https://github.com/olets/griid#markup-for-grii
 Until [built](https://github.com/olets/griid#a-typical-usage), the griid LESS adds absolutely nothing to your compiled CSS -- include it in your default setup, and don't worry about adding bloat if you don't use it. In addition, all of griid's features are compartmentalized -- by [customizing your build](https://github.com/olets/griid#customizing-your-griid-installation), you can make sure that only the styles you need actually make it into your stylesheet.
 
 ###Table of contents
-- [markup for griid's three grid types](https://github.com/olets/griid#markup-for-griids-three-grid-types)
-- [getting grid](https://github.com/olets/griid#getting-grid)
-- [using griid](https://github.com/olets/griid#using-griid)
-  - [default settings](https://github.com/olets/griid#griid-default-settings)
-  - [typical usage](https://github.com/olets/griid#a-typical-usage)
+- [Markup for griid's three grid types](https://github.com/olets/griid#markup-for-griids-three-grid-types)
+- [Getting grid](https://github.com/olets/griid#getting-grid)
+- [Using griid](https://github.com/olets/griid#using-griid)
+  - [Default settings](https://github.com/olets/griid#griid-default-settings)
+  - [Typical usage](https://github.com/olets/griid#a-typical-usage)
 - [griid LESS functions and mixins](https://github.com/olets/griid#griid-less-functions-and-mixins)
-  - [alignment](https://github.com/olets/griid#a-alignment)
-  - [grid transformations](https://github.com/olets/griid#b-grid-transformations)
+  - [Alignment](https://github.com/olets/griid#a-alignment)
+  - [Grid transformations](https://github.com/olets/griid#b-grid-transformations)
  	   - [Adjusting .griid .cell grids](https://github.com/olets/griid#1-adjusting-griid-cell-grids)
  	   - [Adjusting .griid .cell-n-d grids](https://github.com/olets/griid#2-adjusting-griid-cell-n-d-grids)
  	   - [Adjusting .griid-x .cell grids](https://github.com/olets/griid#3-adjusting-griid-x-cell-grids)
@@ -149,12 +149,15 @@ At the top of griid.less are griid's default variables:
 	- or if you only need to reset a particular type of grid, you can save a little weight by running `.griid--initialize-equal-cells`, `.griid--initialize-unequal-cells`, or `.griid--initialize-row`
 	- to have specific grids use a different baseline font size, you don't need to do a full new initialization. Just run `.griid--fz(@fontSize)`##griid LESS functions and mixins
 
-griid has support for all sorts of adjustments. These are especially useful for media queries - turn your 1/3 - 2/3 layout into 1/2 - 1/2 [quickly and cleanly](https://github.com/olets/griid#2-adjusting-griid-cell-n-d-grids). [Progressively resize a grid](https://github.com/olets/griid#a-transformation-example-a-progressively-resposive-grid) first from 6 columns (the factory default max columns for griid) [to 5](https://github.com/olets/griid#3-adjusting-griid-x-cell-grids), then 4, 3, 2, 1. Turn a [single-row grid into](https://github.com/olets/griid#1-adjusting-griid-cell-grids) a three-column grid. Pretty much anything you could want to do, you can
+griid has support for all sorts of adjustments. These are especially useful for media queries - turn your 1/3 - 2/3 layout into 1/2 - 1/2 [quickly and cleanly](https://github.com/olets/griid#2-adjusting-griid-cell-n-d-grids). [Progressively resize a grid](https://github.com/olets/griid#a-transformation-example-a-progressively-resposive-grid) first from 6 columns (the factory default max columns for griid) [to 5](https://github.com/olets/griid#3-adjusting-griid-x-cell-grids), then 4, 3, 2, 1. Turn a [single-row grid into](https://github.com/olets/griid#1-adjusting-griid-cell-grids) a three-column grid. Pretty much anything you could want to do, you can.
+
+Explanations of all the adjustments are here. You might also [check out the test suite](https://cdn.rawgit.com/olets/griid/v2.1.6/tests/griid-tests.html) for an example of each.
 
 &nbsp;
 
 ###A. Alignment
 1. `.griid--vertical-align(@args:@griid--item-v-align)`
+
     Change the vertical alignment of cell contents
     Default re-initializes
 	
@@ -164,6 +167,7 @@ griid has support for all sorts of adjustments. These are especially useful for 
 	`.griid--bottom` (shorthand mixin for `.griid--vertical-align(bottom)`)
 	
 1. `.griid--orphan-align(@alignment:@griid--orphan-h-align)`
+
     Change how orphan cells in multi-row grids are aligned
     Default re-initializes
     
