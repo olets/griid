@@ -162,22 +162,22 @@ griid--drop(@dropBy: 1(, @minColCount: @griid--min-cols(, @maxColCount: @griid--
 /* resize unequal cells */
 .griid--resize-one-unequal(@treatAsNumerator:1, @treatAsDenominator:2, @targetNumerator:0, @targetDenominator:1, @ratio:0) when not (@ratio = 0) and (@targetNumerator/@targetDenominator =< @ratio) and (@targetNumerator = 0) {
     .griid, &.griid {
-        .cell-@{treatAsNumerator}-@{treatAsDenominator} { .griid--unequal-cell(2/1) }
+        > .cell-@{treatAsNumerator}-@{treatAsDenominator} { .griid--unequal-cell(2/1) }
     }
 }
 .griid--resize-one-unequal(@treatAsNumerator:1, @treatAsDenominator:2, @targetNumerator:0, @targetDenominator:1, @ratio:0) when not (@ratio = 0) and (@targetNumerator/@targetDenominator =< @ratio) and not (@targetNumerator = 0) {
     .griid, &.griid {
-        .cell-@{targetNumerator}-@{targetDenominator} { .griid--unequal-cell(@treatAsDenominator/@treatAsNumerator) }
+        > .cell-@{targetNumerator}-@{targetDenominator} { .griid--unequal-cell(@treatAsDenominator/@treatAsNumerator) }
     }
 }
 .griid--resize-one-unequal(@treatAsNumerator:1, @treatAsDenominator:2, @targetNumerator:0, @targetDenominator:1, @ratio:0) when (@ratio = 0) and (@targetNumerator = 0) {
     .griid, &.griid {
-        .cell-@{treatAsNumerator}-@{treatAsDenominator} { .griid--unequal-cell(2/1) }
+        > .cell-@{treatAsNumerator}-@{treatAsDenominator} { .griid--unequal-cell(2/1) }
     }
 }
 .griid--resize-one-unequal(@treatAsNumerator:1, @treatAsDenominator:2, @targetNumerator:0, @targetDenominator:1, @ratio:0) when (@ratio = 0) and not (@targetNumerator = 0) {
     .griid, &.griid {
-        .cell-@{targetNumerator}-@{targetDenominator} { .griid--unequal-cell(@treatAsDenominator/@treatAsNumerator) }
+        > .cell-@{targetNumerator}-@{targetDenominator} { .griid--unequal-cell(@treatAsDenominator/@treatAsNumerator) }
     }
 }
 .griid--resize-unequal-helper(@treatAsNumerator, @treatAsDenominator, @denominator, @i, @ratio) when (@i =< @denominator) {
@@ -193,13 +193,13 @@ griid--drop(@dropBy: 1(, @minColCount: @griid--min-cols(, @maxColCount: @griid--
 .griid--resize-one-equal(@treatAs, @target:0) when (@target = 0) {
 //    .griid-@{target} { // to only allow mixins to be applied up the tree from a grid
     .griid-@{treatAs}, &.griid-@{treatAs} { // to allow mixins to be applied to grids or anywhere up the tree from a grid
-        .cell { .griid--equal-cell(1) }
+        > .cell { .griid--equal-cell(1) }
     }
 }
 .griid--resize-one-equal(@treatAs, @target:0) when not (@target = 0) {
 //    .griid-@{target} { // to only allow mixins to be applied up the tree from a grid
     .griid-@{target}, &.griid-@{target} { // to allow mixins to be applied to grids or anywhere up the tree from a grid
-        .cell { .griid--equal-cell(@treatAs) }
+        > .cell { .griid--equal-cell(@treatAs) }
     }
 }
 
@@ -212,7 +212,7 @@ griid--drop(@dropBy: 1(, @minColCount: @griid--min-cols(, @maxColCount: @griid--
 /* drop one column from an equal-width-columns grid */
 .griid--drop-one-helper(@dropBy, @target) {
     .griid-@{target}, &.griid-@{target} {
-         .cell { .griid--equal-cell(@target - @dropBy)}
+        > .cell { .griid--equal-cell(@target - @dropBy)}
     }
 }
 .griid--drop-one(@dropBy, @target:0) when (@target = 0) {    // so that .griid-drop() never drops the column count below 1
