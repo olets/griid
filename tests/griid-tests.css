@@ -6,19 +6,30 @@
 	background: #39c;
 	color: #fff;
 	outline: 1px solid pink;
-	padding: 10px 0;
+	padding: 10px 0
 }
 
 a {
-	color: inherit;
 	text-decoration: none;
+  font-weight: 700;
+  color: #39c
 }
-li {
-	color: green
+li a {
+	color: green;
+  font-weight: 400;
 }
-li.broken {
+li.broken a {
 	color: red
 }
+section {
+  margin: 30px 0;
+  background: #eee;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: calc(~'100% - 60px')
+}
+
 
 /*
 .working:before, .broken:before {
@@ -35,11 +46,14 @@ li.broken {
 }*/
 
 #tests h4, #tests h5 {
-	margin-bottom: 0;
+	margin-bottom: 20px;
 	color: green
 }
 #tests h4 {
 	margin-top: 40px;
+}
+#tests section > h4:first-of-type {
+  margin-top: 0;
 }
 #tests h5 {
 	text-transform: uppercase;

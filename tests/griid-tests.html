@@ -4,9 +4,9 @@
     <title>griid tests</title>
     <meta name="description" content="tests for griid">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--<link rel="stylesheet" href="griid-tests.css">-->
-    <link rel="stylesheet" href="https://cdn.rawgit.com/olets/griid/v2.1.7/tests/griid-tests.css">
-    <link rel="stylesheet" href="https://cdn.rawgit.com/olets/griid/v2.1.7/css/griid.min.css">
+    <!-- <link rel="stylesheet" href="griid-tests.css"> -->
+    <link rel="stylesheet" href="https://rawgit.com/olets/griid/master/tests/griid-tests.css">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/olets/griid/v2.1.8/css/griid.min.css">
 </head>
 <body>
 <div class="griid">
@@ -100,19 +100,21 @@
     <div class="cell-2-3">
         <div id="tests">
 
-            <h4 id="singlerow">
-                .griid
-            </h4>
-            <section class="griid">
-                <div class="cell">a</div>
-                <div class="cell">b</div>
-                <div class="cell">c</div>
-                <div class="cell">d</div>
+            <section>
+                <h4 id="singlerow">
+                    .griid
+                </h4>
+                <div class="griid">
+                    <div class="cell">a</div>
+                    <div class="cell">b</div>
+                    <div class="cell">c</div>
+                    <div class="cell">d</div>
+                </div>
             </section>
             
             <section id="equal">
                 <h4>
-                    .grid--2
+                    .griid-2
                 </h4>
                 <div class="griid-2">
                     <div class="cell">a</div>
@@ -121,7 +123,7 @@
                 </div>
 
                 <h4>
-                    .grid--3
+                    .griid-3
                 </h4>
                 <div class="griid-3">
                     <div class="cell">a</div>
@@ -131,7 +133,7 @@
                 </div>
 
                 <h4>
-                    .grid--4
+                    .griid-4
                 </h4>
                 <div class="griid-4">
                     <div class="cell">a</div>
@@ -315,6 +317,7 @@
                         <div class="cell">cell becomes block</div>
                     </div>
                 </div>
+            </section>
             
             <section id="resize-row-x">
                 <h4>
@@ -387,7 +390,7 @@
 
             <section id="resize-unequal">
                 <h4>
-                    .griid.grid-resize-unequal
+                    .griid--resize-unequal
                 </h4>
                 all fractions become 1/2 (the default)
                 <h5>on the grid</h5>
@@ -406,7 +409,7 @@
 
             <section id="resize-unequal-x-y">
                 <h4>
-                    .grid-resize-unequal(1,3)
+                    .griid--resize-unequal(1,3)
                 </h4>
                 all fractions become 1/3
                 <h5>on the grid</h5>
@@ -425,7 +428,7 @@
 
             <section id="resize-unequal-a-b-c-d">
                 <h4>
-                    .grid-resize-unequal(1,4,1,3)
+                    .griid--resize-unequal(1,4,1,3)
                 </h4>
                 all cells 1/3 or smaller become 1/2
                 <h5>on the grid</h5>
@@ -447,7 +450,7 @@
                     
             <section id="resize-one-equal-x">
                 <h4>
-                    .grid-resize-one-equal(3)
+                    .griid--resize-one-equal(3)
                 </h4>
                 .griid-3 becomes single column (the equivalent of griid-1, but there is no griid-1)
 
@@ -493,7 +496,7 @@
                 
             <section id="resize-one-equal-x-y">
                 <h4>
-                    .grid-resize-one-equal(4,3)
+                    .griid--resize-one-equal(4,3)
                 </h4>
                 griid-3 becomes griid-4
 
@@ -542,7 +545,7 @@
 
             <section id="resize-equal">
                 <h4>
-                    .grid-resize-equal
+                    .griid--resize-equal
                 </h4>
                 .grid-x cells become blocks
                 <h5>on the grid</h5>
@@ -568,7 +571,7 @@
             <section id="resize-equal-x">
 
                 <h4>
-                    .grid-resize-equal(3)
+                    .griid--resize-equal(3)
                 </h4>
                 all .grid-x become .griid-3
                 <h5>on the grid</h5>
@@ -594,7 +597,7 @@
             <section id="resize-equal-x-y">
 
                 <h4>
-                    .grid-resize-equal(3,4)
+                    .griid--resize-equal(3,4)
                 </h4>
                 all .griid-x with 4 or more columns become .griid-3
                 <h5>on the grid</h5>
@@ -657,7 +660,7 @@
                     
             <section id="resize-equal-x-y-z">
                 <h4>
-                    .grid-resize-equal(3,4,5)
+                    .griid--resize-equal(3,4,5)
                 </h4>
                 .grid-x with between 4 and 5 columns become .griid-3
 
@@ -740,7 +743,7 @@
             <section id="drop-one-x">
 
                 <h4>
-                    .grid-drop-one(4)
+                    .griid--drop-one(4)
                 </h4>
                 .griid-4 loses a column
                 <h5>on the grid</h5>
@@ -794,7 +797,7 @@
             <section id="drop-one-x-y">
     
                 <h4>
-                    .grid-drop-one(2, 4)
+                    .griid--drop-one(2, 4)
                 </h4>
                 .griid-4 loses two columns
                 <h5>on the grid</h5>
@@ -848,7 +851,7 @@
             <section id="drop">
 
                 <h4>
-                    .grid-drop
+                    .griid--drop
                 </h4>
                 all .grid-x grids lose one column
                 <h5>on the grid</h5>
@@ -902,7 +905,7 @@
             <section id="drop-x">
 
                 <h4>
-                    .grid-drop(2)
+                    .griid--drop(2)
                 </h4>
                 all .grid-x grids lose two columns
 
@@ -958,7 +961,7 @@
             <section id="drop-x-y">
 
                 <h4>
-                    .grid-drop(2,4)
+                    .griid--drop(2,4)
                 </h4>
                 .grid-x grids with 4 or more columns drop two columns
 
@@ -1031,7 +1034,7 @@
 
             <section id="drop-x-y-z">
                 <h4>
-                    .grid-drop(2,4,5)
+                    .griid--drop(2,4,5)
                 </h4>
                 .grid-x with between 4 and 5 columns lose two columns
                 <h5>on the grid</h5>
@@ -1113,7 +1116,7 @@
 
             <section id="row">
                 <h4>
-                    .grid-row
+                    .griid--row
                 </h4>
                 turns `.grid-x .cell` and `.griid .cell-numerator-denominator` grids into `.griid .cell` grids
                 <h5>on the grid</h5>
@@ -1158,7 +1161,7 @@
 
             <section id="resize">
                 <h4>
-                    .grid-resize
+                    .griid--resize
                 </h4>
                 by default, make everything blocks
                 <h5>on the grid</h5>
@@ -1205,7 +1208,7 @@
             <section id="resize-x">
 
                 <h4>
-                    .grid-resize(4)
+                    .griid--resize(4)
                 </h4>
                 turns all grids into griid-4
                 <h5>on the grid: .griid .cell</h5>
