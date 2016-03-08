@@ -9,6 +9,8 @@ griid supports [three grid types](https://github.com/olets/griid#markup-for-grii
 
 Until [built](https://github.com/olets/griid#a-typical-usage), the griid LESS adds absolutely nothing to your compiled CSS -- include it in your default setup, and don't worry about adding bloat if you don't use it. In addition, all of griid's features are compartmentalized -- by [customizing your build](https://github.com/olets/griid#customizing-your-griid-installation), you can make sure that only the styles you need actually make it into your stylesheet.
 
+Here's [a demo pen](http://codepen.io/henry/pen/BKoNMq) with griid already imported - go play around!
+
 ###Table of contents
 - [Markup for griid's three grid types](https://github.com/olets/griid#markup-for-griids-three-grid-types)
 - [Getting grid](https://github.com/olets/griid#getting-grid)
