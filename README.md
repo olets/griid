@@ -116,8 +116,8 @@ Or add griid to your bower dependencies with
 
 Or it from the rawgit CDN (remember to update the URL to the latest version)
 
-	https://cdn.rawgit.com/olets/griid/v2.1.7/griid.less
-	https://cdn.rawgit.com/olets/griid/v2.1.7/griid-functions.less
+	https://cdn.rawgit.com/olets/griid/v2.1.8/griid.less
+	https://cdn.rawgit.com/olets/griid/v2.1.8/griid-functions.less
 
 &nbsp;
 
@@ -153,7 +153,7 @@ griid has support for all sorts of adjustments. These are especially useful for 
 
 &nbsp;
 
-Explanations of all the adjustments are here. You might also **[check out the test suite](https://cdn.rawgit.com/olets/griid/v2.1.7/tests/griid-tests.html) for an example of each available adjustment**.
+Explanations of all the adjustments are here. You might also **[check out the test suite](https://cdn.rawgit.com/olets/griid/v2.1.8/tests/griid-tests.html) for an example of each available adjustment**.
 
 &nbsp;
 
