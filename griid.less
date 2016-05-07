@@ -1,3 +1,5 @@
+.griid--install;
+
 /**********************************************************************************************************************************
  **********************************************************************************************************************************
  **********************************************************************************************************************************
@@ -77,7 +79,7 @@
  * layout for single-row grid of equal-width, equal-height cells
  * 
  */
-.griid--single-row(@fontSize: @griid--font-size) {         // .griid--single-row is included in griid--install
+.griid--single-row(@fontSize: @griid--font-size, @gutter: @griid--gutter) {         // .griid--single-row is included in griid--install
     .griid {
         table-layout: fixed;                               // equal-width cells are the result of a table-layout:fixed table
         > .row {
@@ -86,14 +88,15 @@
         }
         > .cell, > .row > .cell {
             display: table-cell;                           // in combination with 1%-wide table-cells
-            width: 1%
+            width: 1%;
+            border-right: @gutter solid transparent;
         }
     }
 }
-.griid--space-single-row() {                                    // .griid--space-single-row is NOT included in griid-install
+.griid--space-single-row(@gutter: @griid--gutter) {                                    // .griid--space-single-row is NOT included in griid-install
     .griid {                                               // remember that border-spacing applies to the outside edges of the table, 
         border-collapse: separate;                         // so if this is used `.griid .cell`s will not line up with `.griid-x .cells` or `.griid .cell-n-d`s
-        border-spacing: @griid--gutter;
+        border-spacing: @gutter;
     }
 }
 
@@ -125,36 +128,36 @@
  */
 
 /* width calculator for unequal and equal-width cells */
-.griid--cell-width(@x) when not (@griid--gutter = 0) {
-    @griid--gutters: (@x - 1) * @griid--gutter;
+.griid--cell-width(@x, @gutter: @griid--gutter) when not (@griid--gutter = 0) {
+    @griid--gutters: (@x - 1) * @gutter;
     width: calc(~'(@{ie_friendly_100_percent} - @{griid--gutters}) / @{x}');
 }
-.griid--cell-width(@x) when (@griid--gutter = 0) {         // account for calc limitation: can't subtract zero
-    @griid--gutters: (@x - 1) * @griid--gutter;
+.griid--cell-width(@x, @gutter: @griid--gutter) when (@griid--gutter = 0) {         // account for calc limitation: can't subtract zero
+    @griid--gutters: (@x - 1) * @gutter;
     width: calc(~'@{ie_friendly_100_percent} / @{x}');
 }
 
 
 /* unequal-width cells */
 /* 2: each fraction */
-.griid--unequal-cell(@x) {
-    margin-right: @griid--gutter;
-    .griid--cell-width(@x)
+.griid--unequal-cell(@x, @gutter: @griid--gutter) {
+    margin-right: @gutter;
+    .griid--cell-width(@x, @gutter)
 }
 /* 1: the loop */
-.griid--fraction(@denominator, @i:1) when (@i < @denominator) {
-    .cell-@{i}-@{denominator} { .griid--unequal-cell(@denominator/@i) };
-    .griid--fraction(@denominator, (@i + 1))
+.griid--fraction(@denominator, @i:1, @gutter: @griid--gutter) when (@i < @denominator) {
+    .cell-@{i}-@{denominator} { .griid--unequal-cell(@denominator/@i, @gutter) };
+    .griid--fraction(@denominator, (@i + 1), @gutter)
 }
 
 
 /* equal-width cells */
 /* 2: each column count */
-.griid--equal-cell(@cols) when (@cols > 1) {
-    &:nth-child(n) { margin-right: @griid--gutter }
+.griid--equal-cell(@cols, @gutter: @griid--gutter) when (@cols > 1) {
+    &:nth-child(n) { margin-right: @gutter }
     &:nth-child(@{fooN}) { margin-right: 0 }
     @fooN: ~"@{cols}n";
-    .griid--cell-width(@cols)
+    .griid--cell-width(@cols, @gutter)
 }
 /* 1: loop */
 .griid--equal-cell(@cols) when not (@cols > 1) { width: @ie_friendly_100_percent }
@@ -178,63 +181,63 @@
 
 
 /* initialize equal-width cells  */
-.griid--initialize-equal-helper(@maxColCount, @i) when (@i =< @maxColCount) {
-    .griid-@{i} > .cell { .griid--equal-cell(@i) }
-    .griid--initialize-equal-helper(@maxColCount, (@i + 1))
+.griid--initialize-equal-helper(@maxColCount, @i, @gutter) when (@i =< @maxColCount) {
+    .griid-@{i} > .cell { .griid--equal-cell(@i, @gutter) }
+    .griid--initialize-equal-helper(@maxColCount, (@i + 1), @gutter)
 }
 /* with a specified custom font size  */
-.griid--initialize-equal-cells(@fontSize: @griid--font-size, @maxColCount: @griid--max-cols, @minColCount:@griid--min-cols) when not (@fontSize = @griid--font-size) {
+.griid--initialize-equal-cells(@fontSize: @griid--font-size, @maxColCount: @griid--max-cols, @minColCount:@griid--min-cols, @gutter: @griid--gutter) when not (@fontSize = @griid--font-size) {
     .griid--fz(@fontSize);
-    .griid--initialize-equal-helper(@maxColCount, @minColCount)
+    .griid--initialize-equal-helper(@maxColCount, @minColCount, @gutter)
 }
 /* with the default font size  */
-.griid--initialize-equal-cells(@fontSize: @griid--font-size, @maxColCount: @griid--max-cols, @minColCount:@griid--min-cols) when (@fontSize = @griid--font-size) {
-    .griid--initialize-equal-helper(@maxColCount, @minColCount)
+.griid--initialize-equal-cells(@fontSize: @griid--font-size, @maxColCount: @griid--max-cols, @minColCount:@griid--min-cols, @gutter: @griid--gutter) when (@fontSize = @griid--font-size) {
+    .griid--initialize-equal-helper(@maxColCount, @minColCount, @gutter)
 }
 
 
 /* initialize unequal-width cells */
-.griid--initialize-unequal-helper(@smallestDenominator, @i) when (@i =< @smallestDenominator) {
-    .griid--fraction(@i);
-    .griid--initialize-unequal-helper(@smallestDenominator, (@i + 1))
+.griid--initialize-unequal-helper(@smallestDenominator, @i, @gutter: @griid--gutter) when (@i =< @smallestDenominator) {
+    .griid--fraction(@i, @gutter);
+    .griid--initialize-unequal-helper(@smallestDenominator, (@i + 1), @gutter)
 }
 /* with a specified custom font size  */
-.griid--initialize-unequal-cells(@fontSize: @griid--font-size, @smallestDenominator: @griid--max-cols, @largestDenominator: @griid--min-cols) when not (@fontSize = @griid--font-size) {
+.griid--initialize-unequal-cells(@fontSize: @griid--font-size, @smallestDenominator: @griid--max-cols, @largestDenominator: @griid--min-cols, @gutter: @griid--gutter) when not (@fontSize = @griid--font-size) {
     .griid--fz(@fontSize);
-    .griid--initialize-unequal-helper(@smallestDenominator, @largestDenominator)
+    .griid--initialize-unequal-helper(@smallestDenominator, @largestDenominator, @gutter)
 }
 /* with the default font size  */
-.griid--initialize-unequal-cells(@fontSize: @griid--font-size, @smallestDenominator: @griid--max-cols, @largestDenominator: @griid--min-cols) when (@fontSize = @griid--font-size) {
+.griid--initialize-unequal-cells(@fontSize: @griid--font-size, @smallestDenominator: @griid--max-cols, @largestDenominator: @griid--min-cols, @gutter: @griid--gutter) when (@fontSize = @griid--font-size) {
     [class*='griid'] > [class*='cell'].row-end { margin-right: 0 }
     .cell-1-1, .cell-full { width: @ie_friendly_100_percent }
-    .griid--initialize-unequal-helper(@smallestDenominator, @largestDenominator)
+    .griid--initialize-unequal-helper(@smallestDenominator, @largestDenominator, @gutter)
 }
 
 
 /* initial single-row grids */
-.griid--initialize-row(@fontSize: @griid--font-size) {
-    .griid--single-row(@fontSize);
+.griid--initialize-row(@fontSize: @griid--font-size, @gutter: @griid--gutter) {
+    .griid--single-row(@fontSize, @gutter);
 }
 
 
 /* initialize equal- and unequal-width cells */
-.griid--initialize(@fontSize: @griid--font-size, @maxColCount: @griid--max-cols, @minColCount: @griid--min-cols, @smallestDenominator: @griid--max-cols, @largestDenominator: @griid--min-cols)  when not (@fontSize = @griid--font-size) {
-    .griid--initialize-row(@fontSize);
+.griid--initialize(@fontSize: @griid--font-size, @maxColCount: @griid--max-cols, @minColCount: @griid--min-cols, @smallestDenominator: @griid--max-cols, @largestDenominator: @griid--min-cols, @gutter: @griid--gutter)  when not (@fontSize = @griid--font-size) {
+    .griid--initialize-row(@fontSize, @gutter);
     .griid--fz(@fontSize);
-    .griid--initialize-equal-helper(@maxColCount, @minColCount);
+    .griid--initialize-equal-helper(@maxColCount, @minColCount, @gutter);
     [class*='griid'] > [class*='cell'].row-end { margin-right: 0 }
     .cell-1-1, .cell-full { width: @ie_friendly_100_percent }
-    .griid--initialize-unequal-helper(@smallestDenominator, @largestDenominator)
+    .griid--initialize-unequal-helper(@smallestDenominator, @largestDenominator, @gutter)
 }
-.griid--initialize(@fontSize: @griid--font-size, @maxColCount: @griid--max-cols, @minColCount: @griid--min-cols, @smallestDenominator: @griid--max-cols, @largestDenominator: @griid--min-cols)  when (@fontSize = @griid--font-size) {
-    .griid--initialize-row(@fontSize);
-    .griid--initialize-equal-helper(@maxColCount, @minColCount);
+.griid--initialize(@fontSize: @griid--font-size, @maxColCount: @griid--max-cols, @minColCount: @griid--min-cols, @smallestDenominator: @griid--max-cols, @largestDenominator: @griid--min-cols, @gutter: @griid--gutter)  when (@fontSize = @griid--font-size) {
+    .griid--initialize-row(@fontSize, @gutter);
+    .griid--initialize-equal-helper(@maxColCount, @minColCount, @gutter);
     [class*='griid'] > [class*='cell'].row-end { margin-right: 0 }
     .cell-1-1, .cell-full { width: @ie_friendly_100_percent }
-    .griid--initialize-unequal-helper(@smallestDenominator, @largestDenominator)
+    .griid--initialize-unequal-helper(@smallestDenominator, @largestDenominator, @gutter)
 }
 
 .griid--install(@fontSize: @griid--font-size, @gutter: @griid--gutter, @rowSpacing: @griid--row-spacing, @orphanAlignment: @griid--orphan-h-align, @contentAlignment: @griid--item-v-align, @maxColCount: @griid--max-cols, @minColCount: @griid--min-cols, @smallestDenominator: @griid--max-cols, @largestDenominator: @griid--min-cols) {
     .griid--base(@fontSize, @orphanAlignment, @contentAlignment, @rowSpacing);
-    .griid--initialize(@fontSize, @maxColCount, @minColCount, @smallestDenominator, @largestDenominator)
+    .griid--initialize(@fontSize, @maxColCount, @minColCount, @smallestDenominator, @largestDenominator, @gutter)
 }
