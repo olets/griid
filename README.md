@@ -7,7 +7,7 @@ Supports IE > 8
 
 griid supports [three grid types](https://github.com/olets/griid#markup-for-griids-three-grid-types): full-width single-row grids with cells of equal width and height; multi-row grids with a specified number of equal-width columns; and multi-row grids with fraction-of-the-grid-width cell widths specified per-cell. In the latter two cases, you can control the horizontal alignment of orphan cells (cells in non-full last rows), the space between all cells, and various other [parameters](https://github.com/olets/griid#griid-default-settings). Grids are infininely nestable. And griid comes with mixin LESS functions that make it easy to change a grid's layout on the fly (e.g. in media queries)!
 
-Until [built](https://github.com/olets/griid#typical-usage), the griid LESS adds absolutely nothing to your compiled CSS -- include it in your default setup, and don't worry about adding bloat if you don't use it. In addition, all of griid's features are compartmentalized -- by [customizing your build](https://github.com/olets/griid#customizing-your-griid-installation), you can make sure that only the styles you need actually make it into your stylesheet.
+By default, griid LESS is fully built when included. If you don't want this, simply comment out line 1 of griid.less. If you do that, the griid LESS adds absolutely nothing to your compiled CSS until [built](https://github.com/olets/griid#typical-usage)-- include it in your default setup, and don't worry about adding bloat if you don't use it. In addition, all of griid's features are compartmentalized -- by [customizing your build](https://github.com/olets/griid#customizing-your-griid-installation), you can make sure that only the styles you need actually make it into your stylesheet.
 
 Check out [the full suite of things griid can do](https://cdn.rawgit.com/olets/griid/bcb6ef678f7501d5d4304aee04e2493effc8aeca/tests/griid-tests.html)
 
@@ -126,9 +126,6 @@ Or it from the rawgit CDN (remember to update the URL to the latest version)
 &nbsp;
 
 ## using griid
-###*griid* ***requires*** *initialization*
-
-
 
 ###griid default settings
 
@@ -146,9 +143,8 @@ At the top of griid.less are griid's default variables:
 &nbsp;
 
 ###Typical usage:
--    1. Definitely: run `.griid--install` to have full griid support, with the default `@griid--` values.
--    2. Likely: run adjustment functions in media queries to treat one grid as another in certain contexts ([see below](https://github.com/olets/griid#b-grid-transformations))
--    3. Possibly:
+-    1. Likely: run adjustment functions in media queries to treat one grid as another in certain contexts ([see below](https://github.com/olets/griid#b-grid-transformations))
+-    2. Possibly:
 	- run `.griid--initialize` to revert any changes made by adjustment functions,
 	- or if you only need to reset a particular type of grid, you can save a little weight by running `.griid--initialize-equal-cells`, `.griid--initialize-unequal-cells`, or `.griid--initialize-row`
 	- to have specific grids use a different baseline font size, you don't need to do a full new initialization. Just run `.griid--fz(@fontSize)`##griid LESS functions and mixins
@@ -332,7 +328,8 @@ The [initialization functions](https://github.com/olets/griid#customizing-your-g
 	                   (@maxColCount: @griid--max-cols,
 	                    (@minColCount: @griid--min-cols,
 	                     (@smallestDenominator: @griid--max-cols,
-	                      (@largestDenominator: @griid--min-cols))))
+	                      (@largestDenominator: @griid--min-cols,
+	                      	(@gutter: @griid--gutter)))))
 	                 )
 
 2.
@@ -340,7 +337,8 @@ The [initialization functions](https://github.com/olets/griid#customizing-your-g
 	.griid--initialize-equal-cells(
 	                              @fontSize: @griid--font-size,
 	                               (@maxColCount: @griid--max-cols,
-	                                (@minColCount:@griid--min-cols))
+	                                (@minColCount:@griid--min-cols,
+                                	 (@gutter: @griid--gutter))
 	                             )
 
 3.
@@ -348,14 +346,15 @@ The [initialization functions](https://github.com/olets/griid#customizing-your-g
 	.griid--initialize-unequal-cells(
 	                                @fontSize: @griid--font-size, 
 	                                 (@denominatorOfNarrowestCells: @griid--max-cols,
-	                                  (@numeratorOfNarrowestCells: @griid--min-cols))
+	                                  (@numeratorOfNarrowestCells: @griid--min-cols,
+	                                   (@gutter: @griid--gutter))
 	                               )
 	                               
 
-.4. If you really want to, you can even do a custom `.griid--build`
+.4. If you really want to, you can even do a custom `.griid--install`
 
 
-	.griid--build(
+	.griid--install(
 	               @fontSize,
 	                (@gutter,
 	                 (@rowSpacing,
