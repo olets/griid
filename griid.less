@@ -128,11 +128,11 @@
  */
 
 /* width calculator for unequal and equal-width cells */
-.griid--cell-width(@x, @gutter: @griid--gutter) when not (@griid--gutter = 0) {
+.griid--cell-width(@x, @gutter: @griid--gutter) when not ((@x - 1) * @griid--gutter = 0) {
     @griid--gutters: (@x - 1) * @gutter;
     width: calc(~'(@{ie_friendly_100_percent} - @{griid--gutters}) / @{x}');
 }
-.griid--cell-width(@x, @gutter: @griid--gutter) when (@griid--gutter = 0) {         // account for calc limitation: can't subtract zero
+.griid--cell-width(@x, @gutter: @griid--gutter) when ((@x - 1) * @griid--gutter = 0) {         // account for calc limitation: can't subtract zero
     @griid--gutters: (@x - 1) * @gutter;
     width: calc(~'@{ie_friendly_100_percent} / @{x}');
 }
