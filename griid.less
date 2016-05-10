@@ -145,9 +145,9 @@
     .griid--cell-width(@x, @gutter)
 }
 /* 1: the loop */
-.griid--fraction(@denominator, @i:1, @gutter: @griid--gutter) when (@i < @denominator) {
+.griid--fraction(@denominator, @gutter: @griid--gutter, @i:1) when (@i < @denominator) {
     .cell-@{i}-@{denominator} { .griid--unequal-cell(@denominator/@i, @gutter) };
-    .griid--fraction(@denominator, (@i + 1), @gutter)
+    .griid--fraction(@denominator, @gutter, (@i + 1))
 }
 
 
