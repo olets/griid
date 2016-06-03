@@ -165,7 +165,9 @@
 }
 /* 1: loop */
 .griid--equal-cell(@cols) when not (@cols > 1) {
-    margin-right: 0;
+    &:nth-child(n) {
+        margin-right: 0;
+    }
     width: @ie_friendly_100_percent
 }
 
