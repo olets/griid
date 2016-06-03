@@ -1,6 +1,6 @@
 #griid
 ###The greedy grid that tries to do it all with LESS
-v2.2
+v2.2.3
 
 griid is a grid system with automatic rows. You can use the processed griid.css file on its own, but to take advantage its full usefulness you'll need LESS.
 
