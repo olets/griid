@@ -140,7 +140,11 @@
 
 /* unequal-width cells */
 /* 2: each fraction */
-.griid--unequal-cell(@x, @gutter: @griid--gutter) {
+.griid--unequal-cell(@x, @gutter: @griid--gutter) when (@x = 1) {
+    margin-right: 0;
+    .griid--cell-width(@x, @gutter)
+}
+.griid--unequal-cell(@x, @gutter: @griid--gutter) when not (@x = 1) {
     margin-right: @gutter;
     .griid--cell-width(@x, @gutter)
 }
