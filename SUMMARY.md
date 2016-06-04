@@ -9,5 +9,5 @@
 * [griid LESS functions and mixins](griid_less_functions_and_mixins.md)
    * [Alignment](griid_less_functions_and_mixins/alignment.md)
    * [Grid transformations](griid_less_functions_and_mixins/grid_transformations.md)
-       * [Adjusting `.griid .cell` grids](griid_less_functions_and_mixins/grid_adjustments/adjusting`_griidcell`_grids_md.md)
+       * [Adjusting `.griid .cell` grids](griid_less_functions_and_mixins/grid_adjustments/adjusting_griidcell_grids.md)
 
