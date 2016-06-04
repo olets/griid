@@ -51,7 +51,7 @@ Multi-row grids with equal-width cells look like
 `.griid-x > .cell*n` (there will be x cells per row)
 
 Multi-row grids with unequal-width cells look like
-`.griid` for the grid, `.cell-n-d` for a cell n/d of the row width. Add `.row-end` to the last cell in each row. Full-width cells are `.cell-1-1` or `.cell-full`, and do not require `.row-end`
+`.griid` for the grid, `.cell-n-d` for a cell n/d of the row width. New rows will be made automatically, but if your grid has a gutter you'll need to add `.row-end` to the last cell in each row (this is not necessary if there's only one row). Full-width cells are `.cell-1-1` or `.cell-full`, and never require `.row-end`.
 
 So
 
