@@ -5,4 +5,3 @@ griid has support for all sorts of adjustments. These are especially useful for 
 &nbsp;
 
 Explanations of all the adjustments are here. You might also **[check out the test suite](https://cdn.rawgit.com/olets/griid/bcb6ef678f7501d5d4304aee04e2493effc8aeca/tests/griid-tests.html) for an example of each available adjustment**.
-
