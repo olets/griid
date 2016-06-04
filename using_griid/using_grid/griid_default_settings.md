@@ -1,2 +1,0 @@
-# griid default settings
-
