@@ -10,5 +10,5 @@
    * [Alignment](griid_less_functions_and_mixins/alignment.md)
    * [Grid transformations](griid_less_functions_and_mixins/grid_transformations.md)
        * [Adjusting `.griid .cell` grids](griid_less_functions_and_mixins/grid_transformations/adjusting_griid_cell_grids.md)
-       * adjusting_griid_cell-n-d_grids
+       * [adjusting_griid_cell-n-d_grids](griid_less_functions_and_mixins/grid_transformations/adjusting_griid_cell-_n-d_grids.md)
 
