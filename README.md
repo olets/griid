@@ -39,11 +39,6 @@ Here's [a demo pen](http://codepen.io/henry/pen/BKoNMq) with griid already impor
 
 
 
-
-###4. Adjusting both `.griid-x .cell` and `.griid .cell-n-d` grids
-
-1. `.griid--row`
-    Turn a `.griid-x .cell` or `.griid .cell-n-d` grid into a `.griid .cell` grid
     
 ###5. Adjusting all grids (`.griid .cell`, `.griid-x .cell`, and `.griid .cell-n-d`)
 1. `.griid--resize(@treatAs:1)`
