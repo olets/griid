@@ -6,4 +6,5 @@
 * using griid
    * [griid default settings](using_griid/griid_default_settings.md)
    * [Typical usage](using_griid/typical_usage.md)
+* griid LESS functions and mixins
 
