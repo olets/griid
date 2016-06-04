@@ -38,11 +38,6 @@ Here's [a demo pen](http://codepen.io/henry/pen/BKoNMq) with griid already impor
 - [Acknowledgements](https://github.com/olets/griid#acknowledgements)
 
 
-####1. Adjusting `.griid .cell` grids
-
-1. `.griid--resize-row(@treatAs:1)`
-    Turn a single-row grid into a multi-row grid with a **@treatAs** number of cells per row
-    Default turns the cells into blocks
 
 
 ####2. Adjusting `.griid .cell-n-d` grids
