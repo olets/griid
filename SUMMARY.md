@@ -17,5 +17,5 @@
    * [A transformation example: A progressively resposive grid](griid_less_functions_and_mixins/a_transformation_example.md)
 * Customizing your griid installation
    * [Customizing the installation](customizing_your_griid_installation/customizing_the_installation.md)
-   * Overriding default variables
+   * [Overriding default variables](customizing_your_griid_installation/overriding_default_variables.md)
 
