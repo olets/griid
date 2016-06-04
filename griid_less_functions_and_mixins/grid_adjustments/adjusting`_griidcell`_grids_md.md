@@ -1,0 +1,2 @@
+# Adjusting `.griid .cell` grids
+
