@@ -39,11 +39,6 @@ Here's [a demo pen](http://codepen.io/henry/pen/BKoNMq) with griid already impor
 
 
 
-##Contributing
-Pull requests, a SASS version, etc etc are more than welcome. Please check your version against tests/griid-tests.html, and add any new functions to the test suite.
-
-&nbsp;
-
 ##Acknowledgements
 griid grew out of ideas in [@JoelSutherland's](https://github.com/JoelSutherland) **grid-items** LESS grid
 
