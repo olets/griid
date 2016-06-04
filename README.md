@@ -13,5 +13,3 @@ By default, griid LESS is fully built when included. If you don't want this, sim
 Check out [the demo](http://olets.github.io/griid/) [the full suite of things griid can do](https://cdn.rawgit.com/olets/griid/v2.2.4/tests/griid-tests.html)
 
 Here's [a demo pen](http://codepen.io/henry/pen/BKoNMq) with griid already imported - go play around!
-
-######Henry Bley-Vroman, 2016
