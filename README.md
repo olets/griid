@@ -37,32 +37,6 @@ Here's [a demo pen](http://codepen.io/henry/pen/BKoNMq) with griid already impor
 - [Contributing](https://github.com/olets/griid#contributing)
 - [Acknowledgements](https://github.com/olets/griid#acknowledgements)
 
- &nbsp;
- 
----
-
-&nbsp;
-
-
-## using griid
-
-###griid default settings
-
-
-
-&nbsp;
-
-###Typical usage:
-
-
-&nbsp;
-
-
-&nbsp;
-
-###B. Grid transformations
-
-Note: *all transformation functions check markup, not styling*. When you target `.griid-x` grids with a certain column count, griid targets *ostensible* column counts, disregarding any transformations you may have done. For example: If you use  `.griid--drop-one(5);` to turn a five-column grid into four-column grid ([see below](https://github.com/olets/griid#3-adjusting-griid-x-cell-grids)) and later want to turn it into a three-column grid, you'll need to do either `.griid--drop(2,5)` ("drop by 2 the column count of 5-column grids") or `.griid--resize-one(3,5)` ("resize to 3 columns all 5-column grids"). Don't be tricked into thinking you can do `.griid--drop-one(4)` - as far as `.griid--drop-one()` is concerned, this is still a `.griid-5`. Similarly, `.griid--drop; .griid-drop` is no different than `.griid--drop`. In practice this isn't a problem - there are enough options that you'll be able to easily do what you want.
 
 ####1. Adjusting `.griid .cell` grids
 
