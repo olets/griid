@@ -217,7 +217,9 @@
 }
 /* with the default font size  */
 .griid--initialize-unequal-cells(@fontSize: @griid--font-size, @smallestDenominator: @griid--max-cols, @largestDenominator: @griid--min-cols, @gutter: @griid--gutter) when (@fontSize = @griid--font-size) {
-    [class*='griid'] > [class*='cell'].row-end { margin-right: 0 }
+    [class*='griid'] > [class*='cell'] {
+        &.row-end, &.row-break { margin-right: 0 }
+    }
     .cell-1-1, .cell-full { width: @ie_friendly_100_percent }
     .griid--initialize-unequal-helper(@smallestDenominator, @largestDenominator, @gutter)
 }
@@ -234,14 +236,18 @@
     .griid--initialize-row(@fontSize, @gutter);
     .griid--fz(@fontSize);
     .griid--initialize-equal-helper(@maxColCount, @minColCount, @gutter);
-    [class*='griid'] > [class*='cell'].row-end { margin-right: 0 }
+    [class*='griid'] > [class*='cell'] {
+        &.row-end, &.row-break { margin-right: 0 }
+    }
     .cell-1-1, .cell-full { width: @ie_friendly_100_percent }
     .griid--initialize-unequal-helper(@smallestDenominator, @largestDenominator, @gutter)
 }
 .griid--initialize(@fontSize: @griid--font-size, @maxColCount: @griid--max-cols, @minColCount: @griid--min-cols, @smallestDenominator: @griid--max-cols, @largestDenominator: @griid--min-cols, @gutter: @griid--gutter)  when (@fontSize = @griid--font-size) {
     .griid--initialize-row(@fontSize, @gutter);
     .griid--initialize-equal-helper(@maxColCount, @minColCount, @gutter);
-    [class*='griid'] > [class*='cell'].row-end { margin-right: 0 }
+    [class*='griid'] > [class*='cell'] {
+        &.row-end, &.row-break { margin-right: 0 }
+    }
     .cell-1-1, .cell-full { width: @ie_friendly_100_percent }
     .griid--initialize-unequal-helper(@smallestDenominator, @largestDenominator, @gutter)
 }
