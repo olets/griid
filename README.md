@@ -39,12 +39,6 @@ Here's [a demo pen](http://codepen.io/henry/pen/BKoNMq) with griid already impor
 
 
 
-###B. Overriding default variables
-
-
-	
-&nbsp;
-
 ##Contributing
 Pull requests, a SASS version, etc etc are more than welcome. Please check your version against tests/griid-tests.html, and add any new functions to the test suite.
 
