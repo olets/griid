@@ -5,4 +5,5 @@
 * [getting griid](getting_griid.md)
 * using griid
    * [griid default settings](using_griid/griid_default_settings.md)
+   * Typical usage
 
