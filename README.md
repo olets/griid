@@ -14,36 +14,4 @@ Check out [the demo](http://olets.github.io/griid/) [the full suite of things gr
 
 Here's [a demo pen](http://codepen.io/henry/pen/BKoNMq) with griid already imported - go play around!
 
-###Table of contents
-- [Markup for griid's three grid types](https://github.com/olets/griid#markup-for-griids-three-grid-types)
-- [Getting griid](https://github.com/olets/griid#getting-griid)
-- [Using griid](https://github.com/olets/griid#using-griid)
-  - [Default settings](https://github.com/olets/griid#griid-default-settings)
-  - [Typical usage](https://github.com/olets/griid#typical-usage)
-- [griid LESS functions and mixins](https://github.com/olets/griid#griid-less-functions-and-mixins)
-  - [Alignment](https://github.com/olets/griid#a-alignment)
-  - [Grid transformations](https://github.com/olets/griid#b-grid-transformations)
- 	   - [Adjusting .griid .cell grids](https://github.com/olets/griid#1-adjusting-griid-cell-grids)
- 	   - [Adjusting .griid .cell-n-d grids](https://github.com/olets/griid#2-adjusting-griid-cell-n-d-grids)
- 	   - [Adjusting .griid-x .cell grids](https://github.com/olets/griid#3-adjusting-griid-x-cell-grids)
-	 	   - [Resizing to an arbitrary column count](https://github.com/olets/griid#i-resizing-from-one-column-count-to-any-other-arbitrary-column-count)
-	 	   - [Dropping the column count by one or more](https://github.com/olets/griid#ii-dropping-the-column-count-by-one-or-more)
- 	   - [Adjusting both .griid-x .cell and .griid .cell-n-d grids](https://github.com/olets/griid#4-adjusting-both-griid-x-cell-and-griid-cell-n-d-grids)
- 	   - [Adjusting all grids (.griid .cell, .griid-x .cell, and .griid .cell-n-d)](https://github.com/olets/griid#5-adjusting-all-grids-griid-cell-griid-x-cell-and-griid-cell-n-d)
-   - [A transformation example: A progressively resposive grid](https://github.com/olets/griid#a-transformation-example-a-progressively-resposive-grid)
-- [Customizing your griid installation](https://github.com/olets/griid#customizing-your-griid-installation)
-	- [Customizing the installation](https://github.com/olets/griid#a-customizing-the-installation)
-	- [Overriding default variables](https://github.com/olets/griid#b-overriding-default-variables)
-- [Contributing](https://github.com/olets/griid#contributing)
-- [Acknowledgements](https://github.com/olets/griid#acknowledgements)
-
-
-
-##Acknowledgements
-griid grew out of ideas in [@JoelSutherland's](https://github.com/JoelSutherland) **grid-items** LESS grid
-
-&nbsp;
-
-&nbsp;
-
 ######Henry Bley-Vroman, 2016
