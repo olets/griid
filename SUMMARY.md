@@ -18,5 +18,5 @@
 * Customizing your griid installation
    * [Customizing the installation](customizing_your_griid_installation/customizing_the_installation.md)
    * [Overriding default variables](customizing_your_griid_installation/overriding_default_variables.md)
-* Contributing
+* [Contributing](contributing.md)
 
