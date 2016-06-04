@@ -7,5 +7,5 @@
    * [griid default settings](using_griid/griid_default_settings.md)
    * [Typical usage](using_griid/typical_usage.md)
 * [griid LESS functions and mixins](griid_less_functions_and_mixins.md)
-   * Alignment
+   * [Alignment](griid_less_functions_and_mixins/alignment.md)
 
