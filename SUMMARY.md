@@ -13,5 +13,5 @@
        * [Adjusting `.griid .cell-n-d` grids](griid_less_functions_and_mixins/grid_transformations/adjusting_griid_cell-_n-d_grids.md)
        * [Adjusting `.griid-x .cell` grids](griid_less_functions_and_mixins/grid_transformations/adjusting_griid-x_cell_grids.md)
        * [Adjusting both `.griid-x .cell` and `.griid .cell-n-d` grids](griid_less_functions_and_mixins/grid_transformations/adjusting_both_griid-x_cell_and_griid_cell-n-d.md)
-       * Adjusting all grids (`.griid .cell`, `.griid-x .cell`, and `.griid .cell-n-d`)
+       * [Adjusting all grids (`.griid .cell`, `.griid-x .cell`, and `.griid .cell-n-d`)](griid_less_functions_and_mixins/grid_transformations/adjusting_all_grids.md)
 
