@@ -39,15 +39,7 @@ Here's [a demo pen](http://codepen.io/henry/pen/BKoNMq) with griid already impor
 
 
 
-    
-###5. Adjusting all grids (`.griid .cell`, `.griid-x .cell`, and `.griid .cell-n-d`)
-1. `.griid--resize(@treatAs:1)`
-    Turns *all* grids into `.griid-@treatAs` (and all `.cell-n-d` into `.cell`)
-    
-    Default turns all cells into blocks
 
-
-&nbsp;
 
 ###A transformation example: A progressively resposive grid
 
