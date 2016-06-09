@@ -1,0 +1,19 @@
+/* configuration settings for griid
+ *
+ * griid requires
+ *   @griid--gutter, @griid--row-spacing, @griid--orphan-h-align, @griid--item-v-align, @griid--min-cols, @griid--max-cols,
+ * 	 @griid--font-size, and @griid--font-unit
+ *
+ */
+
+@griid--gutter: 0;                                     // gte 0, any unit
+@griid--row-spacing: 0;                                // gte 0, any unit
+@griid--orphan-h-align: left;                          // default orphan alignment (left, center, or right)
+@griid--item-v-align: top;                             // default grid-item vertical alignment (top, middle, or bottom)
+@griid--min-cols: 2;                                   // set per-site to minimize css weight
+@griid--max-cols: 6;                                   // set per-site to minimize css weight
+
+// Recommended font settings: font-size 1, font-size-unit rem
+// This means you can do `html {@media (max-width: ...) { font-size: ... }}`
+@griid--font-size: 1;
+@griid--font-unit: rem;
