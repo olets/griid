@@ -34,13 +34,17 @@
  * config
  * 
  */
-@griid--font-size: 16px;
 @griid--gutter: 0;                                     // gte 0, any unit
 @griid--row-spacing: 0;                                // gte 0, any unit
 @griid--orphan-h-align: left;                          // default orphan alignment (left, center, or right)
 @griid--item-v-align: top;                             // default grid-item vertical alignment (top, middle, or bottom)
 @griid--min-cols: 2;                                   // set per-site to minimize css weight
 @griid--max-cols: 6;                                   // set per-site to minimize css weight
+
+// Recommended font settings: font-size 1, font-size-unit rem
+// This means you can do `html {@media (max-width: ...) { font-size: ... }}`
+@griid--font-size: 1;
+@griid--font-unit: rem;
 
 
 
@@ -65,14 +69,17 @@
             position: relative;
             margin-bottom: @rowSpacing;
             vertical-align: @contentAlignment;
-            font-size: @fontSize;
-            text-align: left;                              // reverts cell content to default (otherwise would inherit @orphanAlignment)
+            text-align: left;                 
+            .griid--set-font-size(@fontSize);             // reverts cell content to default (otherwise would inherit @orphanAlignment)
             // overflow: hidden;
             &:last-child { margin-right: 0 !important}     // makes sure center- and right-aligned orphans line up with cells in preceding rows
 
             img {max-width: 100%}                          // for good measure
         }
     }
+}
+.griid--set-font-size(@fontSize: @griid--font-size, @fontSizeUnit: @griid--font-unit) {
+    font-size: unit(@fontSize, @fontSizeUnit);
 }
 
 /****************************************************************
@@ -84,7 +91,7 @@
         table-layout: fixed;                               // equal-width cells are the result of a table-layout:fixed table
         > .row {
             display: table-row;
-            > .cell { font-size: @fontSize }
+            > .cell { .griid--set-font-size(@fontSize) }
         }
         > .cell, > .row > .cell {
             display: table-cell;                           // in combination with 1%-wide table-cells
@@ -184,7 +191,7 @@
 .griid--fz(@fontSize: @griid--font-size) {
     [class*='griid'] > [class*='cell'],                    // can be applied upstream of a grid
     &[class*='griid'] > [class*='cell'] {                  // or directly on a griid
-        font-size: @fontSize
+        .griid--set-font-size(@fontSize)
     }
 }
 
