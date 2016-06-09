@@ -182,7 +182,7 @@
  */
 
 /* font size */
-.griid--fz(@fontSize: @griid--font-size) {
+.griid--font-size(@fontSize: @griid--font-size) {
     [class*='griid'] > [class*='cell'],                    // can be applied upstream of a grid
     &[class*='griid'] > [class*='cell'] {                  // or directly on a griid
         .griid--set-font-size(@fontSize)
@@ -197,7 +197,7 @@
 }
 /* with a specified custom font size  */
 .griid--initialize-equal-cells(@fontSize: @griid--font-size, @maxColCount: @griid--max-cols, @minColCount:@griid--min-cols, @gutter: @griid--gutter) when not (@fontSize = @griid--font-size) {
-    .griid--fz(@fontSize);
+    .griid--font-size(@fontSize);
     .griid--initialize-equal-helper(@maxColCount, @minColCount, @gutter)
 }
 /* with the default font size  */
@@ -213,7 +213,7 @@
 }
 /* with a specified custom font size  */
 .griid--initialize-unequal-cells(@fontSize: @griid--font-size, @smallestDenominator: @griid--max-cols, @largestDenominator: @griid--min-cols, @gutter: @griid--gutter) when not (@fontSize = @griid--font-size) {
-    .griid--fz(@fontSize);
+    .griid--font-size(@fontSize);
     .griid--initialize-unequal-helper(@smallestDenominator, @largestDenominator, @gutter)
 }
 /* with the default font size  */
@@ -233,7 +233,7 @@
 /* initialize equal- and unequal-width cells */
 .griid--initialize(@fontSize: @griid--font-size, @maxColCount: @griid--max-cols, @minColCount: @griid--min-cols, @smallestDenominator: @griid--max-cols, @largestDenominator: @griid--min-cols, @gutter: @griid--gutter)  when not (@fontSize = @griid--font-size) {
     .griid--initialize-row(@fontSize, @gutter);
-    .griid--fz(@fontSize);
+    .griid--font-size(@fontSize);
     .griid--initialize-equal-helper(@maxColCount, @minColCount, @gutter);
     [class*='griid'] > [class*='cell'].row-end { margin-right: 0 }
     .cell-1-1, .cell-full { width: @ie_friendly_100_percent }
