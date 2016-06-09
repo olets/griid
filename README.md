@@ -1,6 +1,6 @@
 #griid
 ###The greedy grid that tries to do it all with LESS
-v2.5
+v2.5.1
 
 griid is a grid system with automatic rows. You can use the processed griid.css file on its own, but to take advantage its full usefulness you'll need LESS.
 
@@ -10,7 +10,7 @@ griid supports [three grid types](https://github.com/olets/griid#markup-for-grii
 
 By default, griid LESS is fully built when included. If you don't want this, simply comment out line 1 of griid.less. If you do that, the griid LESS adds absolutely nothing to your compiled CSS until [built](https://github.com/olets/griid#typical-usage)-- include it in your default setup, and don't worry about adding bloat if you don't use it. In addition, all of griid's features are compartmentalized -- by [customizing your build](https://github.com/olets/griid#customizing-your-griid-installation), you can make sure that only the styles you need actually make it into your stylesheet.
 
-Check out [the demo](http://olets.github.io/griid/) [the full suite of things griid can do](https://cdn.rawgit.com/olets/griid/v2.5/tests/griid-tests.html)
+Check out [the demo](http://olets.github.io/griid/) [the full suite of things griid can do](https://cdn.rawgit.com/olets/griid/v2.5.1/tests/griid-tests.html)
 
 Here's [a demo pen](http://codepen.io/henry/pen/BKoNMq) with griid already imported - go play around!
 
