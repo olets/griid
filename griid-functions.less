@@ -145,10 +145,7 @@ griid--drop(@dropBy: 1(, @minColCount: @griid--min-cols(, @maxColCount: @griid--
 /* turn a multi-row grid into a single-row grid with equal-width, equal-height columns */
 .griid--row() {
     [class*='griid'], &[class*='griid'] {
-        > [class*='cell'] {
-            display: table-cell;
-            width: 1%
-        }
+        > [class*='cell'] { .griid--single-row-cell }
     }
 }
 
@@ -156,7 +153,11 @@ griid--drop(@dropBy: 1(, @minColCount: @griid--min-cols(, @maxColCount: @griid--
 /* resize single-row cells */
 .griid--resize-row(@treatAs:1) {
     .griid, &.griid {
-        > .cell { .griid--equal-cell(@treatAs); display: inline-block; }
+        > .cell {
+            .griid--equal-cell(@treatAs);
+            display: inline-block;
+            border-right: 0;
+        }
     }
 }
 

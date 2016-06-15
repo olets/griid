@@ -86,16 +86,19 @@
             > .cell { .griid--set-font-size(@fontSize) }
         }
         > .cell, > .row > .cell {
-            display: table-cell;                           // in combination with 1%-wide table-cells
-            width: 1%;
-            border-right: @gutter solid transparent;
+            .griid--single-row-cell(@gutter)
         }
     }
+}
+.griid--single-row-cell(@gutter: @griid--gutter) {
+    display: table-cell;                           // in combination with 1%-wide table-cells
+    width: 1%;
+    border-right: @gutter solid transparent
 }
 .griid--space-single-row(@gutter: @griid--gutter) {                                    // .griid--space-single-row is NOT included in griid-install
     .griid {                                               // remember that border-spacing applies to the outside edges of the table, 
         border-collapse: separate;                         // so if this is used `.griid .cell`s will not line up with `.griid-x .cells` or `.griid .cell-n-d`s
-        border-spacing: @gutter;
+        border-spacing: @gutter
     }
 }
 
