@@ -1,5 +1,11 @@
 ## 2.5.2
 
+2016-12-21
+
+Bugfix in compiled css
+
+## 2.5.2
+
 2016-06-15
 
 Bugfix: gutters when transforming between single- and multi-row grids
